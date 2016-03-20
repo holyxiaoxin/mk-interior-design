@@ -11,7 +11,6 @@ import React, {
   Navigator
 } from 'react-native';
 import { Router, initialRoute } from '../config/router';
-import DrawerExamplePage from './DrawerExamplePage';
 import DrawerLayout from 'react-native-drawer-layout';
 import DrawerList from '../components/DrawerList';
 

@@ -16,7 +16,7 @@ incrementIfOdd = () => {
   return (dispatch, getState) => {
     const { counter } = getState();
 
-    if (counter.count % 2 === 0) {
+    if (counter.get('count') % 2 === 0) {
       return;
     }
 

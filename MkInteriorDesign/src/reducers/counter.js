@@ -1,15 +1,20 @@
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions/counter';
+import Immutable from 'immutable';
 
-const initialState = {
+const initialState = Immutable.fromJS({
   count: 0
-};
+});
 
 export default function counter(state = initialState, action = {}) {
   switch (action.type) {
-  case INCREMENT_COUNTER:
-    return { ...state, count: state.count + 1 };
-  case DECREMENT_COUNTER:
-    return { ...state, count:  state.count - 1 };
+  case INCREMENT_COUNTER: {
+    const count = state.get('count');
+    return state.set('count', count + 1);
+  }
+  case DECREMENT_COUNTER: {
+    const count = state.get('count');
+    return state.set('count', count - 1);
+  }
   default:
     return state;
   }

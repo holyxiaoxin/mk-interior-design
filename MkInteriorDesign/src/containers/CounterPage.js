@@ -11,7 +11,8 @@ import { mapDispatchToProps, connect } from '../util/Connector';
 class CounterPage extends Component {
   render() {
     const { increment, incrementIfOdd, incrementAsync, decrement } = this.props.actions;
-    const { count } = this.props.state;
+    const state = this.props.state;
+    const count = state.get('count');
 
     return (
       <View style={styles.container}>

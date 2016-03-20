@@ -1,6 +1,7 @@
 import React, { Navigator, Platform, BackAndroid } from 'react-native';
 import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
+import CounterPage from '../containers/CounterPage';
 // import DrawerExamplePage from '../containers/DrawerExamplePage';
 
 class Router {
@@ -39,6 +40,13 @@ class Router {
   toBrowsePage(props) {
     this.push(props, {
       component: BrowsePage,
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
+    });
+  }
+
+  toCounterPage(props) {
+    this.push(props, {
+      component: CounterPage,
       sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
     });
   }

@@ -5,6 +5,7 @@ export default class DrawerList extends Component {
       super(props);
       this.toProfilePage = this.toProfilePage.bind(this);
       this.toBrowsePage = this.toBrowsePage.bind(this);
+      this.toCounterPage = this.toCounterPage.bind(this);
     }
 
   toProfilePage() {
@@ -15,6 +16,11 @@ export default class DrawerList extends Component {
   toBrowsePage() {
     this.props.closeDrawer();
     this.props.router.toBrowsePage();
+  }
+
+  toCounterPage() {
+    this.props.closeDrawer();
+    this.props.router.toCounterPage();
   }
 
   render() {
@@ -31,7 +37,7 @@ export default class DrawerList extends Component {
             <Text style={styles.drawerFont}>Browse</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerRow} onPress={this.toProfilePage}>
+        <TouchableOpacity style={styles.drawerRow} onPress={this.toCounterPage}>
           <View style={{flexDirection: "row"}}>
             <Text style={styles.drawerFont}>My Favourite</Text>
           </View>

@@ -7,8 +7,11 @@ import React, {
   Text,
   View,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  Navigator
 } from 'react-native';
+import { Router, initialRoute } from '../config/router';
+import DrawerExamplePage from './DrawerExamplePage';
 import DrawerLayout from 'react-native-drawer-layout';
 import DrawerList from '../components/DrawerList';
 
@@ -18,50 +21,38 @@ export default class App extends Component {
     this.state = {};
   }
 
+  renderScene(route, navigator) {
+    this.router = this.router || new Router(navigator)
+    if (route.component) {
+      const mainPage = React.createElement(route.component, Object.assign({}, route.props, {router: this.router, navigator: navigator}));
+      return (
+        <DrawerLayout
+          drawerWidth={300}
+          ref={(drawer) => { return this.drawer = drawer  }}
+          keyboardDismissMode="on-drag"
+          renderNavigationView={() => <DrawerList router={this.router}/>}
+        >
+        { mainPage }
+        </DrawerLayout>
+      )
+    }
+  }
+
+  configureScene(route) {
+    if (route.sceneConfig) {
+      return route.sceneConfig;
+    }
+    return Navigator.SceneConfigs.FloatFromBottomAndroid;
+  }
+
   render() {
-    const navigationView = (
-     <View style={[styles.container, {backgroundColor: '#fff'}]}>
-       <Text>Hello there!</Text>
-       <TouchableHighlight onPress={() => this.drawer.closeDrawer()}>
-         <Text>Close drawer</Text>
-       </TouchableHighlight>
-     </View>
-   );
-
-    // const mainPage = (
-    //   <View style={styles.container}>
-    //     <Text style={styles.welcome}>
-    //       Welcome to React Native!
-    //     </Text>
-    //     <Text style={styles.instructions}>
-    //       This is shared between ios and android
-    //     </Text>
-    //     <Text style={styles.instructions}>
-    //       Shake or press menu button for dev menu
-    //     </Text>
-    //   </View>
-    // );
-
-    // renderNavigationView={() => navigationView}
-
     return (
-      <DrawerLayout
-        onDrawerSlide={(e) => this.setState({drawerSlideOutput: JSON.stringify(e.nativeEvent)})}
-        onDrawerStateChanged={(e) => this.setState({drawerStateChangedOutput: JSON.stringify(e)})}
-        drawerWidth={300}
-        ref={(drawer) => { return this.drawer = drawer  }}
-        keyboardDismissMode="on-drag"
-        renderNavigationView={() => <DrawerList/>}>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>Content!</Text>
-          <Text>{this.state.drawerStateChangedOutput}</Text>
-          <Text>{this.state.drawerSlideOutput}</Text>
-          <TouchableHighlight onPress={() => this.drawer.openDrawer()}>
-            <Text>Open drawer</Text>
-          </TouchableHighlight>
-          <TextInput style={styles.inputField} />
-        </View>
-      </DrawerLayout>
+      <Navigator
+        ref="navigator"
+        initialRoute={initialRoute}
+        configureScene={this.configureScene.bind(this)}
+        renderScene={this.renderScene.bind(this)}
+      />
     );
   }
 }

@@ -8,12 +8,12 @@ export default class DrawerList extends Component {
     }
 
   toProfilePage() {
-    // this.props.closeDrawer();
+    this.props.closeDrawer();
     this.props.router.toProfilePage();
   }
 
   toBrowsePage() {
-    // this.props.closeDrawer();
+    this.props.closeDrawer();
     this.props.router.toBrowsePage();
   }
 

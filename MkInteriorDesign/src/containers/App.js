@@ -17,23 +17,23 @@ import DrawerList from '../components/DrawerList';
 export default class App extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { initialRender: false };
+  }
+
+  componentDidMount() {
+    if(!this.state.initialRender) {
+      this.setState(Object.assign(this.state, { initialRender: true }));
+    }
   }
 
   renderScene(route, navigator) {
-    this.router = this.router || new Router(navigator)
+    if (!this.router) {
+      this.router = new Router(navigator);
+    }
+
     if (route.component) {
       const mainPage = React.createElement(route.component, Object.assign({}, route.props, {router: this.router, navigator: navigator}));
-      return (
-        <DrawerLayout
-          drawerWidth={300}
-          ref={(drawer) => { return this.drawer = drawer  }}
-          keyboardDismissMode="on-drag"
-          renderNavigationView={() => <DrawerList router={this.router}/>}
-        >
-        { mainPage }
-        </DrawerLayout>
-      )
+      return (mainPage)
     }
   }
 
@@ -46,14 +46,31 @@ export default class App extends Component {
 
   render() {
     return (
-      <Navigator
-        ref="navigator"
-        initialRoute={initialRoute}
-        configureScene={this.configureScene.bind(this)}
-        renderScene={this.renderScene.bind(this)}
-      />
+      // renderNavigationView has to present DrawerList component with this.router props.
+      // However, during initial render, this.router has yet been created.
+      // After initial render, this component will re-render with this.router
+      <DrawerLayout
+        drawerWidth={300}
+        ref={(drawer) => { return this.drawer = drawer }}
+        keyboardDismissMode="on-drag"
+        renderNavigationView={
+          () =>
+          <DrawerList
+            router={this.router}
+            closeDrawer={() => (this.drawer || {}).closeDrawer()}
+          />
+        }
+      >
+        <Navigator
+          ref="navigator"
+          initialRoute={initialRoute}
+          configureScene={this.configureScene.bind(this)}
+          renderScene={this.renderScene.bind(this)}
+        />
+      </DrawerLayout>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

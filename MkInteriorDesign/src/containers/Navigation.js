@@ -2,16 +2,23 @@ import React, { Component , Navigator} from 'react-native';
 import { Router, initialRoute } from '../config/router';
 import DrawerLayout from 'react-native-drawer-layout';
 import DrawerList from '../components/DrawerList';
+import { mapDispatchToProps, connect } from '../util/Connector';
 
-export default class Navigation extends Component {
-  constructor() {
-    super();
-    this.state = { initialRender: false };
-  }
+class Navigation extends Component {
+  // constructor() {
+  //   super();
+  //   this.state = { initialRender: false };
+  // }
+
+  // componentDidMount() {
+  //   if(!this.state.initialRender) {
+  //     this.setState(Object.assign(this.state, { initialRender: true }));
+  //   }
+  // }
 
   componentDidMount() {
-    if(!this.state.initialRender) {
-      this.setState(Object.assign(this.state, { initialRender: true }));
+    if(!this.props.state.get('initialRender')) {
+      this.props.actions.setInitialRender();
     }
   }
 
@@ -37,6 +44,13 @@ export default class Navigation extends Component {
     // renderNavigationView has to present DrawerList component with this.router props.
     // However, during initial render, this.router has yet been created.
     // After initial render, this component will re-render with this.router
+
+    const NavigatorToBeRendered = (<Navigator
+      initialRoute={initialRoute}
+      configureScene={this.configureScene.bind(this)}
+      renderScene={this.renderScene.bind(this)}
+    />);
+
     return (
       <DrawerLayout
         drawerWidth={300}
@@ -50,12 +64,14 @@ export default class Navigation extends Component {
           />
         }
       >
-        <Navigator
-          initialRoute={initialRoute}
-          configureScene={this.configureScene.bind(this)}
-          renderScene={this.renderScene.bind(this)}
-        />
+        { NavigatorToBeRendered }
       </DrawerLayout>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { state: state.util };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

@@ -5,17 +5,6 @@ import DrawerList from '../components/DrawerList';
 import { mapDispatchToProps, connect } from '../util/Connector';
 
 class Navigation extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = { initialRender: false };
-  // }
-
-  // componentDidMount() {
-  //   if(!this.state.initialRender) {
-  //     this.setState(Object.assign(this.state, { initialRender: true }));
-  //   }
-  // }
-
   componentDidMount() {
     if(!this.props.state.get('initialRender')) {
       this.props.actions.setInitialRender();
@@ -44,13 +33,6 @@ class Navigation extends Component {
     // renderNavigationView has to present DrawerList component with this.router props.
     // However, during initial render, this.router has yet been created.
     // After initial render, this component will re-render with this.router
-
-    const NavigatorToBeRendered = (<Navigator
-      initialRoute={initialRoute}
-      configureScene={this.configureScene.bind(this)}
-      renderScene={this.renderScene.bind(this)}
-    />);
-
     return (
       <DrawerLayout
         drawerWidth={300}
@@ -64,7 +46,11 @@ class Navigation extends Component {
           />
         }
       >
-        { NavigatorToBeRendered }
+        <Navigator
+          initialRoute={initialRoute}
+          configureScene={this.configureScene.bind(this)}
+          renderScene={this.renderScene.bind(this)}
+        />
       </DrawerLayout>
     )
   }

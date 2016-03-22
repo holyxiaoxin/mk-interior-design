@@ -2,15 +2,8 @@ import React, { Component , Navigator} from 'react-native';
 import { Router, initialRoute } from '../config/router';
 import DrawerLayout from 'react-native-drawer-layout';
 import DrawerList from '../components/DrawerList';
-import { mapDispatchToProps, connect } from '../util/Connector';
 
-class Navigation extends Component {
-  componentDidMount() {
-    if(!this.props.state.get('initialRender')) {
-      this.props.actions.setInitialRender();
-    }
-  }
-
+export default class Navigation extends Component {
   configureScene(route) {
     if (route.sceneConfig) {
       return route.sceneConfig;
@@ -36,12 +29,12 @@ class Navigation extends Component {
     return (
       <DrawerLayout
         drawerWidth={300}
-        ref={(drawer) => { return this.drawer = drawer }}
+        ref={(drawer) => this.drawer = drawer }
         keyboardDismissMode="on-drag"
         renderNavigationView={
           () =>
           <DrawerList
-            router={this.router}
+            getRouter={() => this.router}
             closeDrawer={() => (this.drawer || {}).closeDrawer()}
           />
         }
@@ -55,9 +48,3 @@ class Navigation extends Component {
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return { state: state.util };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

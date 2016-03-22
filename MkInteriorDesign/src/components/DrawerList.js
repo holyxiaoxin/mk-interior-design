@@ -3,6 +3,7 @@ import React, { Component, View, Text, StyleSheet, TouchableOpacity, Image } fro
 export default class DrawerList extends Component {
   constructor(props) {
       super(props);
+      this.router = this.props.getRouter();
       this.toProfilePage = this.toProfilePage.bind(this);
       this.toBrowsePage = this.toBrowsePage.bind(this);
       this.toCounterPage = this.toCounterPage.bind(this);
@@ -10,17 +11,17 @@ export default class DrawerList extends Component {
 
   toProfilePage() {
     this.props.closeDrawer();
-    this.props.router.toProfilePage();
+    this.router.toProfilePage();
   }
 
   toBrowsePage() {
     this.props.closeDrawer();
-    this.props.router.toBrowsePage();
+    this.router.toBrowsePage();
   }
 
   toCounterPage() {
     this.props.closeDrawer();
-    this.props.router.toCounterPage();
+    this.router.toCounterPage();
   }
 
   render() {

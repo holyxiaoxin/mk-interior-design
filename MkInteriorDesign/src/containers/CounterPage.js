@@ -6,7 +6,7 @@ import React, {
   View,
   TouchableHighlight,
 } from 'react-native';
-import { mapDispatchToProps, connect } from '../util/Connector';
+import { mapDispatchToProps, connect } from '../util/connector';
 
 class CounterPage extends Component {
   render() {

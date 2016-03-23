@@ -1,8 +1,8 @@
 import React, { Navigator, Platform, BackAndroid } from 'react-native';
+import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
-// import DrawerExamplePage from '../containers/DrawerExamplePage';
 
 class Router {
   constructor(navigator) {
@@ -28,6 +28,13 @@ class Router {
 
   pop() {
     this.navigator.pop();
+  }
+
+  toLoginPage(props) {
+    this.push(props, {
+      component: LoginPage,
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
+    });
   }
 
   toProfilePage(props) {
@@ -77,7 +84,7 @@ class Router {
 // Change this for easier debugging
 const initialRoute = {
   index: 0,
-  component: ProfilePage
+  component: LoginPage
 }
 
 module.exports = { Router, initialRoute }

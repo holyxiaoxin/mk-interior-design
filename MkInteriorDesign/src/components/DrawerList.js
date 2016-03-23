@@ -1,4 +1,11 @@
-import React, { Component, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, {
+  Component,
+  View,
+  Text,
+  StyleSheet, 
+  TouchableOpacity,
+  Image
+} from 'react-native';
 
 export default class DrawerList extends Component {
   constructor(props) {

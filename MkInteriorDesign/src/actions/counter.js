@@ -1,18 +1,18 @@
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-increment = () => {
+const increment = () => {
   return {
     type: INCREMENT_COUNTER
   };
 }
 
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
-decrement = () => {
+const decrement = () => {
   return {
     type: DECREMENT_COUNTER
   };
 }
 
-incrementIfOdd = () => {
+const incrementIfOdd = () => {
   return (dispatch, getState) => {
     const { counter } = getState();
 
@@ -24,7 +24,7 @@ incrementIfOdd = () => {
   };
 }
 
-incrementAsync = (delay) => {
+const incrementAsync = (delay) => {
   delay = delay || 1000;
   return dispatch => {
     setTimeout(() => {

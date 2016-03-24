@@ -38,6 +38,9 @@ class Router {
     this.push(props, { component: ProfilePage });
   }
 
+  // To use this in Component:
+  // onPress={() => this.props.router.toBrowsePage()}
+  // do not bind `this` in component to this function
   toBrowsePage(props) {
     this.push(props, { component: BrowsePage });
   }

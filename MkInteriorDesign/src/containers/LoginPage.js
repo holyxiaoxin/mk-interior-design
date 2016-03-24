@@ -9,11 +9,15 @@ import React, {
 import window from '../util/window';
 import brandLogo from '../assets/images/mk-logo-home.png';
 import fbLogo from '../assets/images/fb-home.png';
+import { mapDispatchToProps, connect } from '../util/connector';
 
 const { width, height } = window.getDimensions();
 
-export default class LoginPage extends Component {
+class LoginPage extends Component {
   render() {
+    const state = this.props.state;
+    const { facebookLoginAsync } = this.props.actions;
+
     return(
       <View style={{flex:1, flexDirection: 'column'}}>
 
@@ -38,7 +42,7 @@ export default class LoginPage extends Component {
 
         {/* Push it to bottom */}
         <View style={styles.bottomWrapper}>
-          <TouchableHighlight>
+          <TouchableHighlight style={{marginLeft: 50, marginRight: 50}} onPress={facebookLoginAsync}>
             <View style={styles.connectView}>
               <Image
                 source={fbLogo}
@@ -50,16 +54,22 @@ export default class LoginPage extends Component {
           </TouchableHighlight>
 
           {/* Margin top and bottom 50 */}
-          <TouchableHighlight style={{marginBottom: 50, marginTop: 50}}>
-            <View style={styles.laterView}>
+          <View style={{marginBottom: 50, marginTop: 50, alignItems: 'center'}}>
+            <TouchableHighlight onPress={() => this.props.router.toBrowsePage()}>
               <Text style={styles.laterText}>Maybe later</Text>
-            </View>
-          </TouchableHighlight>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { state: state.user };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
 const styles = StyleSheet.create({
   topWrapper: {
@@ -88,12 +98,9 @@ const styles = StyleSheet.create({
     color: '#ddd'
   },
   connectView: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 50,
-    marginRight: 50,
     paddingTop: 5,
     paddingBottom: 5,
     borderWidth: 1,
@@ -106,9 +113,7 @@ const styles = StyleSheet.create({
     color: '#ddd'
   },
   laterText: {
-    flex: 1,
     flexDirection: 'row',
-    alignSelf: 'center',
     fontSize: 10,
     color: '#ddd',
     textDecorationLine: 'underline'

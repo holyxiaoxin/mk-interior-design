@@ -31,46 +31,26 @@ class Router {
   }
 
   toLoginPage(props) {
-    this.push(props, {
-      component: LoginPage,
-      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
-    });
+    this.push(props, { component: LoginPage });
   }
 
   toProfilePage(props) {
-    this.push(props, {
-      component: ProfilePage,
-      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
-    });
+    this.push(props, { component: ProfilePage });
   }
 
   toBrowsePage(props) {
-    this.push(props, {
-      component: BrowsePage,
-      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
-    });
+    this.push(props, { component: BrowsePage });
   }
 
   toCounterPage(props) {
-    this.push(props, {
-      component: CounterPage,
-      sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
-    });
+    this.push(props, { component: CounterPage });
   }
-
-  // toDrawerExamplePage(props) {
-  //   this.push(props, {
-  //     component: DrawerExamplePage,
-  //     sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
-  //   })
-  // }
 
   // replaceWithHome(props) {
   //   let homeRoute = {
   //     index: 0,
   //     props: props,
   //     component: ProjectsCompaniesPage,
-  //     sceneConfig: Navigator.SceneConfigs.FloatFromBottomAndroid
   //   }
   //   this.navigator.immediatelyResetRouteStack([homeRoute])
   // }

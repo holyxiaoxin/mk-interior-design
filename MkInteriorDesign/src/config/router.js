@@ -67,7 +67,8 @@ class Router {
 // Change this for easier debugging
 const initialRoute = {
   index: 0,
-  component: LoginPage
+  // component: LoginPage
+  component: BrowsePage
 }
 
 module.exports = { Router, initialRoute }

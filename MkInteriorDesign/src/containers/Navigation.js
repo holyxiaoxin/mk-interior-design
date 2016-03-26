@@ -22,8 +22,18 @@ export default class Navigation extends Component {
     this.router = this.router ? this.router : new Router(navigator);
 
     if (route.component) {
-      const mainPage = React.createElement(route.component, Object.assign({}, route.props, {router: this.router, navigator: navigator}));
-      return (mainPage)
+      const mainPage = React.createElement(
+        route.component,
+        Object.assign(
+          {},
+          route.props,
+          { router: this.router, navigator: navigator },
+          { drawer:
+            { openDrawer: this.openDrawer.bind(this), closeDrawer: this.closeDrawer.bind(this) }
+          }
+        )
+      );
+      return mainPage;
     }
   }
 
@@ -40,7 +50,7 @@ export default class Navigation extends Component {
           () =>
           <DrawerList
             getRouter={() => this.router}
-            closeDrawer={() => (this.drawer || {}).closeDrawer()}
+            closeDrawer={this.closeDrawer.bind(this)}
           />
         }
       >
@@ -51,5 +61,13 @@ export default class Navigation extends Component {
         />
       </DrawerLayout>
     )
+  }
+
+  openDrawer() {
+    this.drawer.openDrawer();
+  }
+
+  closeDrawer() {
+    this.drawer.closeDrawer();
   }
 }

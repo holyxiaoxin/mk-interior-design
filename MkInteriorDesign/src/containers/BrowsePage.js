@@ -1,5 +1,6 @@
 import React, { Component, StyleSheet, View, Text } from 'react-native';
 import NavBar from '../components/NavBar';
+// import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from 'react-native-swipe-cards';
 
 let Card = React.createClass({
@@ -38,15 +39,16 @@ export default class BrowsePage extends Component {
     return(
       <View>
         <NavBar drawer={this.props.drawer} title="Discover Styles"/>
-          <SwipeCards
-            cards={Cards}
+        {/*<FilterDrawer />*/}
+        {/*<SwipeCards
+          cards={Cards}
 
-            renderCard={(cardData) => <Card {...cardData} />}
-            renderNoMoreCards={() => NoMoreCards}
+          renderCard={(cardData) => <Card {...cardData} />}
+          renderNoMoreCards={() => NoMoreCards}
 
-            handleYup={this.handleYup}
-            handleNope={this.handleNope}
-          />
+          handleYup={this.handleYup}
+          handleNope={this.handleNope}
+        />*/}
       </View>
 
     )

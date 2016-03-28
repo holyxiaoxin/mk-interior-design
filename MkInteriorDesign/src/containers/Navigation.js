@@ -14,7 +14,9 @@ export default class Navigation extends Component {
         Navigator.SceneConfigs.FadeAndroid
         :
         // You can swipe left and right to jump back and forth from stack (for ios only)
-        Navigator.SceneConfigs.HorizontalSwipeJump
+        // Don't use HorizontalSwipeJump yet. It conflicts with tinder cards
+        // Navigator.SceneConfigs.HorizontalSwipeJump
+        Navigator.SceneConfigs.FadeAndroid
     );
   }
 

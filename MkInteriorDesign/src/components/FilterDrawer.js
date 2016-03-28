@@ -6,7 +6,7 @@ import React, { Component,
   View,
   TouchableHighlight
 } from 'react-native';
-import SlidingUpPanel from './SlidingUpPanel';
+import SlideDownPanel from './SlideDownPanel';
 import window from '../util/window';
 const { width, height } = window.getDimensions();
 
@@ -32,7 +32,7 @@ export default class FilterDrawer extends Component {
         <View style={styles.backContainer}>
           <Text style={styles.logText}>Panel Height: {this.state.containerHeight}</Text>
         </View>
-        <SlidingUpPanel
+        <SlideDownPanel
             ref="panel"
             offsetTop={OFFSET_TOP}
             containerMaximumHeight={MAXIMUM_HEIGHT}
@@ -43,7 +43,7 @@ export default class FilterDrawer extends Component {
           <View style={styles.frontContainer}>
             <Text style={styles.panelText}>Hello guys!</Text>
           </View>
-        </SlidingUpPanel>
+        </SlideDownPanel>
       </View>
     )
   }

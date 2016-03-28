@@ -19,6 +19,7 @@ var SlidingUpPanel = React.createClass({
 
   getInitialState: function() {
     return {
+      offsetTop: this.props.offsetTop,
       handlerHeight : this.props.handlerHeight,
       containerHeight : this.props.handlerHeight,
       containerMinimumHeight : this.props.handlerHeight,
@@ -37,6 +38,7 @@ var SlidingUpPanel = React.createClass({
   },
 
   componentDidMount: function() {
+    var offsetTop = this.state.offsetTop;
     var containerMinimumHeight = this.state.containerMinimumHeight;
     var containerMaximumHeight = this.state.containerMaximumHeight;
     var containerHalfHeight = this.state.containerHalfHeight;
@@ -64,8 +66,15 @@ var SlidingUpPanel = React.createClass({
       throw "Set a handler view. Hint: It is a React Class."
     }
 
+    if(offsetTop == undefined) {
+      offsetTop = BASE_CONTAINER_HEIGHT;
+      this.setState({
+        offsetTop,
+      });
+    }
+
     if (containerMaximumHeight == undefined) {
-      containerMaximumHeight = height
+      containerMaximumHeight = height;
       this.setState({
         containerMaximumHeight,
       });
@@ -113,12 +122,14 @@ var SlidingUpPanel = React.createClass({
       <View
         style = {{
           position: 'absolute',
-          bottom: 0,
+          top: this.state.offsetTop,
           opacity: this.state.containerOpacity,
           height: this.state.containerHeight,
           paddingBottom: this.state.leastContainerHeight,
           backgroundColor : this.state.containerBackgroundColor
-        }}>
+        }}
+      >
+        {this.props.children}
         <View
           style = {{
             height : this.state.handlerHeight,
@@ -126,10 +137,10 @@ var SlidingUpPanel = React.createClass({
             justifyContent : 'center',
             opacity : this.state.handlerOpacity,
             backgroundColor : this.state.handlerBackgroundColor}}
-          {...this.panResponder.panHandlers}>
+          {...this.panResponder.panHandlers}
+        >
           {this.state.handlerView}
         </View>
-        {this.props.children}
       </View>
     );
   },
@@ -158,11 +169,11 @@ var SlidingUpPanel = React.createClass({
     var y0 = gestureState.y0;
     var negativeY = -dy;
 
-    var positionY = negativeY - this.previousTop;
+    var positionY = negativeY + this.previousTop;
 
-    if (positionY >= this.state.containerMinimumHeight && positionY <= this.state.containerMaximumHeight) {
+    // if (positionY >= this.state.containerMinimumHeight && positionY <= this.state.containerMaximumHeight) {
       this.setState({
-        containerHeight : positionY,
+        containerHeight : -positionY,
         middleList : false
       });
 
@@ -170,7 +181,7 @@ var SlidingUpPanel = React.createClass({
       if (this.props.getContainerHeight != undefined) {
         this.props.getContainerHeight(this.state.containerHalfHeight);
       }
-    }
+    // }
   },
 
   handlePanResponderStart: function(e: Object, gestureState: Object) {
@@ -196,10 +207,10 @@ var SlidingUpPanel = React.createClass({
       } else {
         containerHeight = this.state.containerMaximumHeight;
       }
-    } else if (dy < 0) { // move up
+    } else if (dy > 0) { // move down
       containerHeight = this.state.containerMaximumHeight;
       this.previousTop += dy;
-    } else { // move down
+    } else { // move up
       containerHeight = this.state.containerMinimumHeight;
       this.previousTop = -this.state.containerMinimumHeight;
     }

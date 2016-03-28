@@ -10,8 +10,9 @@ import SlidingUpPanel from './SlidingUpPanel';
 import window from '../util/window';
 const { width, height } = window.getDimensions();
 
-var MAXIMUM_HEIGHT = height - 100;
-var MINUMUM_HEIGHT = 80;
+var MAXIMUM_HEIGHT = height - 200;
+var HANDLER_HEIGHT = 40;
+var OFFSET_TOP = 100;
 
 export default class FilterDrawer extends Component {
   constructor() {
@@ -33,9 +34,10 @@ export default class FilterDrawer extends Component {
         </View>
         <SlidingUpPanel
             ref="panel"
+            offsetTop={OFFSET_TOP}
             containerMaximumHeight={MAXIMUM_HEIGHT}
             containerBackgroundColor="green"
-            handlerHeight={MINUMUM_HEIGHT}
+            handlerHeight={HANDLER_HEIGHT}
             handlerDefaultView={<HandlerOne/>}
             getContainerHeight={this.getContainerHeight.bind(this)}>
           <View style={styles.frontContainer}>
@@ -98,7 +100,7 @@ var styles = StyleSheet.create({
   },
 
   image: {
-    height : MINUMUM_HEIGHT,
+    height : HANDLER_HEIGHT,
     width: width,
     alignItems: 'center',
     backgroundColor : 'gray'
@@ -106,7 +108,7 @@ var styles = StyleSheet.create({
 
   textContainer: {
     backgroundColor : 'transparent',
-    height : MINUMUM_HEIGHT,
+    height : HANDLER_HEIGHT,
     justifyContent : 'center'
   },
 

@@ -13,6 +13,7 @@
     "react-native-drawer-layout": "^0.4.0",
     "react-native-navbar": "^1.4.0",
     "react-native-swipe-cards": "0.0.7",
+    "react-native-slide-down-panel": "https://github.com/holyxiaoxin/react-native-slide-down-panel.git#master",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"

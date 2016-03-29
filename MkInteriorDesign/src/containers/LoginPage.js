@@ -1,17 +1,17 @@
 import React, {
   Component,
+  Dimensions,
   StyleSheet,
   View,
   Text,
   Image,
   TouchableHighlight
 } from 'react-native';
-import window from '../util/window';
 import brandLogo from '../assets/images/mk-logo-home.png';
 import fbLogo from '../assets/images/fb-home.png';
 import { mapDispatchToProps, connect } from '../util/connector';
 
-const { width, height } = window.getDimensions();
+const { width, height } = Dimensions.get('window');
 
 class LoginPage extends Component {
   render() {

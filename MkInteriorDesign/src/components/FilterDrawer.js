@@ -1,4 +1,5 @@
 import React, { Component,
+  Dimensions,
   Animated,
   StyleSheet,
   Text,
@@ -6,9 +7,8 @@ import React, { Component,
   View,
   TouchableHighlight
 } from 'react-native';
-import SlideDownPanel from './SlideDownPanel';
-import window from '../util/window';
-const { width, height } = window.getDimensions();
+import SlideDownPanel from 'react-native-slide-down-panel';
+const { width, height } = Dimensions.get('window');
 
 var MAXIMUM_HEIGHT = height - 200;
 var HANDLER_HEIGHT = 40;

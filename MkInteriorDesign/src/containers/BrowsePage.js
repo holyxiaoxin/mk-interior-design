@@ -1,6 +1,7 @@
 import React, { Component, StyleSheet, View, Text } from 'react-native';
 import NavBar from '../components/NavBar';
-// import FilterDrawer from '../components/FilterDrawer';
+import { THEME_COLOR } from '../config/constants'
+import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from 'react-native-swipe-cards';
 
 let Card = React.createClass({
@@ -37,18 +38,24 @@ export default class BrowsePage extends Component {
     )
 
     return(
-      <View>
+      <View style={styles.container}>
         <NavBar drawer={this.props.drawer} title="Discover Styles"/>
-        {/*<FilterDrawer />*/}
-        {/*<SwipeCards
-          cards={Cards}
+        <FilterDrawer>
+          {/*
+            The children would be the elements rendered after filter drawer.
+            Due to how later elements are rendered infront, we need to render them
+            before the filter drawer. [https://github.com/facebook/react-native/issues/698]
+          */}
+          <SwipeCards
+            cards={Cards}
 
-          renderCard={(cardData) => <Card {...cardData} />}
-          renderNoMoreCards={() => NoMoreCards}
+            renderCard={(cardData) => <Card {...cardData} />}
+            renderNoMoreCards={() => NoMoreCards}
 
-          handleYup={this.handleYup}
-          handleNope={this.handleNope}
-        />*/}
+            handleYup={this.handleYup}
+            handleNope={this.handleNope}
+          />
+        </FilterDrawer>
       </View>
 
     )
@@ -56,6 +63,9 @@ export default class BrowsePage extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: THEME_COLOR.DARK_WHITE
+  },
   card: {
     flex: 1,
     justifyContent: 'center',

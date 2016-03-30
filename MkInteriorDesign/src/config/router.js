@@ -4,8 +4,6 @@ import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
 
-import FilterDrawer from '../components/FilterDrawer';
-
 class Router {
   constructor(navigator) {
     this.navigator = navigator;
@@ -70,8 +68,7 @@ class Router {
 const initialRoute = {
   index: 0,
   // component: LoginPage
-  // component: BrowsePage
-  component: FilterDrawer
+  component: BrowsePage
 }
 
 module.exports = { Router, initialRoute }

@@ -7,7 +7,7 @@ import React, { Component,
   TouchableWithoutFeedback
 } from 'react-native';
 import hamburgerIcon from '../assets/images/hamburger-nav.png';
-import { THEME_COLOR } from '../config/constants'
+import { THEME_COLOR } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
 export default class NavBar extends Component {

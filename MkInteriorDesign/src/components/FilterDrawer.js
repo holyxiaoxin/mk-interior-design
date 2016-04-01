@@ -10,7 +10,8 @@ import React, { Component,
 import SlideDownPanel from 'react-native-slide-down-panel';
 // import SlideDownPanel from './SlideDownPanel';
 import browseFilterSlidedownIcon from '../assets/images/browse-filter-slidedown-icon.png';
-import { THEME_COLOR } from '../config/constants'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { THEME_COLOR } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
 var MAXIMUM_HEIGHT = 200;
@@ -53,7 +54,10 @@ export default class FilterDrawer extends Component {
 function FrontContainer() {
   return (
     <View style={styles.frontContainer}>
-      <Text>This is where the filter will be</Text>
+      <View style={styles.filterBox}>
+        <Text style={styles.filterText}>Tap to filter by style</Text><FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+      </View>
+
     </View>
   )
 }
@@ -83,9 +87,21 @@ const styles = StyleSheet.create({
     backgroundColor: THEME_COLOR.DARK_WHITE
   },
 
-  logText: {
-    color : 'white',
-    fontWeight: '700',
+  filterBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 20,
+    padding: 6,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: THEME_COLOR.LIGHT_GREY,
+    backgroundColor: THEME_COLOR.WHITE_GREEN
+  },
+
+  filterText: {
+    flex: 1,
+    fontSize: 16,
+    textAlign: 'center'
   },
 
   image: {

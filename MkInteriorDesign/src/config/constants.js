@@ -6,7 +6,7 @@ export const THEME_COLOR = {
   DARK_WHITE: '#e6e8e9',
   WHITE_GREEN: '#f7f8f2',
   LIGHT_GREEN: '#b8dcdd',
-  MIDDLE_GREEN: '#82c6c2',
+  MIDDLE_GREEN: '#7FC6C2',
   DARK_GREEN: '#24b1a6'
 };
 

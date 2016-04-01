@@ -64,16 +64,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'center',
     color: THEME_COLOR.LIGHT_GREY,
-    fontFamily: FONT
+    fontFamily: FONT,
+    fontWeight: "600"
 },
   rightText: {
-    color: THEME_COLOR.MIDDLE_GREEN
+    fontSize: 14,
+    color: THEME_COLOR.MIDDLE_GREEN,
+    fontFamily: FONT,
+    fontWeight: "600"
   },
   sharedMargin: {
-    margin: 16
+    margin: 14
   }
-
 });

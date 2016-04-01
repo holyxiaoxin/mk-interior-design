@@ -1,41 +1,51 @@
 import React, { Component,
+  Dimensions,
   StyleSheet,
   View,
   Image,
   Text,
-  TouchableHighlight
+  TouchableWithoutFeedback
 } from 'react-native';
-
 import hamburgerIcon from '../assets/images/hamburger-nav.png';
+import { THEME_COLOR } from '../config/constants'
+const { width, height } = Dimensions.get('window');
 
 export default class NavBar extends Component {
   render() {
     const { title, drawer: { openDrawer, closeDrawer } } = this.props;
 
     const leftButtonConfig = (
-      <TouchableHighlight onPress={openDrawer}>
-        <Image
-          style={styles.hamburgerIcon}
-          source={hamburgerIcon}
-        />
-      </TouchableHighlight>
+      <View style={styles.sharedMargin}>
+        <TouchableWithoutFeedback onPress={openDrawer}>
+          <Image
+            style={styles.hamburgerIcon}
+            source={hamburgerIcon}
+          />
+        </TouchableWithoutFeedback>
+      </View>
+
     );
 
     const rightButtonConfig = (
-      <TouchableHighlight onPress={() => alert('stubbed next')}>
-        <Text>Next</Text>
-      </TouchableHighlight>
+      <View style={styles.sharedMargin}>
+        <TouchableWithoutFeedback onPress={() => alert('stubbed next')}>
+          <Text style={styles.rightText}>Next (1)</Text>
+        </TouchableWithoutFeedback>
+      </View>
+
     );
 
     const titleConfig = (
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, styles.sharedMargin]}>{title}</Text>
     );
 
     return (
-      <View style={styles.navBar}>
-        <View>{leftButtonConfig}</View>
-        <View>{titleConfig}</View>
-        <View>{rightButtonConfig}</View>
+      <View stlye={styles.container}>
+        <View style={styles.navBar}>
+          <View style={{flex: 1}}>{leftButtonConfig}</View>
+          <View style={{flex: 3}}>{titleConfig}</View>
+          <View style={{flex: 1}}>{rightButtonConfig}</View>
+        </View>
       </View>
     )
   }
@@ -43,16 +53,26 @@ export default class NavBar extends Component {
 
 const styles = StyleSheet.create({
   navBar: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 16,
-  },
-  title: {
-    fontSize: 16,
+    width: width,
+    // justifyContent: 'space-between',
+    backgroundColor: THEME_COLOR.DARK_GREY
   },
   hamburgerIcon: {
     width: 20,
     height: 20
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: THEME_COLOR.LIGHT_GREY
+  },
+  rightText: {
+    color: THEME_COLOR.MIDDLE_GREEN
+  },
+  sharedMargin: {
+    margin: 16
   }
+
 });

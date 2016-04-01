@@ -7,8 +7,8 @@ import React, { Component,
   View,
   TouchableHighlight
 } from 'react-native';
-import SlideDownPanel from 'react-native-slide-down-panel';
-// import SlideDownPanel from './SlideDownPanel';
+// import SlideDownPanel from 'react-native-slide-down-panel';
+import SlideDownPanel from './SlideDownPanel';
 import browseFilterSlidedownIcon from '../assets/images/browse-filter-slidedown-icon.png';
 import { THEME_COLOR } from '../config/constants'
 const { width, height } = Dimensions.get('window');

@@ -4,7 +4,9 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Segoe UI Semibold.ttf</string>
+		<string>SegoeUISemilight.ttf</string>
+		<string>SegoeUISemibold.ttf</string>
+		<string>SegoeUISemiboldItalic.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>FontAwesome.ttf</string>

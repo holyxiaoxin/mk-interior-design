@@ -68,8 +68,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: THEME_COLOR.LIGHT_GREY,
     fontFamily: FONT
-
-  },
+},
   rightText: {
     color: THEME_COLOR.MIDDLE_GREEN
   },

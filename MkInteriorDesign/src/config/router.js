@@ -3,6 +3,7 @@ import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
+import PickRenovatorPage from '../containers/PickRenovatorPage';
 
 class Router {
   constructor(navigator) {
@@ -69,6 +70,7 @@ const initialRoute = {
   index: 0,
   // component: LoginPage
   component: BrowsePage
+  //component: PickRenovatorPage
 }
 
-module.exports = { Router, initialRoute }
+module.exports = { Router, initialRoute };

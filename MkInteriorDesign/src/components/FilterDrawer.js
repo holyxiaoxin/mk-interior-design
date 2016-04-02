@@ -71,7 +71,9 @@ class FrontContainer extends Component {
           <View style={styles.filterBox}>
             {
               this.state.filterTags.map((filterTag, index) =>
-                <View key={index} style={{
+                <View key={`filter-tag-${index}`} style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
                     backgroundColor: 'powderblue',
                     borderRadius: 10,
                     marginLeft: 2,
@@ -82,7 +84,10 @@ class FrontContainer extends Component {
                     paddingRight: 8
                   }
                 }>
-                  <Text>{filterTag}</Text>
+                  <Text style={{paddingRight: 8}}>{filterTag}</Text>
+                  <TouchableWithoutFeedback onPress={this.deleteFilterTag.bind(this, index)}>
+                    <FontAwesome name="times" size={12} color={THEME_COLOR.DARK_GREY} />
+                  </TouchableWithoutFeedback>
                 </View>
 
               )
@@ -99,13 +104,6 @@ class FrontContainer extends Component {
               <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
             </TouchableWithoutFeedback>
           </View>
-
-          {/*<TouchableWithoutFeedback onPress={() => alert('filter!')}>
-            <View style={styles.filterBox}>
-              <Text style={styles.filterText}>Tap to filter by style</Text>
-              <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
-            </View>
-          </TouchableWithoutFeedback>*/}
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={styles.budgetText}>Budget: </Text>
             <View style={{flex: 1, marginRight: 20}}><TwoSlider/></View>
@@ -116,9 +114,16 @@ class FrontContainer extends Component {
 
   addFilter() {
     const filterText = this.state.filterText;
+    if (filterText === '') return;
     const filterTags = this.state.filterTags;
     filterTags.push(filterText);
-    this.setState({filterText: '', filterTags})
+    this.setState({filterText: '', filterTags});
+  }
+
+  deleteFilterTag(index) {
+    const filterTags = this.state.filterTags;
+    filterTags.splice(index, 1);
+    this.setState({filterTags});
   }
 
 }

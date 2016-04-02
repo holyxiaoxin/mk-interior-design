@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, View, Text } from 'react-native';
+import React, { Component, StyleSheet, View, Text, TextInput } from 'react-native';
 import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants';
 import Layout from '../containers/Layout';

@@ -3,6 +3,7 @@ import React, { Component,
   Animated,
   StyleSheet,
   Text,
+  TextInput,
   Image,
   View,
   TouchableWithoutFeedback
@@ -22,7 +23,9 @@ var OFFSET_TOP = 0;
 export default class FilterDrawer extends Component {
   constructor() {
     super();
-    this.state = { containerHeight : 0 };
+    this.state = {
+      containerHeight : 0
+    };
   }
 
   getContainerHeight(containerHeight) {
@@ -33,7 +36,7 @@ export default class FilterDrawer extends Component {
 
   render() {
     return (
-      <View style={styles.parentContainer}>
+      <View>
         <View style={styles.backContainer}>
           {this.props.children}
         </View>
@@ -53,21 +56,71 @@ export default class FilterDrawer extends Component {
   }
 }
 
-function FrontContainer() {
-  return (
-    <View style={styles.frontContainer}>
-        <TouchableWithoutFeedback onPress={() => alert('filter!')}>
+class FrontContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      filterText: '',
+      filterTags: ['tag1', 'tag2']
+    };
+  }
+
+  render() {
+    return (
+      <View style={styles.frontContainer}>
           <View style={styles.filterBox}>
-            <Text style={styles.filterText}>Tap to filter by style</Text>
-            <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+            {
+              this.state.filterTags.map((filterTag, index) =>
+                <View key={index} style={{
+                    backgroundColor: 'powderblue',
+                    borderRadius: 10,
+                    marginLeft: 2,
+                    marginRight: 2,
+                    paddingTop: 4,
+                    paddingBottom: 4,
+                    paddingLeft: 8,
+                    paddingRight: 8
+                  }
+                }>
+                  <Text>{filterTag}</Text>
+                </View>
+
+              )
+            }
+            <TextInput
+              style={{flex: 1, height: 40}}
+              placeholder="Tap to filter by style"
+              underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
+              onChangeText={(filterText) => this.setState({filterText})}
+              onSubmitEditing={this.addFilter.bind(this)}
+              value={this.state.filterText}
+            />
+            <TouchableWithoutFeedback onPress={() => alert('filter!')}>
+              <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+            </TouchableWithoutFeedback>
           </View>
-        </TouchableWithoutFeedback>
-        <View style={{flexDirection: 'row', marginTop: 10}}>
-          <Text style={styles.budgetText}>Budget: </Text>
-          <View style={{flex: 1, marginRight: 20}}><TwoSlider/></View>
-        </View>
-    </View>
-  )
+
+          {/*<TouchableWithoutFeedback onPress={() => alert('filter!')}>
+            <View style={styles.filterBox}>
+              <Text style={styles.filterText}>Tap to filter by style</Text>
+              <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+            </View>
+          </TouchableWithoutFeedback>*/}
+          <View style={{flexDirection: 'row', marginTop: 10}}>
+            <Text style={styles.budgetText}>Budget: </Text>
+            <View style={{flex: 1, marginRight: 20}}><TwoSlider/></View>
+          </View>
+      </View>
+    )
+  }
+
+  addFilter() {
+    const filterText = this.state.filterText;
+    const filterTags = this.state.filterTags;
+    filterTags.push(filterText);
+    this.setState({filterText: '', filterTags})
+  }
+
 }
 
 function Handler() {
@@ -80,11 +133,7 @@ function Handler() {
 }
 
 const styles = StyleSheet.create({
-  parentContainer: {
-    // flex : 1,
-  },
   backContainer: {
-    // flex : 1,
     marginTop: HANDLER_HEIGHT
   },
   frontContainer: {
@@ -94,9 +143,10 @@ const styles = StyleSheet.create({
   },
   filterBox: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     margin: 20,
-    padding: 6,
+    paddingRight: 6,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: THEME_COLOR.LIGHT_GREY,

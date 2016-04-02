@@ -15,14 +15,14 @@ export default class SlideDownPanel extends Component {
     super(props);
 
     const {
-      offsetTop, handlerHeight, containerMaximumHeight, containerBackgroundColor,
+      offsetTop, handlerHeight, initialHeight, containerMaximumHeight, containerBackgroundColor,
       containerOpacity, handlerDefaultView, handlerBackgroundColor, handlerOpacity
     } = props;
 
     this.state = {
       offsetTop: offsetTop != undefined ? offsetTop : DEFAULT_CONTAINER_HEIGHT,
       handlerHeight : handlerHeight != undefined ? handlerHeight: DEFAULT_CONTAINER_HEIGHT,
-      containerHeight : handlerHeight != undefined ? handlerHeight: DEFAULT_CONTAINER_HEIGHT,
+      containerHeight : handlerHeight != undefined ? handlerHeight + initialHeight: handlerHeight,
       containerMinimumHeight : handlerHeight != undefined ? handlerHeight: DEFAULT_CONTAINER_HEIGHT,
       containerMaximumHeight : containerMaximumHeight != undefined ? containerMaximumHeight : height,
       containerBackgroundColor : containerBackgroundColor != undefined ? containerBackgroundColor : 'white',
@@ -32,6 +32,9 @@ export default class SlideDownPanel extends Component {
       handlerOpacity : handlerOpacity != undefined ? handlerOpacity : 1,
       isPanMoving: false
     };
+
+    this.hasLoaded = false;
+    this.previousContainerHeight = initialHeight;
   }
 
   componentWillMount() {
@@ -46,6 +49,7 @@ export default class SlideDownPanel extends Component {
   }
 
   componentDidMount() {
+    this.hasLoaded = true;
     // Make sure that handlerView is set
     if (this.state.handlerView == undefined) {
       throw "Set a handler view. Hint: It is a React Class."
@@ -58,7 +62,6 @@ export default class SlideDownPanel extends Component {
     //     position: 'absolute',
     //     top: this.state.offsetTop,
     //     opacity: this.state.containerOpacity,
-    //     paddingBottom: this.state.leastContainerHeight,
     //     backgroundColor : this.state.containerBackgroundColor
     //   },
     //   handler: {
@@ -70,14 +73,12 @@ export default class SlideDownPanel extends Component {
     //   }
     // };
 
-
     return (
-      this.state.isPanMoving ?
+      this.state.isPanMoving || !this.hasLoaded ?
       <View style={{
         position: 'absolute',
         top: this.state.offsetTop,
         opacity: this.state.containerOpacity,
-        paddingBottom: this.state.leastContainerHeight,
         backgroundColor : this.state.containerBackgroundColor,
         height: this.state.containerHeight
       }}>
@@ -100,7 +101,6 @@ export default class SlideDownPanel extends Component {
               position: 'absolute',
               top: this.state.offsetTop,
               opacity: this.state.containerOpacity,
-              paddingBottom: this.state.leastContainerHeight,
               backgroundColor : this.state.containerBackgroundColor
             }, { height: y}]}>
               {this.props.children}

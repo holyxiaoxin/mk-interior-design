@@ -7,12 +7,12 @@ import React, { Component,
   View,
   TouchableWithoutFeedback
 } from 'react-native';
-import SlideDownPanel from 'react-native-slide-down-panel';
-// import SlideDownPanel from './SlideDownPanel';
+// import SlideDownPanel from 'react-native-slide-down-panel';
+import SlideDownPanel from './SlideDownPanel';
 import TwoSlider from './TwoSlider';
 import browseFilterSlidedownIcon from '../assets/images/browse-filter-slidedown-icon.png';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { THEME_COLOR } from '../config/constants';
+import { THEME_COLOR, FONT } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
 var MAXIMUM_HEIGHT = 200;
@@ -40,6 +40,7 @@ export default class FilterDrawer extends Component {
         <SlideDownPanel
           ref="panel"
           offsetTop={OFFSET_TOP}
+          initialHeight={0}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
@@ -57,7 +58,8 @@ function FrontContainer() {
     <View style={styles.frontContainer}>
         <TouchableWithoutFeedback onPress={() => alert('filter!')}>
           <View style={styles.filterBox}>
-            <Text style={styles.filterText}>Tap to filter by style</Text><FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+            <Text style={styles.filterText}>Tap to filter by style</Text>
+            <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
           </View>
         </TouchableWithoutFeedback>
         <View style={{margin: 30}}>
@@ -105,8 +107,8 @@ const styles = StyleSheet.create({
 
   filterText: {
     flex: 1,
-    fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: FONT
   },
 
   image: {

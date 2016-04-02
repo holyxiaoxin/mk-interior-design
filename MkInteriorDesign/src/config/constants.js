@@ -1,3 +1,5 @@
+import React, { Navigator, Platform, BackAndroid } from 'react-native';
+
 export const THEME_COLOR = {
   DARK_GREY: '#414143',
   DARKER_GREY: '#2D2A2C',
@@ -11,4 +13,4 @@ export const THEME_COLOR = {
   DARK_GREEN: '#24b1a6'
 };
 
-export const FONT = 'Segoe UI';
+export const FONT = (Platform.OS === 'android') ?  'segoeui' : 'Segoe UI';

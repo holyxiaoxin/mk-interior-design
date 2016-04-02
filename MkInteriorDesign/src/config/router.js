@@ -21,8 +21,14 @@ class Router {
   }
 
   push(props, route) {
-    let routesList = this.navigator.getCurrentRoutes();
-    let nextIndex = routesList[routesList.length - 1].index + 1;
+    const routesList = this.navigator.getCurrentRoutes();
+    const currentRoute = routesList[routesList.length - 1];
+    const nextIndex = currentRoute.index + 1;
+    const currentComponent = currentRoute.component
+
+    // Do not push when current component is the same
+    if(currentComponent == route.component) return;
+
     route.props = props;
     route.index = nextIndex;
     this.navigator.push(route);
@@ -74,8 +80,8 @@ class Router {
 const initialRoute = {
   index: 0,
   // component: LoginPage
-  // component: BrowsePage
-  component: PickRenovatorsPage
+  component: BrowsePage
+  // component: PickRenovatorsPage
 }
 
 module.exports = { Router, initialRoute };

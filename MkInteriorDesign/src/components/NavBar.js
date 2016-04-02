@@ -4,7 +4,8 @@ import React, { Component,
   View,
   Image,
   Text,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Platform
 } from 'react-native';
 import hamburgerIcon from '../assets/images/hamburger-nav.png';
 import { THEME_COLOR, FONT } from '../config/constants'
@@ -41,7 +42,14 @@ export default class NavBar extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.topBar}></View>
+
+        {
+          Platform.OS === 'ios' ?
+            <View style={styles.topBar}></View>
+            :
+            ''
+        }
+
         <View style={styles.navBar}>
           <View style={{flex: 1}}>{leftButtonConfig}</View>
           <View style={{flex: 3}}>{titleConfig}</View>

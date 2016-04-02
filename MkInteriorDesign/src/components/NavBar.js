@@ -29,7 +29,7 @@ export default class NavBar extends Component {
 
     const rightButtonConfig = (
       <View style={styles.sharedMargin}>
-        <TouchableWithoutFeedback onPress={() => alert('stubbed next')}>
+        <TouchableWithoutFeedback onPress={() => console.log('stubbed next')}>
           <Text style={styles.rightText}>Next (1)</Text>
         </TouchableWithoutFeedback>
       </View>

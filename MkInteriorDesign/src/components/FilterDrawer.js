@@ -101,7 +101,7 @@ class FrontContainer extends Component {
               value={this.state.filterText}
             />
             <TouchableWithoutFeedback onPress={() => alert('filter!')}>
-              <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+              <Icon name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
             </TouchableWithoutFeedback>
           </View>
           <View style={{flexDirection: 'row', marginTop: 10}}>

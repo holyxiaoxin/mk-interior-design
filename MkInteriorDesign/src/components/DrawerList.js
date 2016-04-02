@@ -13,7 +13,7 @@ export default class DrawerList extends BaseComponent {
   constructor(props) {
       super(props);
       this.router = this.props.getRouter();
-      this._bind('toProfilePage', 'toBrowsePage', 'toCounterPage', 'toListingPage');
+      this._bind('toProfilePage', 'toBrowsePage', 'toCounterPage',  'toFavoritesPage','toListingPage');
     }
 
   toProfilePage() {
@@ -29,6 +29,11 @@ export default class DrawerList extends BaseComponent {
   toCounterPage() {
     this.props.closeDrawer();
     this.router.toCounterPage();
+  }
+
+  toFavoritesPage() {
+    this.props.closeDrawer();
+    this.router.toFavoritesPage();
   }
 
   toListingPage() {
@@ -50,7 +55,7 @@ export default class DrawerList extends BaseComponent {
             <Text style={styles.drawerFont}>Browse</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerRow} onPress={this.toCounterPage}>
+        <TouchableOpacity style={styles.drawerRow} onPress={this.toFavoritesPage}>
           <View style={{flexDirection: "row"}}>
             <Text style={styles.drawerFont}>My Favourites</Text>
           </View>

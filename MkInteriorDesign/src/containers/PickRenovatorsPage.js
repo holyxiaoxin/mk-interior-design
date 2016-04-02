@@ -1,17 +1,10 @@
-import React, { Component, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native';
-import NavBar from '../components/NavBar';
+import React, { Component, Dimensions, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native';
 import { THEME_COLOR } from '../config/constants';
+import Layout from '../containers/Layout';
 import Button from 'react-native-button';
+import ImageList from '../components/ImageList';
 
-let DesignGrid = React.createClass({
-    render() {
-        return (
-            <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
-                <Text>{this.props.text}</Text>
-            </View>
-        )
-    }
-})
+const { width, height } = Dimensions.get('window');
 
 const PICK_RENOVATORS_MOCK_DATA = {
     "success": true,
@@ -103,7 +96,6 @@ const PICK_RENOVATORS_MOCK_DATA = {
     ]
 }
 
-
 export default class PickRenovatorsPage extends Component {
   constructor(props) {
    super(props);
@@ -122,7 +114,7 @@ export default class PickRenovatorsPage extends Component {
    fetchData() {
      this.setState({
       dataSource: this.state.dataSource.cloneWithRows(PICK_RENOVATORS_MOCK_DATA.payload),
-      loaded: true,
+      loaded: true
     })
   }
 
@@ -141,49 +133,46 @@ export default class PickRenovatorsPage extends Component {
               <View style={styles.rightContainer}>
                 <Text style={styles.renovatorNameText}>{renovator.name}</Text>
               </View>
-
-              <View style={styles.renovatorImages}>
-              </View>
           </View>
+
+          <ImageList images={renovator.thumbnails}>
+            <View style={styles.moreBox}>
+              <Text style={styles.moreText}>
+                {renovator.thumbMore} MORE
+              </Text>
+            </View>
+          </ImageList>
         </View>
       );
     }
 
   render() {
-    const title = 'Pick Renovators';
-
     return(
-        <View style={styles.container}>
-          <NavBar drawer={this.props.drawer} title={title}/>
+      <Layout drawer={this.props.drawer} title='Pick Renovators'>
+        <View style={styles.topTextBox}>
+          <Text style={styles.topText}>
+            You have liked these designs. Now, lets choose the renovators
+            to get free quotations from:
+          </Text>
+        </View>
 
-          <View style={styles.topTextBox}>
-            <Text style={styles.topText}>
-              You have liked these designs. Now, lets choose the renovators
-              to get free quotations from:
-            </Text>
-          </View>
+        <View style={{alignItems: 'center'}}>
+          <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:10, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
+                             style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
+            Help me decide!
+          </Button>
+        </View>
 
-          <View style={{alignItems: 'center'}}>
-            <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:4, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
-                               style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
-              Help me decide!
-            </Button>
-          </View>
-
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRenovator}
-            style={styles.listView}
-          />
-      </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRenovator}
+          style={styles.listView}/>
+      </Layout>
     )
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      backgroundColor: THEME_COLOR.DARK_WHITE,
-    },
     topTextBox: {
       padding: 20
     },
@@ -201,23 +190,20 @@ const styles = StyleSheet.create({
       marginTop: 20
     },
     renovatorRow: {
-      marginLeft: 10,
-      marginRight: 10,
     },
     renovatorDetails: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: THEME_COLOR.DARK_WHITE
+      backgroundColor: THEME_COLOR.DARK_WHITE,
+      borderBottomWidth: 1,
+      borderBottomColor: THEME_COLOR.LIGHT_GREY,
+      marginTop: 15
     },
     renovatorLogo: {
       width: 50,
       height: 50
-    },
-    renovatorImages: {
-      // borderWidth: 2,
-      // borderColor: '#00ff00'
     },
     renovatorNameText: {
       fontFamily: 'Segoe UI',
@@ -229,5 +215,9 @@ const styles = StyleSheet.create({
     },
     rightContainer: {
       flex: 1
+    },
+    moreBox: {
+      width: width/3 - 10,
+      height: width/3 - 10
     }
 })

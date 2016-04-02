@@ -1,17 +1,8 @@
-import React, { Component, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native';
+import React, { Component, Dimensions, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native';
 import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants';
 import Button from 'react-native-button';
-
-let DesignGrid = React.createClass({
-    render() {
-        return (
-            <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
-                <Text>{this.props.text}</Text>
-            </View>
-        )
-    }
-})
+const { width, height } = Dimensions.get('window');
 
 const PICK_RENOVATORS_MOCK_DATA = {
     "success": true,
@@ -103,7 +94,6 @@ const PICK_RENOVATORS_MOCK_DATA = {
     ]
 }
 
-
 export default class PickRenovatorsPage extends Component {
   constructor(props) {
    super(props);
@@ -122,7 +112,7 @@ export default class PickRenovatorsPage extends Component {
    fetchData() {
      this.setState({
       dataSource: this.state.dataSource.cloneWithRows(PICK_RENOVATORS_MOCK_DATA.payload),
-      loaded: true,
+      loaded: true
     })
   }
 
@@ -141,9 +131,24 @@ export default class PickRenovatorsPage extends Component {
               <View style={styles.rightContainer}>
                 <Text style={styles.renovatorNameText}>{renovator.name}</Text>
               </View>
+          </View>
 
-              <View style={styles.renovatorImages}>
-              </View>
+          <View style={styles.renovatorImages}>
+            {
+              renovator.thumbnails.map(function(row, i) {
+                return (
+                  <Image key={ `image-${i}`}
+                    source={{uri: 'http://netdna.webdesignerdepot.com/uploads/circular_logos/NASA.jpg'}}
+                    style={styles.renovatorThumbnail}/>
+                );
+              })
+            }
+
+            <View style={styles.moreBox}>
+              <Text style={styles.moreText}>
+                {renovator.thumbMore} MORE
+              </Text>
+            </View>
           </View>
         </View>
       );
@@ -183,6 +188,7 @@ export default class PickRenovatorsPage extends Component {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: THEME_COLOR.DARK_WHITE,
+      flex: 1
     },
     topTextBox: {
       padding: 20
@@ -199,6 +205,7 @@ const styles = StyleSheet.create({
     },
     listView: {
       marginTop: 20
+      // flex: 1
     },
     renovatorRow: {
       marginLeft: 10,
@@ -209,15 +216,13 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: THEME_COLOR.DARK_WHITE
+      backgroundColor: THEME_COLOR.DARK_WHITE,
+      borderBottomWidth: 1,
+      borderBottomColor: THEME_COLOR.LIGHT_GREY
     },
     renovatorLogo: {
       width: 50,
       height: 50
-    },
-    renovatorImages: {
-      // borderWidth: 2,
-      // borderColor: '#00ff00'
     },
     renovatorNameText: {
       fontFamily: 'Segoe UI',
@@ -227,7 +232,24 @@ const styles = StyleSheet.create({
       color: THEME_COLOR.LIGHT_GREY,
       textAlign: 'center'
     },
+    renovatorImages: {
+      alignItems: 'flex-start',
+      flexDirection:'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between'
+    },
+    renovatorThumbnail: {
+      width: width/3 - 10,
+      height: width/3 - 10
+    },
     rightContainer: {
       flex: 1
+    },
+    moreBox: {
+      width: width/3 - 10,
+      height: width/3 - 10
+    },
+    moreText: {
+
     }
 })

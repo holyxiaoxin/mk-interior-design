@@ -35,11 +35,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexDirection:'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   thumbnail: {
     marginTop: 8,
-    width: width/3 - 12,
-    height: width/3 - 12,
+    width: width/3 - 20,
+    height: width/3 - 20,
+    marginRight: 10
   }
 })

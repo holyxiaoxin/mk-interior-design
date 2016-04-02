@@ -41,11 +41,17 @@ export default class FavoritesPage extends Component {
 
         return(
           <Layout drawer={this.props.drawer} title='My Favorites'>
-            <ImageList images={images}/>
+            <View style={styles.container}>
+              <ImageList images={images}/>
+            </View>
           </Layout>
         )
     }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginLeft: 20,
+    marginRight: 10
+  }
 })

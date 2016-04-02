@@ -149,30 +149,37 @@ export default class PickRenovatorsPage extends Component {
   render() {
     return(
       <Layout drawer={this.props.drawer} title='Pick Renovators'>
-        <View style={styles.topTextBox}>
-          <Text style={styles.topText}>
-            You have liked these designs. Now, lets choose the renovators
-            to get free quotations from:
-          </Text>
-        </View>
+        <View style={styles.container}>
+          <View style={styles.topTextBox}>
+            <Text style={styles.topText}>
+              You have liked these designs. Now, lets choose the renovators
+              to get free quotations from:
+            </Text>
+          </View>
 
-        <View style={{alignItems: 'center'}}>
-          <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:10, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
-                             style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
-            Help me decide!
-          </Button>
-        </View>
+          <View style={{alignItems: 'center'}}>
+            <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:10, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
+                               style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
+              Help me decide!
+            </Button>
+          </View>
 
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRenovator}
-          style={styles.listView}/>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRenovator}
+            style={styles.listView}
+          />
+        </View>
       </Layout>
     )
   }
 }
 
 const styles = StyleSheet.create({
+    container: {
+      marginLeft: 20,
+      marginRight: 10
+    },
     topTextBox: {
       padding: 20
     },

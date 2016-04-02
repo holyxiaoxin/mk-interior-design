@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, View, Text } from 'react-native';
+import React, { Component, StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants'
 import FilterDrawer from '../components/FilterDrawer';
@@ -23,21 +23,28 @@ const Cards = [
 ]
 
 export default class PickRenovatorsPage extends Component {
-    render() {
-        const title = 'Pick Renovators';
+  decideForMe() {
+        alert("hi");
+  }
 
-        return(
-            <View style={styles.container}>
-                <NavBar drawer={this.props.drawer} title={title}/>
+  render() {
+    const title = 'Pick Renovators';
 
-                <View style={styles.topTextBox}>
-                  <Text style={styles.topText}>
-                    You have liked these designs. Now, lets choose the renovators
-                    to get free quotations from:
-                  </Text>
-                </View>
-            </View>
-        )
+    return(
+        <View style={styles.container}>
+          <NavBar drawer={this.props.drawer} title={title}/>
+
+          <View style={styles.topTextBox}>
+            <Text style={styles.topText}>
+              You have liked these designs. Now, lets choose the renovators
+              to get free quotations from:
+            </Text>
+          </View>
+
+          <TouchableHighlight onPress={this.decideForMe}>
+            <Text style={styles.topButton}>Help me decide!</Text>
+          </TouchableHighlight>
+        </View>)
     }
 }
 
@@ -53,5 +60,9 @@ const styles = StyleSheet.create({
       fontWeight: '400',
       fontSize: 16,
       color: '#939598'
+    },
+    topButton: {
+      flexDirection: "row",
+      justifyContent: "center"
     }
 })

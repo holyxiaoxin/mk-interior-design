@@ -21,9 +21,9 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		2D6A844C1CAEC2B800E38406 /* SegoeUISemibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A844B1CAEC2B800E38406 /* SegoeUISemibold.ttf */; };
-		2D6A844E1CAEC50100E38406 /* SegoeUISemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A844D1CAEC50100E38406 /* SegoeUISemiboldItalic.ttf */; };
-		2D6A84501CAEC6A400E38406 /* SegoeUISemilight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A844F1CAEC6A400E38406 /* SegoeUISemilight.ttf */; };
+		2D1DE93D1CAF77F5003545C8 /* SegoeUISemilight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DE93A1CAF77F5003545C8 /* SegoeUISemilight.ttf */; };
+		2D1DE93E1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DE93B1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf */; };
+		2D1DE93F1CAF77F5003545C8 /* SegoeUISemibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DE93C1CAF77F5003545C8 /* SegoeUISemibold.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		FBD8BD5E1CAEB25100C4EFE5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBD8BD561CAEB25100C4EFE5 /* Entypo.ttf */; };
 		FBD8BD5F1CAEB25100C4EFE5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBD8BD571CAEB25100C4EFE5 /* EvilIcons.ttf */; };
@@ -135,9 +135,9 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MkInteriorDesign/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MkInteriorDesign/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		2D6A844B1CAEC2B800E38406 /* SegoeUISemibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SegoeUISemibold.ttf; path = ../../../../../Downloads/SegoeUISemibold.ttf; sourceTree = "<group>"; };
-		2D6A844D1CAEC50100E38406 /* SegoeUISemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SegoeUISemiboldItalic.ttf; path = ../../../../../Downloads/SegoeUISemiboldItalic.ttf; sourceTree = "<group>"; };
-		2D6A844F1CAEC6A400E38406 /* SegoeUISemilight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SegoeUISemilight.ttf; path = ../../../../../Downloads/SegoeUISemilight.ttf; sourceTree = "<group>"; };
+		2D1DE93A1CAF77F5003545C8 /* SegoeUISemilight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SegoeUISemilight.ttf; sourceTree = "<group>"; };
+		2D1DE93B1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SegoeUISemiboldItalic.ttf; sourceTree = "<group>"; };
+		2D1DE93C1CAF77F5003545C8 /* SegoeUISemibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SegoeUISemibold.ttf; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		FBD8BD561CAEB25100C4EFE5 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -331,9 +331,9 @@
 		FBD8BD551CAEB25100C4EFE5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				2D6A844F1CAEC6A400E38406 /* SegoeUISemilight.ttf */,
-				2D6A844D1CAEC50100E38406 /* SegoeUISemiboldItalic.ttf */,
-				2D6A844B1CAEC2B800E38406 /* SegoeUISemibold.ttf */,
+				2D1DE93A1CAF77F5003545C8 /* SegoeUISemilight.ttf */,
+				2D1DE93B1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf */,
+				2D1DE93C1CAF77F5003545C8 /* SegoeUISemibold.ttf */,
 				FBD8BD561CAEB25100C4EFE5 /* Entypo.ttf */,
 				FBD8BD571CAEB25100C4EFE5 /* EvilIcons.ttf */,
 				FBD8BD581CAEB25100C4EFE5 /* FontAwesome.ttf */,
@@ -549,13 +549,13 @@
 				FBD8BD631CAEB25100C4EFE5 /* MaterialIcons.ttf in Resources */,
 				FBD8BD641CAEB25100C4EFE5 /* Octicons.ttf in Resources */,
 				FBD8BD651CAEB25100C4EFE5 /* Zocial.ttf in Resources */,
-				2D6A84501CAEC6A400E38406 /* SegoeUISemilight.ttf in Resources */,
+				2D1DE93D1CAF77F5003545C8 /* SegoeUISemilight.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				FBD8BD601CAEB25100C4EFE5 /* FontAwesome.ttf in Resources */,
 				FBD8BD5F1CAEB25100C4EFE5 /* EvilIcons.ttf in Resources */,
+				2D1DE93E1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf in Resources */,
 				FBD8BD621CAEB25100C4EFE5 /* Ionicons.ttf in Resources */,
-				2D6A844E1CAEC50100E38406 /* SegoeUISemiboldItalic.ttf in Resources */,
-				2D6A844C1CAEC2B800E38406 /* SegoeUISemibold.ttf in Resources */,
+				2D1DE93F1CAF77F5003545C8 /* SegoeUISemibold.ttf in Resources */,
 				FBD8BD611CAEB25100C4EFE5 /* Foundation.ttf in Resources */,
 				FBD8BD5E1CAEB25100C4EFE5 /* Entypo.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,

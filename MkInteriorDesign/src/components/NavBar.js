@@ -42,14 +42,7 @@ export default class NavBar extends Component {
 
     return (
       <View style={styles.container}>
-
-        {
-          Platform.OS === 'ios' ?
-            <View style={styles.topBar}></View>
-            :
-            <View></View>
-        }
-
+        <View style={Platform.OS === 'ios' ? styles.topBar : {}}></View>
         <View style={styles.navBar}>
           <View style={{flex: 1}}>{leftButtonConfig}</View>
           <View style={{flex: 3}}>{titleConfig}</View>

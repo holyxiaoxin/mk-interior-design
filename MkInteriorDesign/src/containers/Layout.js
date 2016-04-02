@@ -20,6 +20,7 @@ export default class Layout extends Component {
 
 const styles = StyleSheet.create({
     layout: {
+      flex: 1,
       backgroundColor: THEME_COLOR.DARK_WHITE
     },
     container: {

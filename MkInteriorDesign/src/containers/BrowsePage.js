@@ -1,6 +1,7 @@
 import React, { Component, StyleSheet, View, Text } from 'react-native';
 import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants'
+import Layout from '../containers/Layout';
 import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from 'react-native-swipe-cards';
 import BaseComponent from '../components/BaseComponent';
@@ -39,25 +40,25 @@ export default class BrowsePage extends BaseComponent {
     )
 
     return(
-      <View style={styles.container}>
-        <NavBar drawer={this.props.drawer} title="Discover Styles"/>
+      <Layout drawer={this.props.drawer} title='Discover Styles'>
         <FilterDrawer>
           {/*
             The children would be the elements rendered after filter drawer.
             Due to how later elements are rendered infront, we need to render them
             before the filter drawer. [https://github.com/facebook/react-native/issues/698]
           */}
-          <SwipeCards
-            cards={Cards}
-
-            renderCard={(cardData) => <Card {...cardData} />}
-            renderNoMoreCards={() => NoMoreCards}
-
-            handleYup={this.handleYup}
-            handleNope={this.handleNope}
-          />
+          <View style={{height: 500}}>
+            <SwipeCards
+              cards={Cards}
+              renderCard={(cardData) => <Card {...cardData} />}
+              renderNoMoreCards={() => NoMoreCards}
+              handleYup={this.handleYup}
+              handleNope={this.handleNope}
+            />
+          </View>
         </FilterDrawer>
-      </View>
+      </Layout>
+
 
     )
   }

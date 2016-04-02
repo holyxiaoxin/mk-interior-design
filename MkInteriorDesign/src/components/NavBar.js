@@ -44,9 +44,9 @@ export default class NavBar extends Component {
       <View style={styles.container}>
         <View style={Platform.OS === 'ios' ? styles.topBar : {}}></View>
         <View style={styles.navBar}>
-          <View style={{flex: 1}}>{leftButtonConfig}</View>
-          <View style={{flex: 3}}>{titleConfig}</View>
-          <View style={{flex: 1}}>{rightButtonConfig}</View>
+          <View style={{flex: 0}}>{leftButtonConfig}</View>
+          <View style={{flex: 1}}>{titleConfig}</View>
+          <View style={{flex: 0}}>{rightButtonConfig}</View>
         </View>
       </View>
     )
@@ -62,8 +62,9 @@ const styles = StyleSheet.create({
   },
   navBar: {
     flexDirection: 'row',
-    width: width,
+    alignItems: 'center',
     height: 50,
+    width: width,
     backgroundColor: THEME_COLOR.DARK_GREY,
   },
   hamburgerIcon: {
@@ -84,6 +85,9 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   },
   sharedMargin: {
-    margin: 10
+    // To change the left and right navbar margin,
+    // do it here:
+    marginLeft: 10,
+    marginRight: 10,
   }
 });

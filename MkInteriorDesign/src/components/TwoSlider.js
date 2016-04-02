@@ -22,8 +22,8 @@ export default class TwoSlider extends Component {
       lineHighlightColor = 'paleturquoise',
       leftSliderColor = 'lightblue',
       rightSliderColor = 'lightsteelblue',
-      leftSliderPosition = 100,
-      rightSliderPosition = 200,
+      leftSliderPosition = 50,
+      rightSliderPosition = 150,
       sliderSize = 30
     } = props;
 

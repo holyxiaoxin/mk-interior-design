@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   },
   sharedMargin: {
-    margin: 14
+    margin: 10
   }
 });

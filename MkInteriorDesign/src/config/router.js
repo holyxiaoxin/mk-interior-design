@@ -3,6 +3,7 @@ import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
+import ListingPage from '../containers/ListingPage';
 import PickRenovatorPage from '../containers/PickRenovatorPage';
 
 class Router {
@@ -48,6 +49,10 @@ class Router {
 
   toCounterPage(props) {
     this.push(props, { component: CounterPage });
+  }
+
+  toListingPage(props) {
+    this.push(props, { component: ListingPage });
   }
 
   // replaceWithHome(props) {

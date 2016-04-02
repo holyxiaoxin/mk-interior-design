@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants'
 import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from 'react-native-swipe-cards';
+import BaseComponent from '../components/BaseComponent';
 
 let Card = React.createClass({
   render() {
@@ -20,10 +21,10 @@ const Cards = [
   {text: 'Courgette', backgroundColor: 'green'},
   {text: 'Blueberry', backgroundColor: 'blue'},
   {text: 'Umm...', backgroundColor: 'cyan'},
-  {text: 'orange', backgroundColor: 'orange'},
+  {text: 'orange', backgroundColor: 'orange'}
 ]
 
-export default class BrowsePage extends Component {
+export default class BrowsePage extends BaseComponent {
   handleYup (card) {
     console.log(`Yup for ${card.text}`)
   }

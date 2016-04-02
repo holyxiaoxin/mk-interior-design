@@ -22,7 +22,7 @@ export default class SlideDownPanel extends Component {
     this.state = {
       offsetTop: offsetTop != undefined ? offsetTop : DEFAULT_CONTAINER_HEIGHT,
       handlerHeight : handlerHeight != undefined ? handlerHeight: DEFAULT_CONTAINER_HEIGHT,
-      containerHeight : handlerHeight != undefined ? handlerHeight + initialHeight: handlerHeight,
+      containerHeight : handlerHeight != undefined ? initialHeight: handlerHeight,
       containerMinimumHeight : handlerHeight != undefined ? handlerHeight: DEFAULT_CONTAINER_HEIGHT,
       containerMaximumHeight : containerMaximumHeight != undefined ? containerMaximumHeight : height,
       containerBackgroundColor : containerBackgroundColor != undefined ? containerBackgroundColor : 'white',

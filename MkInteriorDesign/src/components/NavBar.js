@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: width,
     height: 50,
-    // justifyContent: 'space-between',
     backgroundColor: THEME_COLOR.DARK_GREY,
   },
   hamburgerIcon: {

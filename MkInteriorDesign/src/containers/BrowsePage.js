@@ -1,6 +1,6 @@
 import React, { Component, StyleSheet, View, Text } from 'react-native';
 import NavBar from '../components/NavBar';
-import { THEME_COLOR } from '../config/constants'
+import { THEME_COLOR } from '../config/constants';
 import Layout from '../containers/Layout';
 import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from 'react-native-swipe-cards';
@@ -65,9 +65,6 @@ export default class BrowsePage extends BaseComponent {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: THEME_COLOR.DARK_WHITE
-  },
   card: {
     flex: 1,
     justifyContent: 'center',

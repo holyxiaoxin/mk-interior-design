@@ -39,6 +39,14 @@ export default class Navigation extends Component {
     }
   }
 
+  openDrawer() {
+    this.drawer.openDrawer();
+  }
+
+  closeDrawer() {
+    this.drawer.closeDrawer();
+  }
+
   render() {
     // renderNavigationView has to present DrawerList component with this.router props.
     // This will be available during this.configureScene from Navigator.
@@ -63,13 +71,5 @@ export default class Navigation extends Component {
         />
       </DrawerLayout>
     )
-  }
-
-  openDrawer() {
-    this.drawer.openDrawer();
-  }
-
-  closeDrawer() {
-    this.drawer.closeDrawer();
   }
 }

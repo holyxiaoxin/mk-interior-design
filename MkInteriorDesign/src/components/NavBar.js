@@ -40,7 +40,8 @@ export default class NavBar extends Component {
     );
 
     return (
-      <View stlye={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.topBar}></View>
         <View style={styles.navBar}>
           <View style={{flex: 1}}>{leftButtonConfig}</View>
           <View style={{flex: 3}}>{titleConfig}</View>
@@ -52,11 +53,18 @@ export default class NavBar extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+  },
+  topBar: {
+    backgroundColor: THEME_COLOR.DARKER_GREY,
+    height: 20,
+  },
   navBar: {
     flexDirection: 'row',
     width: width,
+    height: 50,
     // justifyContent: 'space-between',
-    backgroundColor: THEME_COLOR.DARK_GREY
+    backgroundColor: THEME_COLOR.DARK_GREY,
   },
   hamburgerIcon: {
     width: 20,

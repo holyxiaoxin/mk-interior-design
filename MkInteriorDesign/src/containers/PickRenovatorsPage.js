@@ -2,6 +2,8 @@ import React, { Component, Dimensions, StyleSheet, View, Text, TouchableHighligh
 import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants';
 import Button from 'react-native-button';
+import ImageList from '../components/ImageList';
+
 const { width, height } = Dimensions.get('window');
 
 const PICK_RENOVATORS_MOCK_DATA = {
@@ -133,23 +135,13 @@ export default class PickRenovatorsPage extends Component {
               </View>
           </View>
 
-          <View style={styles.renovatorImages}>
-            {
-              renovator.thumbnails.map(function(row, i) {
-                return (
-                  <Image key={ `image-${i}`}
-                    source={{uri: 'http://netdna.webdesignerdepot.com/uploads/circular_logos/NASA.jpg'}}
-                    style={styles.renovatorThumbnail}/>
-                );
-              })
-            }
-
+          <ImageList images={renovator.thumbnails}>
             <View style={styles.moreBox}>
               <Text style={styles.moreText}>
                 {renovator.thumbMore} MORE
               </Text>
             </View>
-          </View>
+          </ImageList>
         </View>
       );
     }
@@ -218,7 +210,8 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: THEME_COLOR.DARK_WHITE,
       borderBottomWidth: 1,
-      borderBottomColor: THEME_COLOR.LIGHT_GREY
+      borderBottomColor: THEME_COLOR.LIGHT_GREY,
+      marginTop: 15
     },
     renovatorLogo: {
       width: 50,
@@ -231,16 +224,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
       color: THEME_COLOR.LIGHT_GREY,
       textAlign: 'center'
-    },
-    renovatorImages: {
-      alignItems: 'flex-start',
-      flexDirection:'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between'
-    },
-    renovatorThumbnail: {
-      width: width/3 - 10,
-      height: width/3 - 10
     },
     rightContainer: {
       flex: 1

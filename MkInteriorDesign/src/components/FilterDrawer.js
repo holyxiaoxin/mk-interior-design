@@ -5,10 +5,11 @@ import React, { Component,
   Text,
   Image,
   View,
-  TouchableHighlight
+  TouchableWithoutFeedback
 } from 'react-native';
 import SlideDownPanel from 'react-native-slide-down-panel';
 // import SlideDownPanel from './SlideDownPanel';
+import TwoSlider from './TwoSlider';
 import browseFilterSlidedownIcon from '../assets/images/browse-filter-slidedown-icon.png';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { THEME_COLOR } from '../config/constants';
@@ -54,10 +55,14 @@ export default class FilterDrawer extends Component {
 function FrontContainer() {
   return (
     <View style={styles.frontContainer}>
-      <View style={styles.filterBox}>
-        <Text style={styles.filterText}>Tap to filter by style</Text><FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
-      </View>
-
+        <TouchableWithoutFeedback onPress={() => alert('filter!')}>
+          <View style={styles.filterBox}>
+            <Text style={styles.filterText}>Tap to filter by style</Text><FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
+          </View>
+        </TouchableWithoutFeedback>
+        <View style={{margin: 30}}>
+          <TwoSlider/>
+        </View>
     </View>
   )
 }

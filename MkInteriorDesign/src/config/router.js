@@ -4,7 +4,7 @@ import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
 import ListingPage from '../containers/ListingPage';
-import PickRenovatorPage from '../containers/PickRenovatorPage';
+import PickRenovatorsPage from '../containers/PickRenovatorsPage';
 
 class Router {
   constructor(navigator) {
@@ -74,8 +74,8 @@ class Router {
 const initialRoute = {
   index: 0,
   // component: LoginPage
-  component: BrowsePage
-  //component: PickRenovatorPage
+  // component: BrowsePage
+  component: PickRenovatorsPage
 }
 
 module.exports = { Router, initialRoute };

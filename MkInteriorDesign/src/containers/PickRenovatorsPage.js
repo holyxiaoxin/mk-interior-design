@@ -22,28 +22,36 @@ const Cards = [
     {text: 'Umm...', backgroundColor: 'cyan'},
 ]
 
-export default class PickRenovatorPage extends Component {
+export default class PickRenovatorsPage extends Component {
     render() {
-        const title = 'Discover Styles';
+        const title = 'Pick Renovators';
 
         return(
             <View style={styles.container}>
                 <NavBar drawer={this.props.drawer} title={title}/>
-            </View>
 
+                <View style={styles.topTextBox}>
+                  <Text style={styles.topText}>
+                    You have liked these designs. Now, lets choose the renovators
+                    to get free quotations from:
+                  </Text>
+                </View>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: THEME_COLOR.DARK_WHITE,
+      backgroundColor: THEME_COLOR.DARK_WHITE,
     },
-    card: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 300,
-        height: 300
+    topTextBox: {
+      padding: 20
+    },
+    topText: {
+      fontFamily: 'Segoe UI',
+      fontWeight: '400',
+      fontSize: 16,
+      color: '#939598'
     }
 })

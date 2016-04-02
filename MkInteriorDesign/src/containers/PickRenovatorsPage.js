@@ -3,9 +3,9 @@ import { THEME_COLOR } from '../config/constants';
 import Layout from '../containers/Layout';
 import Button from 'react-native-button';
 import ImageList from '../components/ImageList';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('window');
-
 const PICK_RENOVATORS_MOCK_DATA = {
     "success": true,
     "payload": [
@@ -158,10 +158,12 @@ export default class PickRenovatorsPage extends Component {
           </View>
 
           <View style={{alignItems: 'center'}}>
-            <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:10, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
-                               style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
-              Help me decide!
-            </Button>
+
+          <Icon.Button name="thumbs-up" borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
+            Help me decide!
+          </Icon.Button>
+
+
           </View>
 
           <ListView

@@ -58,8 +58,6 @@ export default class BrowsePage extends BaseComponent {
           </View>
         </FilterDrawer>
       </Layout>
-
-
     )
   }
 }

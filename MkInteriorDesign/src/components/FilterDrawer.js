@@ -12,7 +12,7 @@ import React, { Component,
 import SlideDownPanel from './SlideDownPanel';
 import TwoSlider from './TwoSlider';
 import browseFilterSlidedownIcon from '../assets/images/browse-filter-slidedown-icon.png';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { THEME_COLOR, FONT } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
@@ -86,7 +86,7 @@ class FrontContainer extends Component {
                 }>
                   <Text style={{paddingRight: 8}}>{filterTag}</Text>
                   <TouchableWithoutFeedback onPress={this.deleteFilterTag.bind(this, index)}>
-                    <FontAwesome name="times" size={12} color={THEME_COLOR.DARK_GREY} />
+                    <Icon name="times" size={12} color={THEME_COLOR.DARK_GREY} />
                   </TouchableWithoutFeedback>
                 </View>
 

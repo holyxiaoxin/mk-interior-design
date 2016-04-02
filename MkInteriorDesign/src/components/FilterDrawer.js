@@ -16,7 +16,7 @@ import { THEME_COLOR, FONT } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
 var MAXIMUM_HEIGHT = 200;
-var HANDLER_HEIGHT = 60;
+var HANDLER_HEIGHT = 30;
 var OFFSET_TOP = 0;
 
 export default class FilterDrawer extends Component {

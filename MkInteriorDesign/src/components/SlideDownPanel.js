@@ -57,39 +57,29 @@ export default class SlideDownPanel extends Component {
   }
 
   render() {
-    // const styles = {
-    //   contatiner: {
-    //     position: 'absolute',
-    //     top: this.state.offsetTop,
-    //     opacity: this.state.containerOpacity,
-    //     backgroundColor : this.state.containerBackgroundColor
-    //   },
-    //   handler: {
-    //     height : this.state.handlerHeight,
-    //     width : width,
-    //     justifyContent : 'center',
-    //     opacity : this.state.handlerOpacity,
-    //     backgroundColor : this.state.handlerBackgroundColor
-    //   }
-    // };
-
-    return (
-      this.state.isPanMoving || !this.hasLoaded ?
-      <View style={{
+    const styles = {
+      container: {
         position: 'absolute',
+        overflow: 'hidden',
         top: this.state.offsetTop,
         opacity: this.state.containerOpacity,
         backgroundColor : this.state.containerBackgroundColor,
         height: this.state.containerHeight
-      }}>
+      },
+      handler: {
+        height : this.state.handlerHeight,
+        width : width,
+        justifyContent : 'center',
+        opacity : this.state.handlerOpacity,
+        backgroundColor : this.state.handlerBackgroundColor
+      }
+    };
+
+    return (
+      this.state.isPanMoving || !this.hasLoaded ?
+      <View style={styles.container}>
         {this.props.children}
-        <View style={{
-          height : this.state.handlerHeight,
-          width : width,
-          justifyContent : 'center',
-          opacity : this.state.handlerOpacity,
-          backgroundColor : this.state.handlerBackgroundColor
-        }} {...this.panResponder.panHandlers}>
+        <View style={styles.handler} {...this.panResponder.panHandlers}>
           {this.state.handlerView}
         </View>
       </View>
@@ -97,20 +87,9 @@ export default class SlideDownPanel extends Component {
       <Motion defaultStyle={{y: this.previousContainerHeight}} style={{y: spring(this.state.containerHeight, { stiffness: 200, damping: 30 })}}>
         {
           ({y}) => (
-            <View style={[{
-              position: 'absolute',
-              top: this.state.offsetTop,
-              opacity: this.state.containerOpacity,
-              backgroundColor : this.state.containerBackgroundColor
-            }, { height: y}]}>
+            <View style={[styles.container, { height: y}]}>
               {this.props.children}
-              <View style={{
-                height : this.state.handlerHeight,
-                width : width,
-                justifyContent : 'center',
-                opacity : this.state.handlerOpacity,
-                backgroundColor : this.state.handlerBackgroundColor
-              }} {...this.panResponder.panHandlers}>
+              <View style={styles.handler} {...this.panResponder.panHandlers}>
                 {this.state.handlerView}
               </View>
             </View>

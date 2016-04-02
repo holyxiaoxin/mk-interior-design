@@ -80,20 +80,17 @@ function Handler() {
 
 const styles = StyleSheet.create({
   parentContainer: {
-    flex : 1,
+    // flex : 1,
   },
-
   backContainer: {
-    flex : 1,
+    // flex : 1,
     marginTop: HANDLER_HEIGHT
   },
-
   frontContainer: {
     flex : 1,
     width: width,
     backgroundColor: THEME_COLOR.DARK_WHITE
   },
-
   filterBox: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -104,19 +101,15 @@ const styles = StyleSheet.create({
     borderColor: THEME_COLOR.LIGHT_GREY,
     backgroundColor: THEME_COLOR.WHITE_GREEN
   },
-
   filterText: {
     flex: 1,
     textAlign: 'center',
     fontFamily: FONT
   },
-
   image: {
     height : HANDLER_HEIGHT,
     width: width,
     alignItems: 'center',
     backgroundColor : 'gray'
   },
-
-
 });

@@ -1,6 +1,7 @@
 import React, { Component, StyleSheet, View, Text } from 'react-native';
 import NavBar from '../components/NavBar';
-import { THEME_COLOR } from '../config/constants'
+import { THEME_COLOR } from '../config/constants';
+import Layout from '../containers/Layout';
 import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from 'react-native-swipe-cards';
 import BaseComponent from '../components/BaseComponent';
@@ -39,8 +40,7 @@ export default class BrowsePage extends BaseComponent {
     )
 
     return(
-      <View style={styles.container}>
-        <NavBar drawer={this.props.drawer} title="Discover Styles"/>
+      <Layout drawer={this.props.drawer} title='Discover Styles'>
         <FilterDrawer>
           {/*
             The children would be the elements rendered after filter drawer.
@@ -49,24 +49,18 @@ export default class BrowsePage extends BaseComponent {
           */}
           <SwipeCards
             cards={Cards}
-
             renderCard={(cardData) => <Card {...cardData} />}
             renderNoMoreCards={() => NoMoreCards}
-
             handleYup={this.handleYup}
             handleNope={this.handleNope}
           />
         </FilterDrawer>
-      </View>
-
+      </Layout>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: THEME_COLOR.DARK_WHITE
-  },
   card: {
     flex: 1,
     justifyContent: 'center',

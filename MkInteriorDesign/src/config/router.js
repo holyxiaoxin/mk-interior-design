@@ -3,6 +3,8 @@ import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
+import ListingPage from '../containers/ListingPage';
+import PickRenovatorsPage from '../containers/PickRenovatorsPage';
 
 class Router {
   constructor(navigator) {
@@ -49,6 +51,10 @@ class Router {
     this.push(props, { component: CounterPage });
   }
 
+  toListingPage(props) {
+    this.push(props, { component: ListingPage });
+  }
+
   // replaceWithHome(props) {
   //   let homeRoute = {
   //     index: 0,
@@ -68,7 +74,8 @@ class Router {
 const initialRoute = {
   index: 0,
   // component: LoginPage
-  component: BrowsePage
+  // component: BrowsePage
+  component: PickRenovatorsPage
 }
 
-module.exports = { Router, initialRoute }
+module.exports = { Router, initialRoute };

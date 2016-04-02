@@ -2,18 +2,18 @@ import React, {
   Component,
   View,
   Text,
-  StyleSheet, 
+  StyleSheet,
   TouchableOpacity,
   Image
 } from 'react-native';
 
-export default class DrawerList extends Component {
+import BaseComponent from '../components/BaseComponent';
+
+export default class DrawerList extends BaseComponent {
   constructor(props) {
       super(props);
       this.router = this.props.getRouter();
-      this.toProfilePage = this.toProfilePage.bind(this);
-      this.toBrowsePage = this.toBrowsePage.bind(this);
-      this.toCounterPage = this.toCounterPage.bind(this);
+      this._bind('toProfilePage', 'toBrowsePage', 'toCounterPage', 'toListingPage');
     }
 
   toProfilePage() {
@@ -29,6 +29,11 @@ export default class DrawerList extends Component {
   toCounterPage() {
     this.props.closeDrawer();
     this.router.toCounterPage();
+  }
+
+  toListingPage() {
+    this.props.closeDrawer();
+    this.router.toListingPage();
   }
 
   render() {
@@ -47,20 +52,25 @@ export default class DrawerList extends Component {
         </TouchableOpacity>
         <TouchableOpacity style={styles.drawerRow} onPress={this.toCounterPage}>
           <View style={{flexDirection: "row"}}>
-            <Text style={styles.drawerFont}>My Favourite</Text>
+            <Text style={styles.drawerFont}>My Favourites</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerRow} onPress={this.toProfilePage}>
-          <View style={{flexDirection: "row"}}>
-            <Text style={styles.drawerFont}>Chat</Text>
-          </View>
-        </TouchableOpacity>
+          {
+              /*
+               <TouchableOpacity style={styles.drawerRow} onPress={this.toProfilePage}>
+               <View style={{flexDirection: "row"}}>
+               <Text style={styles.drawerFont}>Chat</Text>
+               </View>
+               </TouchableOpacity>
+               */
+          }
+
         <TouchableOpacity style={styles.drawerRow} onPress={this.toProfilePage}>
           <View style={{flexDirection: "row"}}>
             <Text style={styles.drawerFont}>Blog</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerRow} onPress={this.toProfilePage}>
+        <TouchableOpacity style={styles.drawerRow} onPress={this.toListingPage}>
           <View style={{flexDirection: "row"}}>
             <Text style={styles.drawerFont}>Renovator Listing</Text>
           </View>

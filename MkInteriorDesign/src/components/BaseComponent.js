@@ -7,6 +7,3 @@ class BaseComponent extends Component {
 }
 
 export default BaseComponent;
-
-
-//this._bind('functionOne', 'functionTwo');

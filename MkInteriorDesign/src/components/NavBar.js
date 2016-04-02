@@ -7,7 +7,7 @@ import React, { Component,
   TouchableWithoutFeedback
 } from 'react-native';
 import hamburgerIcon from '../assets/images/hamburger-nav.png';
-import { THEME_COLOR } from '../config/constants';
+import { THEME_COLOR, FONT } from '../config/constants'
 const { width, height } = Dimensions.get('window');
 
 export default class NavBar extends Component {
@@ -64,15 +64,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'center',
-    color: THEME_COLOR.LIGHT_GREY
-  },
+    color: THEME_COLOR.LIGHT_GREY,
+    fontFamily: FONT,
+    fontWeight: "600"
+},
   rightText: {
-    color: THEME_COLOR.MIDDLE_GREEN
+    fontSize: 14,
+    color: THEME_COLOR.MIDDLE_GREEN,
+    fontFamily: FONT,
+    fontWeight: "600"
   },
   sharedMargin: {
-    margin: 16
+    margin: 10
   }
-
 });

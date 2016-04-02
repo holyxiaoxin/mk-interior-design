@@ -47,7 +47,7 @@ export default class NavBar extends Component {
           Platform.OS === 'ios' ?
             <View style={styles.topBar}></View>
             :
-            ''
+            <View></View>
         }
 
         <View style={styles.navBar}>

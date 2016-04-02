@@ -5,6 +5,7 @@ import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
 import ListingPage from '../containers/ListingPage';
 import PickRenovatorsPage from '../containers/PickRenovatorsPage';
+import FavoritesPage from '../containers/FavoritesPage';
 
 class Router {
   constructor(navigator) {
@@ -59,6 +60,10 @@ class Router {
 
   toListingPage(props) {
     this.push(props, { component: ListingPage });
+  }
+
+  toFavoritesPage(props) {
+    this.push(props, { component: FavoritesPage });
   }
 
   // replaceWithHome(props) {

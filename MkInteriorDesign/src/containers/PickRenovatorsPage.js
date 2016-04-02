@@ -1,6 +1,6 @@
 import React, { Component, Dimensions, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native';
-import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants';
+import Layout from '../containers/Layout';
 import Button from 'react-native-button';
 import ImageList from '../components/ImageList';
 
@@ -147,41 +147,32 @@ export default class PickRenovatorsPage extends Component {
     }
 
   render() {
-    const title = 'Pick Renovators';
-
     return(
-        <View style={styles.container}>
-          <NavBar drawer={this.props.drawer} title={title}/>
+      <Layout drawer={this.props.drawer} title='Pick Renovators'>
+        <View style={styles.topTextBox}>
+          <Text style={styles.topText}>
+            You have liked these designs. Now, lets choose the renovators
+            to get free quotations from:
+          </Text>
+        </View>
 
-          <View style={styles.topTextBox}>
-            <Text style={styles.topText}>
-              You have liked these designs. Now, lets choose the renovators
-              to get free quotations from:
-            </Text>
-          </View>
+        <View style={{alignItems: 'center'}}>
+          <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:10, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
+                             style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
+            Help me decide!
+          </Button>
+        </View>
 
-          <View style={{alignItems: 'center'}}>
-            <Button containerStyle={{padding:15, width: 250, height:55, overflow:'hidden', borderRadius:4, backgroundColor: THEME_COLOR.LIGHT_GREEN}}
-                               style={{fontSize: 20, color: THEME_COLOR.LIGHT_WHITE}} onPress={this.decideForMe}>
-              Help me decide!
-            </Button>
-          </View>
-
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRenovator}
-            style={styles.listView}
-          />
-      </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRenovator}
+          style={styles.listView}/>
+      </Layout>
     )
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      backgroundColor: THEME_COLOR.DARK_WHITE,
-      flex: 1
-    },
     topTextBox: {
       padding: 20
     },
@@ -197,11 +188,8 @@ const styles = StyleSheet.create({
     },
     listView: {
       marginTop: 20
-      // flex: 1
     },
     renovatorRow: {
-      marginLeft: 10,
-      marginRight: 10,
     },
     renovatorDetails: {
       flex: 1,
@@ -231,8 +219,5 @@ const styles = StyleSheet.create({
     moreBox: {
       width: width/3 - 10,
       height: width/3 - 10
-    },
-    moreText: {
-
     }
 })

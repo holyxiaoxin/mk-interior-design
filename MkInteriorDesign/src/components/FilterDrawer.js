@@ -40,7 +40,7 @@ export default class FilterDrawer extends Component {
         <SlideDownPanel
           ref="panel"
           offsetTop={OFFSET_TOP}
-          initialHeight={MAXIMUM_HEIGHT + OFFSET_TOP}
+          initialHeight={MAXIMUM_HEIGHT}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
@@ -62,8 +62,9 @@ function FrontContainer() {
             <FontAwesome name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
           </View>
         </TouchableWithoutFeedback>
-        <View style={{margin: 30}}>
-          <TwoSlider/>
+        <View style={{flexDirection: 'row', marginTop: 10}}>
+          <Text style={styles.budgetText}>Budget: </Text>
+          <View style={{flex: 1, marginRight: 20}}><TwoSlider/></View>
         </View>
     </View>
   )
@@ -108,6 +109,13 @@ const styles = StyleSheet.create({
   filterText: {
     flex: 1,
     textAlign: 'center',
+    fontFamily: FONT
+  },
+
+  budgetText: {
+    margin: 20,
+    alignSelf: 'flex-end',
+    fontSize: 16,
     fontFamily: FONT
   },
 

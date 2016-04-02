@@ -32,7 +32,8 @@ export default class TwoSlider extends Component {
 
     this.state = {
       leftSliderX: leftSliderPosition,
-      rightSliderX: rightSliderPosition
+      rightSliderX: rightSliderPosition,
+      lineWidth: 0
     }
   }
 
@@ -70,8 +71,8 @@ export default class TwoSlider extends Component {
       leftTextPosition = 0;
     }
     let rightTextPosition = this.state.rightSliderX - this.sliderSize;
-    if (rightTextPosition > this.lineWidth - TEXT_LABEL_WIDTH) {
-      rightTextPosition = this.lineWidth - TEXT_LABEL_WIDTH;
+    if (rightTextPosition > this.state.lineWidth - TEXT_LABEL_WIDTH) {
+      rightTextPosition = this.state.lineWidth - TEXT_LABEL_WIDTH;
     }
 
     return (
@@ -82,7 +83,7 @@ export default class TwoSlider extends Component {
         </View>
         <View
           onLayout={(event) => {
-            this.lineWidth = event.nativeEvent.layout.width;
+            this.setState({lineWidth: event.nativeEvent.layout.width});
           }}
           style={{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: this.sliderSize/2}}
         >
@@ -168,7 +169,7 @@ export default class TwoSlider extends Component {
       case 'rightSlider': {
         const positionX = this.previousRightSliderX + dx;
         // left boundary is left slider, right boundary is width of line
-        if (positionX > this.state.leftSliderX - this.sliderSize/2 && positionX < this.lineWidth - this.sliderSize) {
+        if (positionX > this.state.leftSliderX - this.sliderSize/2 && positionX < this.state.lineWidth - this.sliderSize) {
           this.setState({ rightSliderX: positionX });
         }
         break;

@@ -8,6 +8,7 @@ import React, { Component,
   View,
   TouchableWithoutFeedback
 } from 'react-native';
+import { mapDispatchToProps, connect } from '../util/connector';
 // import SlideDownPanel from 'react-native-slide-down-panel';
 import SlideDownPanel from './SlideDownPanel';
 import TwoSlider from './TwoSlider';
@@ -20,8 +21,14 @@ var MAXIMUM_HEIGHT = 200;
 var HANDLER_HEIGHT = 30;
 var OFFSET_TOP = 0;
 
-export default class FilterDrawer extends Component {
+class FilterDrawer extends Component {
   render() {
+
+    const state = this.props.state;
+    const {
+      updateFilterInput, addFilterAsync, deleteFilter
+    } = this.props.actions;
+
     return (
       <View>
         <View style={styles.backContainer}>
@@ -35,46 +42,54 @@ export default class FilterDrawer extends Component {
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
         >
-          <FrontContainer/>
+          <FrontContainer
+            filterInput={state.get('filterInput')}
+            filterTags={state.get('filterTags')}
+            updateFilterInput={updateFilterInput}
+            addFilterAsync={addFilterAsync}
+            deleteFilter={deleteFilter}
+          />
         </SlideDownPanel>
       </View>
     )
   }
 }
 
-class FrontContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      filterText: '',
-      filterTags: ['tag1', 'tag2']
-    };
-  }
+const mapStateToProps = (state) => {
+  return { state: state.browse };
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(FilterDrawer);
+
+class FrontContainer extends Component {
   render() {
+    const {
+      filterInput, filterTags,
+      updateFilterInput, addFilterAsync, deleteFilter
+    } = this.props;
+
     return (
       <View style={styles.frontContainer}>
           <View style={styles.filterBox}>
             {
-              this.state.filterTags.map((filterTag, index) =>
+              filterTags.map((filterTag, index) =>
                 <View key={`filter-tag-${index}`} style={styles.filterTagWrapper}>
                   <Text style={styles.filterTagText}>{filterTag}</Text>
-                  <TouchableWithoutFeedback onPress={this.deleteFilterTag.bind(this, index)}>
+                  <TouchableWithoutFeedback onPress={deleteFilter.bind(null, index)}>
                     <Icon name="times" size={15} color={THEME_COLOR.DARK_GREY} />
                   </TouchableWithoutFeedback>
                 </View>
-
               )
             }
             <TextInput
               style={{flex: 1, padding: 0, paddingLeft: 10}}
               placeholder="Tap to filter by style"
               underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
-              onChangeText={(filterText) => this.setState({filterText})}
-              onSubmitEditing={this.addFilter.bind(this)}
-              value={this.state.filterText}
+              onChangeText={(text) => updateFilterInput(text)}
+              onSubmitEditing={addFilterAsync.bind(null, filterInput)}
+              value={filterInput}
             />
-            <TouchableWithoutFeedback onPress={this.addFilter.bind(this)}>
+          <TouchableWithoutFeedback onPress={addFilterAsync.bind(null, filterInput)}>
               <Icon name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
             </TouchableWithoutFeedback>
           </View>
@@ -84,20 +99,6 @@ class FrontContainer extends Component {
           </View>
       </View>
     )
-  }
-
-  addFilter() {
-    const filterText = this.state.filterText;
-    if (filterText === '') return;
-    const filterTags = this.state.filterTags;
-    filterTags.push(filterText);
-    this.setState({filterText: '', filterTags});
-  }
-
-  deleteFilterTag(index) {
-    const filterTags = this.state.filterTags;
-    filterTags.splice(index, 1);
-    this.setState({filterTags});
   }
 
 }

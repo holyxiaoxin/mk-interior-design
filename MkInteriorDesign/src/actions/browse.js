@@ -13,7 +13,6 @@ const updateFilterInput = (data) => {
 }
 
 const addFilter = (data) => {
-  if (data === '') return { type: '' };
   return {
     type: ADD_FILTER,
     data
@@ -37,6 +36,7 @@ const updateBrowsePage = (data) => {
 // TODO: Implement stubbed
 const addFilterAsync = (data) => {
   return dispatch => {
+    if (!data) return; // do nothing if filterInput is empty
     dispatch(addFilter(data));
     get('http://swapi.co/api/planets/1/')
     .then(data => dispatch(updateBrowsePage(data)));

@@ -1,4 +1,5 @@
 import React, { Component, StyleSheet, View, Text, TextInput } from 'react-native';
+import { mapDispatchToProps, connect } from '../util/connector';
 import NavBar from '../components/NavBar';
 import { THEME_COLOR } from '../config/constants';
 import Layout from '../containers/Layout';
@@ -35,13 +36,23 @@ export default class BrowsePage extends BaseComponent {
   }
 
   render() {
+    const state = this.props.state;
+    const {
+      updateFilterInput, addFilterAsync, deleteFilter
+    } = this.props.actions;
+
     const NoMoreCards = (
       <Text>No more cards</Text>
     )
 
     return(
       <Layout drawer={this.props.drawer} title='Discover Styles'>
-        <FilterDrawer>
+        <FilterDrawer
+          state={state}
+          updateFilterInput={updateFilterInput}
+          addFilterAsync={addFilterAsync}
+          deleteFilter={deleteFilter}
+        >
           {/*
             The children would be the elements rendered after filter drawer.
             Due to how later elements are rendered infront, we need to render them
@@ -61,6 +72,12 @@ export default class BrowsePage extends BaseComponent {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { state: state.browse };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);
 
 const styles = StyleSheet.create({
   card: {

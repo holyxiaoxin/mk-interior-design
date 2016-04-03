@@ -8,7 +8,6 @@ import React, { Component,
   View,
   TouchableWithoutFeedback
 } from 'react-native';
-import { mapDispatchToProps, connect } from '../util/connector';
 // import SlideDownPanel from 'react-native-slide-down-panel';
 import SlideDownPanel from './SlideDownPanel';
 import TwoSlider from './TwoSlider';
@@ -21,13 +20,21 @@ var MAXIMUM_HEIGHT = 200;
 var HANDLER_HEIGHT = 30;
 var OFFSET_TOP = 0;
 
-class FilterDrawer extends Component {
+export default class FilterDrawer extends Component {
   render() {
-
-    const state = this.props.state;
     const {
+      state,
       updateFilterInput, addFilterAsync, deleteFilter
-    } = this.props.actions;
+    } = this.props;
+
+    <TextInput
+      style={{flex: 1, padding: 0, paddingLeft: 10}}
+      placeholder="Tap to filter by style"
+      underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
+      onChangeText={updateFilterInput}
+      onSubmitEditing={addFilterAsync.bind(this, state.get('filterInput'))}
+      value={state.get('filterInput')}
+    />
 
     return (
       <View>
@@ -55,12 +62,6 @@ class FilterDrawer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { state: state.browse };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterDrawer);
-
 class FrontContainer extends Component {
   render() {
     const {
@@ -85,11 +86,11 @@ class FrontContainer extends Component {
               style={{flex: 1, padding: 0, paddingLeft: 10}}
               placeholder="Tap to filter by style"
               underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
-              onChangeText={(text) => updateFilterInput(text)}
+              onChangeText={updateFilterInput}
               onSubmitEditing={addFilterAsync.bind(null, filterInput)}
               value={filterInput}
             />
-          <TouchableWithoutFeedback onPress={addFilterAsync.bind(null, filterInput)}>
+            <TouchableWithoutFeedback onPress={addFilterAsync.bind(null, filterInput)}>
               <Icon name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
             </TouchableWithoutFeedback>
           </View>
@@ -100,7 +101,6 @@ class FrontContainer extends Component {
       </View>
     )
   }
-
 }
 
 function Handler() {

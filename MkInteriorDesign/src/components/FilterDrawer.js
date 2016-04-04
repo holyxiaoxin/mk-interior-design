@@ -44,7 +44,7 @@ export default class FilterDrawer extends Component {
         <SlideDownPanel
           ref="panel"
           offsetTop={OFFSET_TOP}
-          initialHeight={MAXIMUM_HEIGHT}
+          initialHeight={HANDLER_HEIGHT}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}

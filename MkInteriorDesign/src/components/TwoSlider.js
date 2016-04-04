@@ -178,7 +178,6 @@ export default class TwoSlider extends Component {
   }
 
   handlePanResponderEnd(e, gestureState) {
-    console.log('end');
   }
 
 }

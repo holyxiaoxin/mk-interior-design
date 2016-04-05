@@ -9,7 +9,7 @@ import React, {
 } from 'react-native';
 import { mapDispatchToProps, connect } from '../util/connector';
 import NavBar from '../components/NavBar';
-import { THEME_COLOR } from '../config/constants';
+import { THEME_COLOR, IS_ANDROID } from '../config/constants';
 import Layout from '../containers/Layout';
 import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from '../components/SwipeCards';
@@ -23,7 +23,6 @@ class Card extends Component {
   render() {
     return (
       <View style={{
-          alignItems: 'center',
           width: width - 20,
           height: 380,
           borderWidth: 2,
@@ -47,35 +46,34 @@ class Card extends Component {
         </View>
 
 
-        <View>
-          <Image
-            source={browseCardPlaceHolder}
-            style={{height: 220, width: width - 20}} />
-            <View style={{
-                flexDirection: 'row',
-                alignSelf: 'stretch',
-                margin: 10
-              }}>
-              <TextInput
-                style={{
-                  flex: 1,
-                  width: 1, // mind-blowing width 1 ?!, otherwise can't flex 1
-                  padding: 0,
-                  fontSize: 16,
-                }}
-                placeholder="Add quick note"
-                underlineColorAndroid={THEME_COLOR.LIGHT_WHITE}
-              />
-              <View style={{
-                  backgroundColor: THEME_COLOR.DARK_WHITE,
-                  justifyContent: 'center',
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  borderRadius: 5,
-                }}>
-                <Text style={{color: THEME_COLOR.LIGHT_WHITE}}>OK</Text>
-              </View>
-            </View>
+        <Image
+          source={browseCardPlaceHolder}
+          style={{height: 220, width: width - 20}} />
+        <View style={{
+            flexDirection: 'row',
+            alignSelf: 'stretch',
+            height: 40
+          }}>
+          <TextInput
+            style={{
+              flex: 1,
+              padding: 0,
+              paddingLeft: 10,
+              fontSize: 16,
+            }}
+            placeholder="Add quick note"
+            underlineColorAndroid={THEME_COLOR.LIGHT_WHITE}
+          />
+          <View style={{
+              backgroundColor: THEME_COLOR.DARK_WHITE,
+              justifyContent: 'center',
+              margin: 5,
+              paddingLeft: 15,
+              paddingRight: 15,
+              borderRadius: 5,
+            }}>
+            <Text style={{color: THEME_COLOR.LIGHT_WHITE}}>OK</Text>
+          </View>
         </View>
       </View>
     )

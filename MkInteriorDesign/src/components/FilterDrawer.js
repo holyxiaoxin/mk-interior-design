@@ -21,20 +21,21 @@ var HANDLER_HEIGHT = 30;
 var OFFSET_TOP = 0;
 
 export default class FilterDrawer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      containerHeight : 0
-    };
-  }
-
-  getContainerHeight(containerHeight) {
-    this.setState({
-      containerHeight : containerHeight
-    });
-  }
-
   render() {
+    const {
+      state,
+      updateFilterInput, addFilterAsync, deleteFilter
+    } = this.props;
+
+    <TextInput
+      style={{flex: 1, padding: 0, paddingLeft: 10}}
+      placeholder="Tap to filter by style"
+      underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
+      onChangeText={updateFilterInput}
+      onSubmitEditing={addFilterAsync.bind(this, state.get('filterInput'))}
+      value={state.get('filterInput')}
+    />
+
     return (
       <View>
         <View style={styles.backContainer}>
@@ -43,13 +44,18 @@ export default class FilterDrawer extends Component {
         <SlideDownPanel
           ref="panel"
           offsetTop={OFFSET_TOP}
-          initialHeight={MAXIMUM_HEIGHT}
+          initialHeight={HANDLER_HEIGHT}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
-          getContainerHeight={this.getContainerHeight.bind(this)}
         >
-          <FrontContainer />
+          <FrontContainer
+            filterInput={state.get('filterInput')}
+            filterTags={state.get('filterTags')}
+            updateFilterInput={updateFilterInput}
+            addFilterAsync={addFilterAsync}
+            deleteFilter={deleteFilter}
+          />
         </SlideDownPanel>
       </View>
     )
@@ -57,50 +63,34 @@ export default class FilterDrawer extends Component {
 }
 
 class FrontContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      filterText: '',
-      filterTags: ['tag1', 'tag2']
-    };
-  }
-
   render() {
+    const {
+      filterInput, filterTags,
+      updateFilterInput, addFilterAsync, deleteFilter
+    } = this.props;
+
     return (
       <View style={styles.frontContainer}>
           <View style={styles.filterBox}>
             {
-              this.state.filterTags.map((filterTag, index) =>
-                <View key={`filter-tag-${index}`} style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    backgroundColor: 'powderblue',
-                    borderRadius: 10,
-                    marginLeft: 2,
-                    marginRight: 2,
-                    paddingTop: 4,
-                    paddingBottom: 4,
-                    paddingLeft: 8,
-                    paddingRight: 8
-                  }
-                }>
-                  <Text style={{paddingRight: 8}}>{filterTag}</Text>
-                  <TouchableWithoutFeedback onPress={this.deleteFilterTag.bind(this, index)}>
-                    <Icon name="times" size={12} color={THEME_COLOR.DARK_GREY} />
+              filterTags.map((filterTag, index) =>
+                <View key={`filter-tag-${index}`} style={styles.filterTagWrapper}>
+                  <Text style={styles.filterTagText}>{filterTag}</Text>
+                  <TouchableWithoutFeedback onPress={deleteFilter.bind(null, index)}>
+                    <Icon name="times" size={15} color={THEME_COLOR.DARK_GREY} />
                   </TouchableWithoutFeedback>
                 </View>
-
               )
             }
             <TextInput
-              style={{flex: 1, height: 40}}
+              style={{flex: 1, padding: 0, paddingLeft: 10}}
               placeholder="Tap to filter by style"
               underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
-              onChangeText={(filterText) => this.setState({filterText})}
-              onSubmitEditing={this.addFilter.bind(this)}
-              value={this.state.filterText}
+              onChangeText={updateFilterInput}
+              onSubmitEditing={addFilterAsync.bind(null, filterInput)}
+              value={filterInput}
             />
-            <TouchableWithoutFeedback onPress={() => alert('filter!')}>
+            <TouchableWithoutFeedback onPress={addFilterAsync.bind(null, filterInput)}>
               <Icon name="plus-circle" size={25} color={THEME_COLOR.DARK_GREY} />
             </TouchableWithoutFeedback>
           </View>
@@ -111,21 +101,6 @@ class FrontContainer extends Component {
       </View>
     )
   }
-
-  addFilter() {
-    const filterText = this.state.filterText;
-    if (filterText === '') return;
-    const filterTags = this.state.filterTags;
-    filterTags.push(filterText);
-    this.setState({filterText: '', filterTags});
-  }
-
-  deleteFilterTag(index) {
-    const filterTags = this.state.filterTags;
-    filterTags.splice(index, 1);
-    this.setState({filterTags});
-  }
-
 }
 
 function Handler() {
@@ -151,11 +126,32 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     margin: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 6,
     paddingRight: 6,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: THEME_COLOR.LIGHT_GREY,
     backgroundColor: THEME_COLOR.WHITE_GREEN
+  },
+  filterTagWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'powderblue',
+    borderRadius: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 3,
+    marginRight: 3,
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingLeft: 8,
+    paddingRight: 8
+  },
+  filterTagText: {
+    paddingRight: 5,
+    fontFamily: FONT
   },
   filterText: {
     flex: 1,

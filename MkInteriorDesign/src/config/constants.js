@@ -1,5 +1,7 @@
 import React, { Navigator, Platform, BackAndroid } from 'react-native';
 
+export const IS_ANDROID = (Platform.OS === 'android');
+
 export const THEME_COLOR = {
   DARK_GREY: '#414143',
   DARKER_GREY: '#2D2A2C',
@@ -15,7 +17,7 @@ export const THEME_COLOR = {
   RED: '#ec7073',
 };
 
-export const FONT = (Platform.OS === 'android') ?  'segoeui' : 'Segoe UI';
+export const FONT = IS_ANDROID ?  'segoeui' : 'Segoe UI';
 
 export const NAVBAR_HEIGHT = 50;
 export const NAVBAR_TOPBAR_HEIGHT = 20;
@@ -23,4 +25,4 @@ export const NAVBAR_TOPBAR_HEIGHT = 20;
 // Can use this to calculate height of device from { Dimensions }
 // TODO: check below
 // Android has this navbar top of 25?
-export const NAVBAR_OFFSET_HEIGHT = (Platform.OS === 'android') ?  NAVBAR_HEIGHT + 25 : NAVBAR_HEIGHT + NAVBAR_TOPBAR_HEIGHT;
+export const NAVBAR_OFFSET_HEIGHT = IS_ANDROID ?  NAVBAR_HEIGHT + 25 : NAVBAR_HEIGHT + NAVBAR_TOPBAR_HEIGHT;

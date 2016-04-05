@@ -8,7 +8,7 @@ import React, { Component,
   Platform
 } from 'react-native';
 import hamburgerIcon from '../assets/images/hamburger-nav.png';
-import { THEME_COLOR, FONT } from '../config/constants'
+import { THEME_COLOR, FONT, NAVBAR_HEIGHT , NAVBAR_TOPBAR_HEIGHT } from '../config/constants'
 const { width, height } = Dimensions.get('window');
 
 export default class NavBar extends Component {
@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
   },
   topBar: {
     backgroundColor: THEME_COLOR.DARKER_GREY,
-    height: 20,
+    height: NAVBAR_TOPBAR_HEIGHT,
   },
   navBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 50,
+    height: NAVBAR_HEIGHT,
     width: width,
     backgroundColor: THEME_COLOR.DARK_GREY,
   },

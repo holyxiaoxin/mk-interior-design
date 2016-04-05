@@ -1,4 +1,7 @@
-import React, { StyleSheet, Text, View, Animated, Component, PanResponder, Image} from 'react-native';
+import React, {
+  StyleSheet, Text, View, Animated,
+  Component, PanResponder, Image, TouchableWithoutFeedback
+} from 'react-native';
 import clamp from 'clamp';
 
 var SWIPE_THRESHOLD = 120;
@@ -111,7 +114,10 @@ class SwipeCards extends Component {
   render() {
     let { pan, enter, } = this.state;
 
-    const { renderNope, showNope, renderYup, showYup, backgroundColor } = this.props;
+    const {
+      renderNope, showNope, renderYup, showYup, backgroundColor,
+      renderYupButton, renderNopeButton
+    } = this.props;
 
     let [translateX, translateY] = [pan.x, pan.y];
 
@@ -166,6 +172,16 @@ class SwipeCards extends Component {
             )
         }
 
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <View>
+            <TouchableWithoutFeedback onPress={()=>{this.props.handleNope(this.state.card);this._resetState()}}>
+                {renderNopeButton()}
+            </TouchableWithoutFeedback>
+          </View>
+          <View><TouchableWithoutFeedback onPress={()=>{this.props.handleYup(this.state.card);this._resetState()}}>{renderYupButton()}</TouchableWithoutFeedback></View>
+        </View>
+
+
       </View>
     );
   }
@@ -179,7 +195,9 @@ SwipeCards.propTypes = {
   showYup: React.PropTypes.bool,
   showNope: React.PropTypes.bool,
   handleYup: React.PropTypes.func,
-  handleNope: React.PropTypes.func
+  handleNope: React.PropTypes.func,
+  renderYupButton: React.PropTypes.func,
+  renderNopeButton: React.PropTypes.func,
 };
 
 SwipeCards.defaultProps = {
@@ -204,7 +222,6 @@ class DefaultNoMoreCards extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },

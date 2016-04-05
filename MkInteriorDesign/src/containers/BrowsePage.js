@@ -15,16 +15,17 @@ import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from '../components/SwipeCards';
 import BaseComponent from '../components/BaseComponent';
 import browseCardPlaceHolder from '../assets/images/browse-card-placeholder-image.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('window');
 
-export default class Card extends Component {
+class Card extends Component {
   render() {
     return (
       <View style={{
           alignItems: 'center',
           width: width - 20,
-          height: 400,
+          height: 380,
           borderWidth: 2,
           borderColor: THEME_COLOR.DARK_WHITE,
           borderRadius: 10,
@@ -76,13 +77,6 @@ export default class Card extends Component {
               </View>
             </View>
         </View>
-
-
-
-
-
-
-
       </View>
     )
   }
@@ -96,6 +90,22 @@ const Cards = [
   {text: 'Umm...', backgroundColor: 'cyan'},
   {text: 'orange', backgroundColor: 'orange'}
 ]
+
+const NopeButton = () => {
+  return (
+    <View style={[styles.SwipeButton, { marginRight: 20 }]}>
+      <Icon name="times" size={50} color={THEME_COLOR.RED} />
+    </View>
+  )
+}
+
+const YupButton = () => {
+  return (
+    <View style={[styles.SwipeButton, { marginLeft: 20 }]}>
+      <Icon name="heart" size={40} color={THEME_COLOR.LIGHT_GREEN} />
+    </View>
+  )
+}
 
 export default class BrowsePage extends BaseComponent {
   handleYup (card) {
@@ -129,16 +139,18 @@ export default class BrowsePage extends BaseComponent {
             Due to how later elements are rendered infront, we need to render them
             before the filter drawer. [https://github.com/facebook/react-native/issues/698]
           */}
-          <View style={{height: 500, backgroundColor: THEME_COLOR.MIDDLE_WHITE}}>
             <SwipeCards
               cards={Cards}
               renderCard={(cardData) => <Card {...cardData} />}
               renderNoMoreCards={() => NoMoreCards}
+              showYup={false}
+              showNope={false}
+              renderYupButton={YupButton}
+              renderNopeButton={NopeButton}
               handleYup={this.handleYup}
               handleNope={this.handleNope}
               backgroundColor={THEME_COLOR.MIDDLE_WHITE}
             />
-          </View>
         </FilterDrawer>
       </Layout>
     )
@@ -153,10 +165,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: 300,
     height: 300
+  },
+  SwipeButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: THEME_COLOR.DARKER_WHITE,
+    backgroundColor: THEME_COLOR.MIDDLE_WHITE,
+    borderWidth: 8,
+    borderRadius: 50,
+    width: 90,
+    height: 90,
   }
 })

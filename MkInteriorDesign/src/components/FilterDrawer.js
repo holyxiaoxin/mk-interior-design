@@ -13,7 +13,7 @@ import SlideDownPanel from './SlideDownPanel';
 import TwoSlider from './TwoSlider';
 import browseFilterSlidedownIcon from '../assets/images/browse-filter-slidedown-icon.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { THEME_COLOR, FONT } from '../config/constants';
+import { THEME_COLOR, FONT, NAVBAR_OFFSET_HEIGHT } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
 var MAXIMUM_HEIGHT = 200;
@@ -114,6 +114,7 @@ function Handler() {
 
 const styles = StyleSheet.create({
   backContainer: {
+    height: height - NAVBAR_OFFSET_HEIGHT - HANDLER_HEIGHT,
     marginTop: HANDLER_HEIGHT
   },
   frontContainer: {

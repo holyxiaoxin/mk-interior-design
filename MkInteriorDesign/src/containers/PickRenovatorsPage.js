@@ -6,95 +6,6 @@ import ImageList from '../components/ImageList';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('window');
-const PICK_RENOVATORS_MOCK_DATA = {
-    "success": true,
-    "payload": [
-        {
-            "rpID": 1,
-            "name": "Weikin Interior Designs",
-            "logoURL": "92laASf",
-            "thumbnails": [
-                {
-                    "picID": 1,
-                    "picImgURL": "ss91kAs"
-                },
-                {
-                    "picID": 2,
-                    "picImgURL": "ss91kAs"
-                },
-                {
-                    "picID": 3,
-                    "picImgURL": "ss91kAs"
-                },
-                {
-                    "picID": 4,
-                    "picImgURL": "ss91kAs"
-                },
-                {
-                    "picID": 5,
-                    "picImgURL": "ss91kAs"
-                }
-            ],
-            "thumbMore": 20 // if 0, no need to display the 'x more' grid
-        },
-        {
-            "rpID": 2,
-            "name": "Ken Tan Interior Designs",
-            "logoURL": "92laASf",
-            "thumbnails": [
-              {
-                  "picID": 1,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 2,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 3,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 4,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 5,
-                  "picImgURL": "ss91kAs"
-              }
-            ],
-            "thumbMore": 15 // if 0, no need to display the 'x more' grid
-        },
-        {
-            "rpID": 3,
-            "name": "JR Lim Interior Designs",
-            "logoURL": "92laASf",
-            "thumbnails": [
-              {
-                  "picID": 1,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 2,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 3,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 4,
-                  "picImgURL": "ss91kAs"
-              },
-              {
-                  "picID": 5,
-                  "picImgURL": "ss91kAs"
-              }
-            ],
-            "thumbMore": 10 // if 0, no need to display the 'x more' grid
-        }
-    ]
-}
 
 export default class PickRenovatorsPage extends Component {
   constructor(props) {
@@ -103,6 +14,7 @@ export default class PickRenovatorsPage extends Component {
        dataSource: new ListView.DataSource({
          rowHasChanged: (row1, row2) => row1 !== row2,
        }),
+       renovators: null,
        loaded: false,
      }
    };
@@ -112,14 +24,17 @@ export default class PickRenovatorsPage extends Component {
    }
 
    fetchData() {
-     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(PICK_RENOVATORS_MOCK_DATA.payload),
-      loaded: true
-    })
+     fetch('http://www.mynest.co/api.php?call=choose_list&nestID=1')
+     .then((response) => response.json())
+     .then((responseData) => {
+       this.setState({
+         dataSource: this.state.dataSource.cloneWithRows(responseData.payload),
+         loaded: true
+       })
+     })
   }
 
   decideForMe() {
-    alert(PICK_RENOVATORS_MOCK_DATA.payload);
   }
 
   renderRenovator(renovator) {
@@ -142,6 +57,7 @@ export default class PickRenovatorsPage extends Component {
               </Text>
             </View>
           </ImageList>
+          
         </View>
       );
     }

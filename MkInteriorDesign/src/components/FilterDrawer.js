@@ -16,9 +16,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { THEME_COLOR, FONT, NAVBAR_OFFSET_HEIGHT } from '../config/constants';
 const { width, height } = Dimensions.get('window');
 
-var MAXIMUM_HEIGHT = 200;
-var HANDLER_HEIGHT = 30;
-var OFFSET_TOP = 0;
+const MAXIMUM_HEIGHT = 200;
+const HANDLER_HEIGHT = 30;
+const OFFSET_TOP = 0;
+
+const BUDGET_TEXT_WIDTH = width/5;
 
 export default class FilterDrawer extends Component {
   render() {
@@ -44,7 +46,7 @@ export default class FilterDrawer extends Component {
         <SlideDownPanel
           ref="panel"
           offsetTop={OFFSET_TOP}
-          initialHeight={HANDLER_HEIGHT}
+          initialHeight={MAXIMUM_HEIGHT}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
@@ -96,7 +98,7 @@ class FrontContainer extends Component {
           </View>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={styles.budgetText}>Budget: </Text>
-            <View style={{flex: 1, marginRight: 20}}><TwoSlider/></View>
+            <View style={{flex: 1, alignItems: 'center'}}><TwoSlider lineWidth={width-BUDGET_TEXT_WIDTH-50}/></View>
           </View>
       </View>
     )
@@ -160,7 +162,8 @@ const styles = StyleSheet.create({
     fontFamily: FONT
   },
   budgetText: {
-    margin: 20,
+    width: BUDGET_TEXT_WIDTH,
+    textAlign: 'center',
     alignSelf: 'flex-end',
     fontSize: 16,
     fontFamily: FONT

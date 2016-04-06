@@ -24,17 +24,16 @@ export default class TwoSlider extends Component {
       rightSliderColor = 'lightsteelblue',
       leftSliderPosition = 50,
       rightSliderPosition = 150,
-      sliderSize = 30
+      sliderSize = 30,
+      lineWidth
     } = props;
 
-    const thisProps = { lineBaseColor, lineHighlightColor, leftSliderColor, rightSliderColor, sliderSize };
+    const thisProps = { lineBaseColor, lineHighlightColor, leftSliderColor, rightSliderColor, sliderSize, lineWidth };
     Object.assign(this, thisProps);
 
     this.state = {
       leftSliderX: leftSliderPosition,
-      rightSliderX: rightSliderPosition,
-      lineWidth: 0
-    }
+      rightSliderX: rightSliderPosition    }
   }
 
   componentWillMount() {
@@ -56,6 +55,13 @@ export default class TwoSlider extends Component {
     });
   }
 
+  componentDidMount() {
+    // Make sure that handlerView is set
+    if (typeof this.lineWidth === 'undefined') {
+      throw "Set lineWidth props in TwoSlider Component. Hint: It is a Number."
+    }
+  }
+
   render() {
     const styles = {
       slider: {
@@ -70,26 +76,21 @@ export default class TwoSlider extends Component {
     if (leftTextPosition < 0) {
       leftTextPosition = 0;
     }
-    let rightTextPosition = this.state.rightSliderX - this.sliderSize;
-    if (rightTextPosition > this.state.lineWidth - TEXT_LABEL_WIDTH) {
-      rightTextPosition = this.state.lineWidth - TEXT_LABEL_WIDTH;
+    let rightTextPosition = this.state.rightSliderX - TEXT_LABEL_WIDTH/2;
+    if (rightTextPosition > this.lineWidth - TEXT_LABEL_WIDTH) {
+      rightTextPosition = this.lineWidth - TEXT_LABEL_WIDTH;
     }
 
     return (
       <View>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={{left: leftTextPosition}}>S$15,000</Text>
-          <Text style={{left: rightTextPosition}}>S$40,000</Text>
+          <Text style={{backgroundColor: 'red', left: leftTextPosition}}>S$15,000</Text>
+          <Text style={{backgroundColor: 'blue', left: rightTextPosition}}>S$40,000</Text>
         </View>
-        <View
-          onLayout={(event) => {
-            this.setState({lineWidth: event.nativeEvent.layout.width});
-          }}
-          style={{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: this.sliderSize/2}}
-        >
+        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: this.sliderSize/2}}>
           <View style={{height: SLIDER_BASE_HEIGHT, width: this.state.leftSliderX, backgroundColor: this.lineBaseColor}}></View>
-          <View style={{height: SLIDER_HIGHTLIGHT_HEIGHT, width: this.state.rightSliderX - this.state.leftSliderX + this.sliderSize, backgroundColor: this.lineHighlightColor}}></View>
-          <View style={{height: SLIDER_BASE_HEIGHT, flex: 1, backgroundColor: this.lineBaseColor}}></View>
+          <View style={{height: SLIDER_HIGHTLIGHT_HEIGHT, width: this.state.rightSliderX - this.state.leftSliderX, backgroundColor: this.lineHighlightColor}}></View>
+          <View style={{height: SLIDER_BASE_HEIGHT, width: this.lineWidth - this.state.rightSliderX, backgroundColor: this.lineBaseColor}}></View>
         </View>
         <View
           style={[styles.slider, {
@@ -103,7 +104,7 @@ export default class TwoSlider extends Component {
         <View
           style={[styles.slider, {
             left: this.state.rightSliderX,
-            marginLeft: this.sliderSize/2,
+            marginLeft: -this.sliderSize/2,
             marginTop: -this.sliderSize,
             backgroundColor: this.rightSliderColor}]
           }
@@ -161,7 +162,8 @@ export default class TwoSlider extends Component {
       case 'leftSlider': {
         const positionX = this.previousLeftSliderX + dx;
         // left boundary is 0, right boundary is right slider
-        if (positionX > 0 && positionX < this.state.rightSliderX + this.sliderSize/2) {
+        // You dont want the sliders to intersect, so you stop 1/2 slider before
+        if (positionX > 0 && positionX < this.state.rightSliderX - this.sliderSize/2) {
           this.setState({ leftSliderX: positionX });
         }
         break;
@@ -169,7 +171,8 @@ export default class TwoSlider extends Component {
       case 'rightSlider': {
         const positionX = this.previousRightSliderX + dx;
         // left boundary is left slider, right boundary is width of line
-        if (positionX > this.state.leftSliderX - this.sliderSize/2 && positionX < this.state.lineWidth - this.sliderSize) {
+        // You dont want the sliders to intersect, so you stop 1/2 slider after
+        if (positionX > this.state.leftSliderX + this.sliderSize/2 && positionX < this.lineWidth) {
           this.setState({ rightSliderX: positionX });
         }
         break;

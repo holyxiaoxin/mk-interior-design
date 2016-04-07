@@ -26,17 +26,8 @@ export default class FilterDrawer extends Component {
   render() {
     const {
       state,
-      updateFilterInput, addFilterAsync, deleteFilter
+      onChangeFilterInput, addFilterAsync, deleteFilter, onChangeSlider
     } = this.props;
-
-    <TextInput
-      style={{flex: 1, padding: 0, paddingLeft: 10}}
-      placeholder="Tap to filter by style"
-      underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
-      onChangeText={updateFilterInput}
-      onSubmitEditing={addFilterAsync.bind(this, state.get('filterInput'))}
-      value={state.get('filterInput')}
-    />
 
     return (
       <View>
@@ -54,9 +45,10 @@ export default class FilterDrawer extends Component {
           <FrontContainer
             filterInput={state.get('filterInput')}
             filterTags={state.get('filterTags')}
-            updateFilterInput={updateFilterInput}
+            onChangeFilterInput={onChangeFilterInput}
             addFilterAsync={addFilterAsync}
             deleteFilter={deleteFilter}
+            onChangeSlider={onChangeSlider}
           />
         </SlideDownPanel>
       </View>
@@ -68,7 +60,8 @@ class FrontContainer extends Component {
   render() {
     const {
       filterInput, filterTags,
-      updateFilterInput, addFilterAsync, deleteFilter
+      onChangeFilterInput, addFilterAsync,
+      deleteFilter, onChangeSlider
     } = this.props;
 
     return (
@@ -88,7 +81,7 @@ class FrontContainer extends Component {
               style={{flex: 1, padding: 0, paddingLeft: 10}}
               placeholder="Tap to filter by style"
               underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
-              onChangeText={updateFilterInput}
+              onChangeText={onChangeFilterInput}
               onSubmitEditing={addFilterAsync.bind(null, filterInput)}
               value={filterInput}
             />
@@ -98,11 +91,17 @@ class FrontContainer extends Component {
           </View>
           <View style={{flexDirection: 'row', marginTop: 10}}>
             <Text style={styles.budgetText}>Budget: </Text>
-            <View style={{flex: 1, alignItems: 'center'}}><TwoSlider lineWidth={width-BUDGET_TEXT_WIDTH-50}/></View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <TwoSlider
+                lineWidth={width-BUDGET_TEXT_WIDTH-50}
+                onChange={onChangeSlider}
+              />
+            </View>
           </View>
       </View>
     )
   }
+
 }
 
 function Handler() {

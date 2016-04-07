@@ -1,13 +1,14 @@
 import { get, post } from '../util/request';
 
-export const UPDATE_FILTER_INPUT = 'UPDATE_FILTER_INPUT';
+export const ON_CHANGE_FILTER_INPUT = 'ON_CHANGE_FILTER_INPUT';
 export const ADD_FILTER = 'ADD_FILTER';
 export const DELETE_FILTER = 'DELETE_FILTER';
+export const ON_CHANGE_SLIDER = 'ON_CHANGE_SLIDER';
 export const UPDATE_BROWSE_CARDS = 'UPDATE_BROWSE_CARDS';
 
-const updateFilterInput = (data) => {
+const onChangeFilterInput = (data) => {
   return {
-    type: UPDATE_FILTER_INPUT,
+    type: ON_CHANGE_FILTER_INPUT,
     data
   };
 }
@@ -24,6 +25,13 @@ const deleteFilter = (data) => {
     type: DELETE_FILTER,
     data
   };
+}
+
+const onChangeSlider = (data) => {
+  return {
+    type: ON_CHANGE_SLIDER,
+    data
+  }
 }
 
 const updateBrowsePage = (data) => {
@@ -43,4 +51,4 @@ const addFilterAsync = (data) => {
   };
 }
 
-export default { updateFilterInput, addFilterAsync, deleteFilter };
+export default { onChangeFilterInput, addFilterAsync, deleteFilter, onChangeSlider };

@@ -26,13 +26,15 @@ export default class TwoSlider extends Component {
       maxValue = 300000,
       sliderSize = 30,
       numberOfStops = 60,
-      lineWidth
+      lineWidth,
+      onChange
     } = props;
 
     const thisProps = {
       lineBaseColor, lineHighlightColor,
       leftSliderColor, rightSliderColor,
-      sliderSize, numberOfStops, lineWidth
+      sliderSize, numberOfStops, lineWidth,
+      onChange
     };
     Object.assign(this, thisProps);
 
@@ -173,24 +175,40 @@ export default class TwoSlider extends Component {
       case 'leftSlider': {
         const positionX = this.previousLeftSliderX + dx;
         // left boundary is 0, right boundary is right slider
-        // You dont want the sliders to intersect, so you stop 1/2 slider before
-        if (positionX > 0 && positionX < this.state.rightSliderX - this.sliderSize/2) {
+        if (positionX > 0 && positionX < this.state.rightSliderX) {
           const snapInterval = Math.round(positionX/this.intervalX);
           const snapPositionX = snapInterval * this.intervalX;
           const leftValue = snapInterval * this.intervalValue;
-          this.setState({ leftSliderX: snapPositionX, leftValue: leftValue});
+          const previousLeftValue = this.state.leftValue;
+          if (this.props.onChange && previousLeftValue !== leftValue) {
+            this.props.onChange({ leftValue, rightValue: this.state.rightValue });
+          }
+          // You dont want the sliders to intersect, so you stop 1/2 slider before
+          const slightlyLeftOfRightSliderX = this.state.rightSliderX - this.sliderSize/2;
+          this.setState({
+            leftSliderX: snapPositionX > slightlyLeftOfRightSliderX ? slightlyLeftOfRightSliderX : snapPositionX,
+            leftValue
+          });
         }
         break;
       }
       case 'rightSlider': {
         const positionX = this.previousRightSliderX + dx;
         // left boundary is left slider, right boundary is width of line
-        // You dont want the sliders to intersect, so you stop 1/2 slider after
-        if (positionX > this.state.leftSliderX + this.sliderSize/2 && positionX < this.lineWidth) {
+        if (positionX > this.state.leftSliderX && positionX < this.lineWidth) {
           const snapInterval = Math.round(positionX/this.intervalX);
           const snapPositionX = snapInterval * this.intervalX;
           const rightValue = snapInterval * this.intervalValue;
-          this.setState({ rightSliderX: snapPositionX, rightValue: rightValue });
+          const previousRightValue = this.state.rightValue;
+          if (this.props.onChange && previousRightValue !== rightValue) {
+            this.props.onChange({ leftValue: this.state.leftValue, rightValue });
+          }
+          // You dont want the sliders to intersect, so you stop 1/2 slider after
+          const slightlyRightOfLeftSliderX = this.state.leftSliderX + this.sliderSize/2;
+          this.setState({
+            rightSliderX: snapPositionX < slightlyRightOfLeftSliderX ? slightlyRightOfLeftSliderX : snapPositionX,
+            rightValue
+          });
         }
         break;
       }

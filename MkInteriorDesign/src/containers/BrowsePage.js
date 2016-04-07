@@ -117,7 +117,7 @@ export default class BrowsePage extends BaseComponent {
   render() {
     const state = this.props.state;
     const {
-      updateFilterInput, addFilterAsync, deleteFilter
+      onChangeFilterInput, addFilterAsync, deleteFilter, onChangeSlider
     } = this.props.actions;
 
     const NoMoreCards = (
@@ -128,9 +128,10 @@ export default class BrowsePage extends BaseComponent {
       <Layout drawer={this.props.drawer} title='Discover Styles'>
         <FilterDrawer
           state={state}
-          updateFilterInput={updateFilterInput}
+          onChangeFilterInput={onChangeFilterInput}
           addFilterAsync={addFilterAsync}
           deleteFilter={deleteFilter}
+          onChangeSlider={onChangeSlider}
         >
           {/*
             The children would be the elements rendered after filter drawer.

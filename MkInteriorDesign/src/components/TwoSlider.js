@@ -6,16 +6,31 @@ import React, {
   PanResponder,
   StyleSheet
 } from 'react-native';
+import numeral from 'numeral';
+import { THEME_COLOR, FONT } from '../config/constants';
 
 const { width, height } = Dimensions.get('window');
 
+
 const SLIDER_BASE_HEIGHT = 1;
 const SLIDER_HIGHTLIGHT_HEIGHT = 5;
-const TEXT_LABEL_WIDTH = 120;
+const ONE_TEXT_MINIMUM_WIDTH = 8;
+const TEXT_LABEL_HEIGHT = 20;
+
 
 export default class TwoSlider extends Component {
   constructor(props) {
     super(props);
+
+    numeral.language('sg', {
+      delimiters: {
+        thousands: ','
+      },
+      currency: {
+        symbol: 'S$'
+      }
+    });
+    numeral.language('sg');
 
     const {
       lineBaseColor = 'grey',
@@ -85,20 +100,30 @@ export default class TwoSlider extends Component {
     }
 
     // Calculates text boundaries
-    let leftTextPosition = this.state.leftSliderX - this.sliderSize*2;
-    if (leftTextPosition < 0) {
-      leftTextPosition = 0;
-    }
-    let rightTextPosition = this.state.rightSliderX - TEXT_LABEL_WIDTH/2;
-    if (rightTextPosition > this.lineWidth - TEXT_LABEL_WIDTH) {
-      rightTextPosition = this.lineWidth - TEXT_LABEL_WIDTH;
-    }
+    const leftTextMinimumWidth = ONE_TEXT_MINIMUM_WIDTH * numeral(this.state.leftValue).format('$0,0').length;
+    const rightTextMinimumWidth = ONE_TEXT_MINIMUM_WIDTH * numeral(this.state.rightValue).format('$0,0').length;
+
+    const leftTextWidth = ((v) => {
+      // Cannot be less than leftTextMinimumWidth, otherwise it will screw up the view
+      if (v < leftTextMinimumWidth) return leftTextMinimumWidth;
+      // Sum of leftTextWidth and rightTextWidth cannot be more than this.lineWidth
+      if (v > this.lineWidth - rightTextMinimumWidth) return this.lineWidth - rightTextMinimumWidth;
+      return v;
+    })(this.state.leftSliderX);
+    const rightTextWidth =  ((v) => {
+      if (v < rightTextMinimumWidth) return rightTextMinimumWidth;
+      if (v > this.lineWidth - leftTextMinimumWidth) return this.lineWidth - leftTextMinimumWidth;
+      return v;
+    })(this.lineWidth - this.state.rightSliderX);
+    // middleTextWidth cannot be 0, give it a minimum value
+    const middleTextWidth = (this.lineWidth - (leftTextWidth + rightTextWidth)) || 0.01;
 
     return (
       <View>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={{backgroundColor: 'red', left: leftTextPosition}}>S${this.state.leftValue}</Text>
-          <Text style={{backgroundColor: 'blue', left: rightTextPosition}}>S${this.state.rightValue}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={{height: TEXT_LABEL_HEIGHT, width: leftTextWidth, textAlign: 'right', fontFamily: FONT}}>{numeral(this.state.leftValue).format('$0,0')}</Text>
+          <Text style={{height: TEXT_LABEL_HEIGHT, width: middleTextWidth}}></Text>
+          <Text style={{height: TEXT_LABEL_HEIGHT, width: rightTextWidth, textAlign: 'left', fontFamily: FONT}}>{numeral(this.state.rightValue).format('$0,0')}</Text>
         </View>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: this.sliderSize/2}}>
           <View style={{height: SLIDER_BASE_HEIGHT, width: this.state.leftSliderX, backgroundColor: this.lineBaseColor}}></View>

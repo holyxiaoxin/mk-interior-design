@@ -203,7 +203,11 @@ export default class TwoSlider extends Component {
         if (positionX > 0 && positionX < this.state.rightSliderX) {
           const snapInterval = Math.round(positionX/this.intervalX);
           const snapPositionX = snapInterval * this.intervalX;
-          const leftValue = snapInterval * this.intervalValue;
+          // Because we allow slider position and slider value to be different,
+          // so that the values of 2 sliders can overlap but yet placed at different positions,
+          // the calculated leftValue using slider position should be checked against the rightValue.
+          const leftValue = (snapInterval * this.intervalValue) > this.state.rightValue ?
+            this.state.leftValue : (snapInterval * this.intervalValue);
           const previousLeftValue = this.state.leftValue;
           if (this.props.onChange && previousLeftValue !== leftValue) {
             this.props.onChange({ leftValue, rightValue: this.state.rightValue });
@@ -223,7 +227,11 @@ export default class TwoSlider extends Component {
         if (positionX > this.state.leftSliderX && positionX < this.lineWidth) {
           const snapInterval = Math.round(positionX/this.intervalX);
           const snapPositionX = snapInterval * this.intervalX;
-          const rightValue = snapInterval * this.intervalValue;
+          // Because we allow slider position and slider value to be different,
+          // so that the values of 2 sliders can overlap but yet placed at different positions,
+          // the calculated rightValue using slider position should be checked against the leftValue.
+          const rightValue = (snapInterval * this.intervalValue) < this.state.leftValue ?
+            this.state.rightValue : (snapInterval * this.intervalValue);
           const previousRightValue = this.state.rightValue;
           if (this.props.onChange && previousRightValue !== rightValue) {
             this.props.onChange({ leftValue: this.state.leftValue, rightValue });

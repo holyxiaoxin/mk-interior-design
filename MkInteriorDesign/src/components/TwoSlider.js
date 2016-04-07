@@ -22,18 +22,29 @@ export default class TwoSlider extends Component {
       lineHighlightColor = 'paleturquoise',
       leftSliderColor = 'lightblue',
       rightSliderColor = 'lightsteelblue',
-      leftSliderPosition = 50,
-      rightSliderPosition = 150,
+      minValue = 0,
+      maxValue = 300000,
       sliderSize = 30,
+      numberOfStops = 60,
       lineWidth
     } = props;
 
-    const thisProps = { lineBaseColor, lineHighlightColor, leftSliderColor, rightSliderColor, sliderSize, lineWidth };
+    const thisProps = {
+      lineBaseColor, lineHighlightColor,
+      leftSliderColor, rightSliderColor,
+      sliderSize, numberOfStops, lineWidth
+    };
     Object.assign(this, thisProps);
 
+    this.intervalX = lineWidth / numberOfStops;
+    this.intervalValue = (maxValue-minValue) / numberOfStops;
+
     this.state = {
-      leftSliderX: leftSliderPosition,
-      rightSliderX: rightSliderPosition    }
+      leftSliderX: 0,
+      rightSliderX: lineWidth,
+      leftValue: minValue,
+      rightValue: maxValue
+    }
   }
 
   componentWillMount() {
@@ -84,8 +95,8 @@ export default class TwoSlider extends Component {
     return (
       <View>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <Text style={{backgroundColor: 'red', left: leftTextPosition}}>S$15,000</Text>
-          <Text style={{backgroundColor: 'blue', left: rightTextPosition}}>S$40,000</Text>
+          <Text style={{backgroundColor: 'red', left: leftTextPosition}}>S${this.state.leftValue}</Text>
+          <Text style={{backgroundColor: 'blue', left: rightTextPosition}}>S${this.state.rightValue}</Text>
         </View>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: this.sliderSize/2}}>
           <View style={{height: SLIDER_BASE_HEIGHT, width: this.state.leftSliderX, backgroundColor: this.lineBaseColor}}></View>
@@ -164,7 +175,10 @@ export default class TwoSlider extends Component {
         // left boundary is 0, right boundary is right slider
         // You dont want the sliders to intersect, so you stop 1/2 slider before
         if (positionX > 0 && positionX < this.state.rightSliderX - this.sliderSize/2) {
-          this.setState({ leftSliderX: positionX });
+          const snapInterval = Math.round(positionX/this.intervalX);
+          const snapPositionX = snapInterval * this.intervalX;
+          const leftValue = snapInterval * this.intervalValue;
+          this.setState({ leftSliderX: snapPositionX, leftValue: leftValue});
         }
         break;
       }
@@ -173,7 +187,10 @@ export default class TwoSlider extends Component {
         // left boundary is left slider, right boundary is width of line
         // You dont want the sliders to intersect, so you stop 1/2 slider after
         if (positionX > this.state.leftSliderX + this.sliderSize/2 && positionX < this.lineWidth) {
-          this.setState({ rightSliderX: positionX });
+          const snapInterval = Math.round(positionX/this.intervalX);
+          const snapPositionX = snapInterval * this.intervalX;
+          const rightValue = snapInterval * this.intervalValue;
+          this.setState({ rightSliderX: snapPositionX, rightValue: rightValue });
         }
         break;
       }

@@ -116,7 +116,8 @@ function Handler() {
 const styles = StyleSheet.create({
   backContainer: {
     height: height - NAVBAR_OFFSET_HEIGHT - HANDLER_HEIGHT,
-    marginTop: HANDLER_HEIGHT
+    marginTop: HANDLER_HEIGHT,
+    overflow: 'hidden'
   },
   frontContainer: {
     flex : 1,

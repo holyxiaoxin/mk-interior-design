@@ -11,7 +11,7 @@
     "query-string": "^3.0.3",
     "react": "^0.14.5",
     "react-motion": "^0.4.2",
-    "react-native": "^0.23.0-rc4",
+    "react-native": "^0.23.1",
     "react-native-button": "^1.4.2",
     "react-native-drawer-layout": "^0.4.0",
     "react-native-slide-down-panel": "^1.0.4",

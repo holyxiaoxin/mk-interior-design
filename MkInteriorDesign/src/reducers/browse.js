@@ -6,27 +6,29 @@ import Immutable from 'immutable';
 
 const initialState = Immutable
   .fromJS({
-    filterInput: '',
-    filterTags: ['tag1', 'tag2'],
-    slider: {}
+    filter: {
+      filterInput: '',
+      filterTags: ['tag1', 'tag2'],
+      slider: {}
+    }
   });
 
 export default function user(state = initialState, action = {}) {
   switch (action.type) {
     case ON_CHANGE_FILTER_INPUT: {
-      return state.set('filterInput', action.data);
+      return state.setIn(['filter', 'filterInput'], action.data);
     }
     case ADD_FILTER: {
       const newFilterTag = action.data;
-      const filterTags = state.get('filterTags').push(newFilterTag);
-      return state.set('filterTags', filterTags)
-                  .set('filterInput', '');
+      const filterTags = state.getIn(['filter', 'filterTags']).push(newFilterTag);
+      return state.setIn(['filter', 'filterTags'], filterTags)
+                  .setIn(['filter', 'filterInput'], '');
     }
     case DELETE_FILTER: {
       const index = action.data;
-      const filterTags = state.get('filterTags').delete(index);
-      return state.set('filterTags', filterTags)
-                  .set('filterInput', '');
+      const filterTags = state.getIn(['filter', 'filterTags']).delete(index);
+      return state.setIn(['filter', 'filterTags'], filterTags)
+                  .setIn(['filter', 'filterInput'], '');
     }
     case UPDATE_BROWSE_CARDS: {
       // TODO: Implement stubbed and remove log
@@ -36,7 +38,7 @@ export default function user(state = initialState, action = {}) {
     case ON_CHANGE_SLIDER: {
       const {leftValue: minValue, rightValue: maxValue} = action.data;
       const slider = Immutable.fromJS({ minValue, maxValue });
-      return state.set('slider', slider);
+      return state.setIn(['filter', 'slider'], slider);
     }
     default:
       return state;

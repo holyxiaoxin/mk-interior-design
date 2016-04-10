@@ -89,10 +89,10 @@ class Router {
 // Change this for easier debugging
 const initialRoute = {
   index: 0,
-  // component: LoginPage
+  component: LoginPage
   // component: BrowsePage
   // component: PickRenovatorsPage
-  component: InstructionsPage
+  // component: InstructionsPage
 }
 
 module.exports = { Router, initialRoute };

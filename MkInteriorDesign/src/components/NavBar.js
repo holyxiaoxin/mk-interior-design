@@ -7,8 +7,8 @@ import React, { Component,
   TouchableWithoutFeedback,
   Platform
 } from 'react-native';
-import hamburgerIcon from '../assets/images/hamburger-nav.png';
 import { THEME_COLOR, FONT, NAVBAR_HEIGHT , NAVBAR_TOPBAR_HEIGHT } from '../config/constants'
+import Icon from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
 
 export default class NavBar extends Component {
@@ -18,10 +18,7 @@ export default class NavBar extends Component {
     const leftButtonConfig = (
       <View style={styles.sharedMargin}>
         <TouchableWithoutFeedback onPress={openDrawer}>
-          <Image
-            style={styles.hamburgerIcon}
-            source={hamburgerIcon}
-          />
+          <Icon name="bars" size={24} style={{marginLeft: 5}} color={THEME_COLOR.LIGHT_GREY} />
         </TouchableWithoutFeedback>
       </View>
 

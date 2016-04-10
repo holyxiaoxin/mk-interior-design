@@ -5,11 +5,13 @@ import React, {
   View,
   Text,
   Image,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
-import brandLogo from '../assets/images/mk-logo-home.png';
-import fbLogo from '../assets/images/fb-home.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { THEME_COLOR, FONT } from '../config/constants';
 import { mapDispatchToProps, connect } from '../util/connector';
+import loginSplashPlaceholder from '../assets/images/login-splash-placeholder.png';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,16 +21,17 @@ class LoginPage extends Component {
     const { facebookLoginAsync } = this.props.actions;
 
     return(
-      <View style={{flex:1, flexDirection: 'column'}}>
+      <View style={{flex:1, flexDirection: 'column', backgroundColor: THEME_COLOR.DARKER_GREY}}>
+        <Image
+          style={{position: 'absolute', height: height, width: width, opacity: 0.3}}
+          resizeMode={Image.resizeMode.cover}
+          source={loginSplashPlaceholder} />
 
         {/*Split view into bottom half and top half*/}
         <View style={styles.topWrapper}>
           {/* Margin bottom 50, can't seem to get it to center using flex */}
-          <View>
-            <Image
-              source={brandLogo}
-              style={styles.brandLogo}
-            />
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Icon style={{backgroundColor: 'transparent'}} name="home" size={100} color={THEME_COLOR.RED} />
           </View>
 
           {/* Push it to bottom */}
@@ -42,22 +45,21 @@ class LoginPage extends Component {
 
         {/* Push it to bottom */}
         <View style={styles.bottomWrapper}>
-          <TouchableHighlight style={{marginLeft: 50, marginRight: 50}} onPress={facebookLoginAsync}>
-            <View style={styles.connectView}>
-              <Image
-                source={fbLogo}
-                style={styles.facebookLogo}
-                resizeMode={Image.resizeMode.contain}
-              />
-              <Text style={styles.connectText}>Connect With Facebook</Text>
-            </View>
-          </TouchableHighlight>
+          <View style={{width: 280}}>
+            <TouchableOpacity onPress={facebookLoginAsync}>
+              <View style={styles.connectView}>
+                <Icon name="facebook" style={{marginLeft: 15, marginRight: 15, backgroundColor: 'transparent'}} size={20} color={THEME_COLOR.RED} />
+                <Text style={styles.connectText}>Connect With Facebook</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
 
           {/* Margin top and bottom 50 */}
           <View style={{marginBottom: 50, marginTop: 50, alignItems: 'center'}}>
-            <TouchableHighlight onPress={() => this.props.router.toBrowsePage()}>
+            <TouchableOpacity onPress={() => this.props.router.toInstructionsPage()}>
               <Text style={styles.laterText}>Maybe later</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -81,41 +83,44 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-end',
-  },
-  brandLogo: {
-    flex: 1,
-    flexDirection: 'row',
-    width: width*0.3,
-    height: height*0.25,
-    alignSelf: 'center',
-    marginBottom: 50
+    alignItems: 'center'
   },
   titleText: {
+    fontFamily: FONT,
     flex: 1,
+    fontWeight: 'bold',
     flexDirection: 'row',
     alignSelf: 'center',
     fontSize: 20,
-    color: '#ddd'
+    backgroundColor: 'transparent',
+    color: THEME_COLOR.LIGHT_WHITE
   },
   connectView: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 5,
-    paddingBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
     borderWidth: 1,
+    borderColor: THEME_COLOR.LIGHT_WHITE
   },
   facebookLogo: {
     height: 30
   },
   connectText: {
+    fontFamily: FONT,
+    flex: 1,
+    fontWeight: 'bold',
+    textAlign: 'center',
     fontSize: 18,
-    color: '#ddd'
+    backgroundColor: 'transparent',
+    color: THEME_COLOR.LIGHT_WHITE
   },
   laterText: {
+    fontFamily: FONT,
     flexDirection: 'row',
     fontSize: 10,
-    color: '#ddd',
+    color: THEME_COLOR.LIGHT_WHITE,
+    backgroundColor: 'transparent',
     textDecorationLine: 'underline'
   }
 });

@@ -199,6 +199,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   cardInfoSeperator: {
+    color: THEME_COLOR.LIGHT_GREY,
+    fontSize: 14,
+    lineHeight: 18,
     marginLeft: 12,
     marginRight: 12
   },

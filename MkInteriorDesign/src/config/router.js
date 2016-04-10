@@ -1,5 +1,6 @@
 import React, { Navigator, Platform, BackAndroid } from 'react-native';
 import LoginPage from '../containers/LoginPage';
+import InstructionsPage from '../containers/InstructionsPage';
 import ProfilePage from '../containers/ProfilePage';
 import BrowsePage from '../containers/BrowsePage';
 import CounterPage from '../containers/CounterPage';
@@ -41,6 +42,10 @@ class Router {
 
   toLoginPage(props) {
     this.push(props, { component: LoginPage });
+  }
+
+  toInstructionsPage(props) {
+    this.push(props, { component: InstructionsPage });
   }
 
   toProfilePage(props) {
@@ -85,8 +90,9 @@ class Router {
 const initialRoute = {
   index: 0,
   // component: LoginPage
-  component: BrowsePage
+  // component: BrowsePage
   // component: PickRenovatorsPage
+  component: InstructionsPage
 }
 
 module.exports = { Router, initialRoute };

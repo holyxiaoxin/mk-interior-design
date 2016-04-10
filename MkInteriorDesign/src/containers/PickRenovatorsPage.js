@@ -1,11 +1,11 @@
-import React, { Component, Dimensions, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native';
-import { THEME_COLOR } from '../config/constants';
-import Layout from '../containers/Layout';
-import Button from 'react-native-button';
-import ImageList from '../components/ImageList';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component, Dimensions, StyleSheet, View, Text, TouchableHighlight, ListView, Image } from 'react-native'
+import { THEME_COLOR } from '../config/constants'
+import Layout from '../containers/Layout'
+import ImageList from '../components/ImageList'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import ItemCheckbox from '../components/CheckBox'
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window')
 
 export default class PickRenovatorsPage extends Component {
   constructor(props) {
@@ -37,17 +37,29 @@ export default class PickRenovatorsPage extends Component {
   decideForMe() {
   }
 
+  _onCheckCallback() {
+    alert("hi")
+  }
+
   renderRenovator(renovator) {
       return (
         <View style={styles.renovatorRow}>
           <View style={styles.renovatorDetails}>
               <Image
                 source={{uri: 'http://netdna.webdesignerdepot.com/uploads/circular_logos/NASA.jpg'}}
-                style={styles.renovatorLogo}/>
+                style={styles.renovatorLogo}
+              />
 
               <View style={styles.rightContainer}>
                 <Text style={styles.renovatorNameText}>{renovator.name}</Text>
               </View>
+
+              <ItemCheckbox
+                onCheck={this._onCheckCallback}
+                icon="check"
+                size={40}
+                checked={true}
+              />
           </View>
 
           <ImageList images={renovator.thumbnails}>
@@ -57,7 +69,7 @@ export default class PickRenovatorsPage extends Component {
               </Text>
             </View>
           </ImageList>
-          
+
         </View>
       );
     }
@@ -75,8 +87,8 @@ export default class PickRenovatorsPage extends Component {
 
           <View style={{alignItems: 'center'}}>
 
-          <Icon.Button name="thumbs-up" borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
-            Help me decide!
+          <Icon.Button name="thumbs-up" margin={5}  borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
+            <Text style={styles.button}>Help me decide!</Text>
           </Icon.Button>
 
 
@@ -124,11 +136,13 @@ const styles = StyleSheet.create({
       backgroundColor: THEME_COLOR.DARK_WHITE,
       borderBottomWidth: 1,
       borderBottomColor: THEME_COLOR.LIGHT_GREY,
-      marginTop: 15
+      marginTop: 15,
+      paddingBottom: 5
     },
     renovatorLogo: {
-      width: 50,
-      height: 50
+      width: 40,
+      height: 40,
+      borderRadius: 20
     },
     renovatorNameText: {
       fontFamily: 'Segoe UI',
@@ -144,5 +158,11 @@ const styles = StyleSheet.create({
     moreBox: {
       width: width/3 - 10,
       height: width/3 - 10
+    },
+    button: {
+      fontFamily: 'Segoe UI',
+      fontSize: 16,
+      fontWeight: '600',
+      color: THEME_COLOR.LIGHT_WHITE
     }
 })

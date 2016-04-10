@@ -12,6 +12,7 @@
     "react": "^0.14.5",
     "react-motion": "^0.4.2",
     "react-native": "^0.23.1",
+    "react-native-animatable": "^0.5.2",
     "react-native-button": "^1.4.2",
     "react-native-drawer-layout": "^0.4.0",
     "react-native-orientation": "^1.15.0",

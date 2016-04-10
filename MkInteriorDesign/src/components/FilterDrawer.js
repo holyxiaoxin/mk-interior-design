@@ -37,7 +37,7 @@ export default class FilterDrawer extends Component {
         <SlideDownPanel
           ref="panel"
           offsetTop={OFFSET_TOP}
-          initialHeight={HANDLER_HEIGHT}
+          initialHeight={MAXIMUM_HEIGHT}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
@@ -78,11 +78,20 @@ class FrontContainer extends Component {
               )
             }
             <TextInput
-              style={{flex: 1, padding: 0, paddingLeft: 10}}
+              ref="filterTextInput"
+              style={{flex: 1, height: 20, fontSize: 14, alignSelf: 'center', padding: 0, paddingLeft: 10, paddingRight: 10}}
               placeholder="Tap to filter by style"
+              autoCorrect={false}
               underlineColorAndroid={THEME_COLOR.WHITE_GREEN}
               onChangeText={onChangeFilterInput}
               onSubmitEditing={addFilterAsync.bind(null, filterInput)}
+              onEndEditing={() =>
+                {
+                  setTimeout(() => {
+                    this.refs.filterTextInput.focus()
+                  }, 0);
+                }
+              }
               value={filterInput}
             />
             <TouchableWithoutFeedback onPress={addFilterAsync.bind(null, filterInput)}>

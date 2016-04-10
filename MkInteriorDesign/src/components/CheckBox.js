@@ -26,7 +26,7 @@ var ItemCheckbox = React.createClass({
 
   getDefaultProps: function() {
     return {
-      onCheck: null,
+      // onCheck: null,
       onUncheck: null,
       icon: "check",
       size: 30,
@@ -84,6 +84,7 @@ var ItemCheckbox = React.createClass({
         checked: false,
         bg_color: this.props.backgroundColor,
       });
+
       if (this.props.onUncheck) {
         this.props.onUncheck();
       }

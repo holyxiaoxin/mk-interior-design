@@ -4,12 +4,14 @@ import Layout from '../containers/Layout'
 import ImageList from '../components/ImageList'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ItemCheckbox from '../components/CheckBox'
+import BaseComponent from '../components/BaseComponent'
 
 const { width, height } = Dimensions.get('window')
 
-export default class PickRenovatorsPage extends Component {
+export default class PickRenovatorsPage extends BaseComponent {
   constructor(props) {
    super(props);
+   this._bind('renderRenovator', 'onCheckCallback', 'onUncheckCallback');
    this.state = {
        dataSource: new ListView.DataSource({
          rowHasChanged: (row1, row2) => row1 !== row2,
@@ -35,13 +37,19 @@ export default class PickRenovatorsPage extends Component {
   }
 
   decideForMe() {
+    alert("OK");
   }
 
-  _onCheckCallback() {
-    alert("hi")
+  onCheckCallback() {
+    alert("checked");
+  }
+
+  onUncheckCallback() {
+    alert("unchecked");
   }
 
   renderRenovator(renovator) {
+      let $this = this;
       return (
         <View style={styles.renovatorRow}>
           <View style={styles.renovatorDetails}>
@@ -55,7 +63,8 @@ export default class PickRenovatorsPage extends Component {
               </View>
 
               <ItemCheckbox
-                onCheck={this._onCheckCallback}
+                onCheck={() => $this.onCheckCallback() }
+                onUncheck={() => $this.onUncheckCallback() }
                 icon="check"
                 size={30}
                 checked={false}

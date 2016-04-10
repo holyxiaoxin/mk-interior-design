@@ -21,21 +21,21 @@ const { width, height } = Dimensions.get('window');
 
 class Card extends Component {
   render() {
-    const { title, subtitle, houseType, houseTheme, houseSize, housePrice } = this.props;
+    const { location, name, houseType, style, size, price } = this.props;
     return (
       <View style={styles.cardContainer}>
         <View style={styles.cardInfoWrapper}>
-          <Text style={styles.cardTitleText}>{title}</Text>
-          <Text style={styles.cardSubtitleText}>{subtitle}</Text>
+          <Text style={styles.cardTitleText}>{location}</Text>
+          <Text style={styles.cardSubtitleText}>{name}</Text>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.cardTopLeftInfoText}>{houseType}</Text>
             <Text style={styles.cardInfoSeperator}>·</Text>
-            <Text style={styles.cardTopRightInfoText}>{houseTheme}</Text>
+            <Text style={styles.cardTopRightInfoText}>{style}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.cardBottomLeftInfoText}>{houseSize}</Text>
+            <Text style={styles.cardBottomLeftInfoText}>{size}</Text>
             <Text style={styles.cardInfoSeperator}>·</Text>
-            <Text style={styles.cardBottomRightInfoText}>{housePrice}</Text>
+            <Text style={styles.cardBottomRightInfoText}>{price}</Text>
           </View>
         </View>
 
@@ -56,15 +56,6 @@ class Card extends Component {
   }
 }
 
-const Cards = [
-  {title: 'Punggol Northsore (Blk 123)', subtitle: 'Our Journey', houseType: 'Apartment', houseTheme: 'Scandinavian', houseSize: '111 m²', housePrice: 'S$30,000'},
-  {title: '4 Choa Chu Kang Park', subtitle: 'Our Home', houseType: 'Condo', houseTheme: 'Jungle', houseSize: '200 m²', housePrice: 'S$26,000'},
-  {title: '1 Pandan Valley Walk', subtitle: 'Our Walk', houseType: 'Apartment', houseTheme: 'Cats', houseSize: '232 m²', housePrice: 'S$17,000'},
-  {title: 'Bedok Street 20 (Blk 134)', subtitle: 'Our House', houseType: 'Apartment', houseTheme: 'Cement', houseSize: '80 m²', housePrice: 'S$20,000'},
-  {title: 'Geylang Street 35 (Blk 38)', subtitle: 'The Sapphire', houseType: 'Condo', houseTheme: 'Wild', houseSize: '73 m²', housePrice: 'S$6,000'},
-  {title: 'Jurong Central (Blk 15)', subtitle: 'The Orange', houseType: 'Apartment', houseTheme: 'Dogs', houseSize: '334 m²', housePrice: 'S$182,000'}
-]
-
 const NopeButton = () => {
   return (
     <View style={[styles.SwipeButton, { marginRight: 20 }]}>
@@ -83,11 +74,11 @@ const YupButton = () => {
 
 export default class BrowsePage extends BaseComponent {
   handleYup (card) {
-    console.log(`Yup for ${card.title}`)
+    console.log(`Yup for ${card.location}`)
   }
 
   handleNope (card) {
-    console.log(`Nope for ${card.title}`)
+    console.log(`Nope for ${card.location}`)
   }
 
   render() {
@@ -115,7 +106,7 @@ export default class BrowsePage extends BaseComponent {
             before the filter drawer. [https://github.com/facebook/react-native/issues/698]
           */}
             <SwipeCards
-              cards={Cards}
+              cards={state.get('listings').toJS()}
               renderCard={(cardData) => <Card {...cardData} />}
               renderNoMoreCards={() => NoMoreCards}
               showYup={false}

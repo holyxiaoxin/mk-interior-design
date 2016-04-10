@@ -51,7 +51,7 @@ var ItemCheckbox = React.createClass({
       backgroundColor: this.state.bg_color,
       borderColor: this.props.color,
       borderWidth: 2,
-      // borderRadius: this.props.size/2,
+      borderRadius: this.props.size/5,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 2,
@@ -70,11 +70,11 @@ var ItemCheckbox = React.createClass({
 
   _getCircleIconStyle: function() {
     return {
-      color: this.props.backgroundColor,
+      // color: this.props.backgroundColor,
       flex: 1,
       width: this._getIconSize(),
       height: this._getIconSize(),
-      // marginRight: 10
+      marginRight: this._getIconSize() - 5
     };
   },
 

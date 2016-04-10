@@ -57,8 +57,8 @@ export default class PickRenovatorsPage extends Component {
               <ItemCheckbox
                 onCheck={this._onCheckCallback}
                 icon="check"
-                size={40}
-                checked={true}
+                size={30}
+                checked={false}
               />
           </View>
 
@@ -86,12 +86,9 @@ export default class PickRenovatorsPage extends Component {
           </View>
 
           <View style={{alignItems: 'center'}}>
-
-          <Icon.Button name="thumbs-up" margin={5}  borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
-            <Text style={styles.button}>Help me decide!</Text>
-          </Icon.Button>
-
-
+            <Icon.Button name="thumbs-up" margin={5}  borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
+              <Text style={styles.button}>Help me decide!</Text>
+            </Icon.Button>
           </View>
 
           <ListView
@@ -108,7 +105,8 @@ export default class PickRenovatorsPage extends Component {
 const styles = StyleSheet.create({
     container: {
       marginLeft: 20,
-      marginRight: 10
+      marginRight: 10,
+      flex: 1
     },
     topTextBox: {
       padding: 20

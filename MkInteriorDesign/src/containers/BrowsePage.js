@@ -7,6 +7,7 @@ import React, {
   TextInput,
   Image
 } from 'react-native';
+import numeral from 'numeral';
 import { mapDispatchToProps, connect } from '../util/connector';
 import NavBar from '../components/NavBar';
 import { THEME_COLOR, FONT, IS_ANDROID } from '../config/constants';
@@ -20,6 +21,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
 
 class Card extends Component {
+  constructor() {
+    super();
+    numeral.language('sg', {
+      delimiters: {
+        thousands: ','
+      },
+      currency: {
+        symbol: 'S$'
+      }
+    });
+    numeral.language('sg');
+  }
+
   render() {
     const { location, name, houseType, style, size, price } = this.props;
     return (
@@ -33,9 +47,9 @@ class Card extends Component {
             <Text style={styles.cardTopRightInfoText}>{style}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.cardBottomLeftInfoText}>{size}</Text>
+            <Text style={styles.cardBottomLeftInfoText}>{size} m²</Text>
             <Text style={styles.cardInfoSeperator}>·</Text>
-            <Text style={styles.cardBottomRightInfoText}>{price}</Text>
+            <Text style={styles.cardBottomRightInfoText}>{numeral(price).format('$0,0')}</Text>
           </View>
         </View>
 

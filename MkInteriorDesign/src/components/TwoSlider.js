@@ -11,7 +11,6 @@ import { THEME_COLOR, FONT } from '../config/constants';
 
 const { width, height } = Dimensions.get('window');
 
-
 const SLIDER_BASE_HEIGHT = 1;
 const SLIDER_HIGHTLIGHT_HEIGHT = 5;
 const ONE_TEXT_MINIMUM_WIDTH = 8;

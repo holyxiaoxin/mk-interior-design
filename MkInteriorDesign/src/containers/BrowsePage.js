@@ -9,7 +9,7 @@ import React, {
 } from 'react-native';
 import { mapDispatchToProps, connect } from '../util/connector';
 import NavBar from '../components/NavBar';
-import { THEME_COLOR, IS_ANDROID } from '../config/constants';
+import { THEME_COLOR, FONT, IS_ANDROID } from '../config/constants';
 import Layout from '../containers/Layout';
 import FilterDrawer from '../components/FilterDrawer';
 import SwipeCards from '../components/SwipeCards';
@@ -21,73 +21,40 @@ const { width, height } = Dimensions.get('window');
 
 class Card extends Component {
   render() {
+    const { location, name, houseType, style, size, price } = this.props;
     return (
-      <View style={{
-          width: width - 20,
-          height: 380,
-          borderWidth: 2,
-          borderColor: THEME_COLOR.DARK_WHITE,
-          borderRadius: 10,
-          backgroundColor: THEME_COLOR.LIGHT_WHITE,
-        }}>
-        <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-around'}}>
-          <View style={{alignSelf: 'center'}}><Text style={{fontSize: 18, fontWeight: 'bold'}}>Punggol Northsore (Blk 123)</Text></View>
-          <View style={{alignSelf: 'center'}}><Text style={{fontSize: 14, fontWeight: 'bold', fontStyle: 'italic'}}>Our Journey</Text></View>
+      <View style={styles.cardContainer}>
+        <View style={styles.cardInfoWrapper}>
+          <Text style={styles.cardTitleText}>{location}</Text>
+          <Text style={styles.cardSubtitleText}>{name}</Text>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 14, flex: 1, textAlign: 'right'}}>Apartment</Text>
-            <Text style={{marginLeft: 12, marginRight: 12}}>·</Text>
-            <Text style={{fontSize: 14, flex: 1, textAlign: 'left'}}>Scandinavian</Text>
+            <Text style={styles.cardTopLeftInfoText}>{houseType}</Text>
+            <Text style={styles.cardInfoSeperator}>·</Text>
+            <Text style={styles.cardTopRightInfoText}>{style}</Text>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 14, flex: 1, textAlign: 'right'}}>111 m²</Text>
-            <Text style={{marginLeft: 12, marginRight: 12}}>·</Text>
-            <Text style={{fontSize: 14, flex: 1, textAlign: 'left'}}>S$30,000</Text>
+            <Text style={styles.cardBottomLeftInfoText}>{size}</Text>
+            <Text style={styles.cardInfoSeperator}>·</Text>
+            <Text style={styles.cardBottomRightInfoText}>{price}</Text>
           </View>
         </View>
 
-
         <Image
           source={browseCardPlaceHolder}
-          style={{height: 220, width: width - 20}} />
-        <View style={{
-            flexDirection: 'row',
-            alignSelf: 'stretch',
-            height: 40
-          }}>
+          style={styles.cardImage} />
+        <View style={styles.cardTextInputWrapper}>
           <TextInput
-            style={{
-              flex: 1,
-              padding: 0,
-              paddingLeft: 10,
-              fontSize: 16,
-            }}
+            style={styles.cardTextInput}
             placeholder="Add quick note"
-            underlineColorAndroid={THEME_COLOR.LIGHT_WHITE}
-          />
-          <View style={{
-              backgroundColor: THEME_COLOR.DARK_WHITE,
-              justifyContent: 'center',
-              margin: 5,
-              paddingLeft: 15,
-              paddingRight: 15,
-              borderRadius: 5,
-            }}>
-            <Text style={{color: THEME_COLOR.LIGHT_WHITE}}>OK</Text>
+            underlineColorAndroid={THEME_COLOR.LIGHT_WHITE} />
+          <View style={styles.cardSubmitWrapper}>
+            <Text style={styles.cardSubmitText}>OK</Text>
           </View>
         </View>
       </View>
     )
   }
 }
-
-const Cards = [
-  {text: 'Tomato', backgroundColor: 'red'},
-  {text: 'Aubergine', backgroundColor: 'purple'},
-  {text: 'Courgette', backgroundColor: 'green'},
-  {text: 'Blueberry', backgroundColor: 'blue'},
-  {text: 'Umm...', backgroundColor: 'cyan'},
-  {text: 'orange', backgroundColor: 'orange'}
-]
 
 const NopeButton = () => {
   return (
@@ -107,11 +74,11 @@ const YupButton = () => {
 
 export default class BrowsePage extends BaseComponent {
   handleYup (card) {
-    console.log(`Yup for ${card.text}`)
+    console.log(`Yup for ${card.location}`)
   }
 
   handleNope (card) {
-    console.log(`Nope for ${card.text}`)
+    console.log(`Nope for ${card.location}`)
   }
 
   render() {
@@ -127,7 +94,7 @@ export default class BrowsePage extends BaseComponent {
     return(
       <Layout drawer={this.props.drawer} title='Discover Styles'>
         <FilterDrawer
-          state={state}
+          state={state.get('filter')}
           onChangeFilterInput={onChangeFilterInput}
           addFilterAsync={addFilterAsync}
           deleteFilter={deleteFilter}
@@ -139,7 +106,7 @@ export default class BrowsePage extends BaseComponent {
             before the filter drawer. [https://github.com/facebook/react-native/issues/698]
           */}
             <SwipeCards
-              cards={Cards}
+              cards={state.get('listings').toJS()}
               renderCard={(cardData) => <Card {...cardData} />}
               renderNoMoreCards={() => NoMoreCards}
               showYup={false}
@@ -163,11 +130,87 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);
 
 const styles = StyleSheet.create({
-  card: {
+  cardContainer: {
+    width: width - 20,
+    height: 380,
+    borderWidth: 2,
+    borderColor: THEME_COLOR.DARK_WHITE,
+    borderRadius: 10,
+    backgroundColor: THEME_COLOR.LIGHT_WHITE,
+  },
+  cardInfoWrapper: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  cardTitleText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: FONT
+  },
+  cardSubtitleText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    fontFamily: FONT
+  },
+  cardTopLeftInfoText: {
+    fontSize: 14,
+    flex: 1,
+    textAlign: 'right',
+    fontFamily: FONT
+  },
+  cardTopRightInfoText: {
+    fontSize: 14,
+    flex: 1,
+    textAlign: 'left',
+    fontFamily: FONT
+  },
+  cardInfoSeperator: {
+    marginLeft: 12,
+    marginRight: 12
+  },
+  cardBottomLeftInfoText: {
+    fontSize: 14,
+    flex: 1,
+    textAlign: 'right',
+    fontFamily: FONT
+  },
+  cardBottomRightInfoText: {
+    fontSize: 14,
+    flex: 1,
+    textAlign: 'left',
+    fontFamily: FONT
+  },
+  cardImage: {
+    height: 220,
+    width: width - 20
+  },
+  cardTextInputWrapper: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    height: 40
+  },
+  cardTextInput: {
+    flex: 1,
+    padding: 0,
+    paddingLeft: 10,
+    fontSize: 16,
+    fontFamily: FONT
+  },
+  cardSubmitWrapper: {
+    backgroundColor: THEME_COLOR.DARK_WHITE,
     justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-    height: 300
+    margin: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+  },
+  cardSubmitText: {
+    color: THEME_COLOR.LIGHT_WHITE,
+    fontFamily: FONT
   },
   SwipeButton: {
     justifyContent: 'center',
@@ -179,4 +222,4 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
   }
-})
+});

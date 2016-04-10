@@ -25,6 +25,7 @@
 		2D1DE93E1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DE93B1CAF77F5003545C8 /* SegoeUISemiboldItalic.ttf */; };
 		2D1DE93F1CAF77F5003545C8 /* SegoeUISemibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D1DE93C1CAF77F5003545C8 /* SegoeUISemibold.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		FBC1FCDD1CBA449600FDD05C /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC1FCDC1CBA449600FDD05C /* Orientation.m */; };
 		FBD8BD5E1CAEB25100C4EFE5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBD8BD561CAEB25100C4EFE5 /* Entypo.ttf */; };
 		FBD8BD5F1CAEB25100C4EFE5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBD8BD571CAEB25100C4EFE5 /* EvilIcons.ttf */; };
 		FBD8BD601CAEB25100C4EFE5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBD8BD581CAEB25100C4EFE5 /* FontAwesome.ttf */; };
@@ -140,6 +141,8 @@
 		2D1DE93C1CAF77F5003545C8 /* SegoeUISemibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SegoeUISemibold.ttf; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		FBC1FCDB1CBA449600FDD05C /* Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Orientation.h; sourceTree = "<group>"; };
+		FBC1FCDC1CBA449600FDD05C /* Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Orientation.m; sourceTree = "<group>"; };
 		FBD8BD561CAEB25100C4EFE5 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		FBD8BD571CAEB25100C4EFE5 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		FBD8BD581CAEB25100C4EFE5 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -310,6 +313,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FBC1FCDA1CBA449600FDD05C /* RCTOrientation */,
 				13B07FAE1A68108700A75B9A /* MkInteriorDesign */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MkInteriorDesignTests */,
@@ -326,6 +330,15 @@
 				00E356EE1AD99517003FC87E /* MkInteriorDesignTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FBC1FCDA1CBA449600FDD05C /* RCTOrientation */ = {
+			isa = PBXGroup;
+			children = (
+				FBC1FCDB1CBA449600FDD05C /* Orientation.h */,
+				FBC1FCDC1CBA449600FDD05C /* Orientation.m */,
+			);
+			path = RCTOrientation;
 			sourceTree = "<group>";
 		};
 		FBD8BD551CAEB25100C4EFE5 /* Fonts */ = {
@@ -599,6 +612,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				FBC1FCDD1CBA449600FDD05C /* Orientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

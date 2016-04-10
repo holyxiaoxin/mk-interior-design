@@ -18,6 +18,8 @@ import BaseComponent from '../components/BaseComponent';
 import browseCardPlaceHolder from '../assets/images/browse-card-placeholder-image.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import Orientation from 'react-native-orientation';
+
 const { width, height } = Dimensions.get('window');
 
 class Card extends Component {
@@ -33,6 +35,15 @@ class Card extends Component {
     });
     numeral.language('sg');
   }
+
+  componentDidMount() {
+    Orientation.lockToPortrait(); //this will lock the view to Portrait
+    // Orientation.lockToLandscape(); //this will lock the view to Landscape
+    // Orientation.unlockAllOrientations(); //this will unlock the view to all Orientations
+
+    // Orientation.addOrientationListener(this._orientationDidChange);
+  }
+
 
   render() {
     const { location, name, houseType, style, size, price } = this.props;

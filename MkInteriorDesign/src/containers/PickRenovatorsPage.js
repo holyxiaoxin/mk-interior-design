@@ -18,6 +18,7 @@ export default class PickRenovatorsPage extends BaseComponent {
        }),
        renovators: null,
        loaded: false,
+       unlocked: true
      }
    };
 
@@ -48,8 +49,20 @@ export default class PickRenovatorsPage extends BaseComponent {
     alert("unchecked");
   }
 
+  renderAchievement() {
+    return (
+      <View style={styles.achievementModal}>
+        <Text>
+          Achievement Unlock
+        </Text>
+      </View>
+    )
+  }
+
   renderRenovator(renovator) {
       let $this = this;
+      let logo = 'http://www.mynest.co/app/img/' + renovator.logoURL + '.jpg';
+
       return (
         <View style={styles.renovatorRow}>
           <View style={styles.renovatorDetails}>
@@ -84,8 +97,9 @@ export default class PickRenovatorsPage extends BaseComponent {
     }
 
   render() {
+    let overlay = this.state.unlocked ? this.renderAchievement : null;
     return(
-      <Layout drawer={this.props.drawer} title='Pick Renovators'>
+      <Layout drawer={this.props.drawer} overlay={overlay} title='Pick Renovators'>
         <View style={styles.container}>
           <View style={styles.topTextBox}>
             <Text style={styles.topText}>
@@ -95,7 +109,7 @@ export default class PickRenovatorsPage extends BaseComponent {
           </View>
 
           <View style={{alignItems: 'center'}}>
-            <Icon.Button name="thumbs-up" margin={5}  borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
+            <Icon.Button name="thumbs-up" margin={5} borderRadius={5} backgroundColor={THEME_COLOR.LIGHT_GREEN} onPress={this.decideForMe}>
               <Text style={styles.button}>Help me decide!</Text>
             </Icon.Button>
           </View>

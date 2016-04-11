@@ -10,8 +10,9 @@ import React, {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { THEME_COLOR, FONT } from '../config/constants';
 import { mapDispatchToProps, connect } from '../util/connector';
-import loginSplashPlaceholder from '../assets/images/login-splash-placeholder.png';
-
+import loginSplash from '../assets/images/login-splash.png';
+import brandLogo from '../assets/images/brand-logo.png';
+import loginFacebookButton from '../assets/images/login-facebook-button.png';
 
 const { width, height } = Dimensions.get('window');
 
@@ -21,17 +22,21 @@ class LoginPage extends Component {
     const { facebookLoginAsync } = this.props.actions;
 
     return(
-      <View style={{flex:1, flexDirection: 'column', backgroundColor: THEME_COLOR.DARKER_GREY}}>
+      <View style={{flex:1, flexDirection: 'column'}}>
         <Image
-          style={{position: 'absolute', height: height, width: width, opacity: 0.3}}
+          style={{position: 'absolute', height: height, width: width}}
           resizeMode={Image.resizeMode.cover}
-          source={loginSplashPlaceholder} />
+          source={loginSplash} />
 
         {/*Split view into bottom half and top half*/}
         <View style={styles.topWrapper}>
           {/* Margin bottom 50, can't seem to get it to center using flex */}
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Icon style={{backgroundColor: 'transparent'}} name="home" size={100} color={THEME_COLOR.RED} />
+            <Image
+              width={120}
+              height={120}
+              resizeMode={Image.resizeMode.cover}
+              source={brandLogo} />
           </View>
 
           {/* Push it to bottom */}
@@ -45,14 +50,13 @@ class LoginPage extends Component {
 
         {/* Push it to bottom */}
         <View style={styles.bottomWrapper}>
-          <View style={{width: 280}}>
             <TouchableOpacity onPress={facebookLoginAsync}>
-              <View style={styles.connectView}>
-                <Icon name="facebook" style={{marginLeft: 15, marginRight: 15, backgroundColor: 'transparent'}} size={20} color={THEME_COLOR.RED} />
-                <Text style={styles.connectText}>Connect With Facebook</Text>
-              </View>
+              <Image
+                width={width-60}
+                height={110}
+                resizeMode={Image.resizeMode.contain}
+                source={loginFacebookButton} />
             </TouchableOpacity>
-          </View>
 
 
           {/* Margin top and bottom 50 */}
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     flexDirection: 'row',
     alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 26,
     backgroundColor: 'transparent',
     color: THEME_COLOR.LIGHT_WHITE
   },
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
   laterText: {
     fontFamily: FONT,
     flexDirection: 'row',
-    fontSize: 10,
+    fontSize: 16,
     color: THEME_COLOR.LIGHT_WHITE,
     backgroundColor: 'transparent',
     textDecorationLine: 'underline'

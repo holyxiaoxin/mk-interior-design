@@ -118,7 +118,7 @@ export default class BrowsePage extends BaseComponent {
     )
 
     return(
-      <Layout drawer={this.props.drawer} title='Discover Styles'>
+      <Layout backgroundColor={THEME_COLOR.MIDDLE_WHITE} drawer={this.props.drawer} title='Discover Styles'>
         <FilterDrawer
           state={state.get('filter')}
           onChangeFilterInput={onChangeFilterInput}

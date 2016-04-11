@@ -7,7 +7,8 @@ export default class Layout extends Component {
     const {
       title,
       drawer,
-      renderNavBar = true
+      renderNavBar = true,
+      backgroundColor = THEME_COLOR.DARK_WHITE
     } = this.props;
 
     if (renderNavBar && typeof drawer === 'undefined') {
@@ -15,7 +16,7 @@ export default class Layout extends Component {
     }
 
     return (
-      <View style={styles.layout}>
+      <View style={[styles.layout, { backgroundColor }]}>
           {
             renderNavBar ? <NavBar drawer={drawer} title={title}/>
             : <View style={{marginTop: IS_ANDROID ? 0 : NAVBAR_TOPBAR_HEIGHT}}></View>
@@ -30,8 +31,7 @@ export default class Layout extends Component {
 
 const styles = StyleSheet.create({
     layout: {
-      flex: 1,
-      backgroundColor: THEME_COLOR.DARK_WHITE
+      flex: 1
     },
     container: {
       flex: 1,

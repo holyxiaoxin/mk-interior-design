@@ -20,9 +20,10 @@ export const THEME_COLOR = {
 export const FONT = IS_ANDROID ?  'segoeui' : 'Segoe UI';
 
 export const NAVBAR_HEIGHT = 50;
-export const NAVBAR_TOPBAR_HEIGHT = 20;
+export const NAVBAR_TOPBAR_HEIGHT = 20; // this is top bar for IOS
 // This will return offset of navbar from top
 // Can use this to calculate height of device from { Dimensions }
 // TODO: check below
-// Android has this navbar top of 25?
-export const NAVBAR_OFFSET_HEIGHT = IS_ANDROID ?  NAVBAR_HEIGHT + 25 : NAVBAR_HEIGHT + NAVBAR_TOPBAR_HEIGHT;
+// Android has this navbar top of 24?
+export const TOPBAR_OFFSET_HEIGHT = IS_ANDROID ?  24 : NAVBAR_TOPBAR_HEIGHT;
+export const NAVBAR_OFFSET_HEIGHT = IS_ANDROID ?  NAVBAR_HEIGHT + 24 : NAVBAR_HEIGHT + NAVBAR_TOPBAR_HEIGHT;

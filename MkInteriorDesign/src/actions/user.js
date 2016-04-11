@@ -8,6 +8,13 @@ const facebookLogin = (data) => {
   };
 }
 
+export const SHOWN_NAVBAR_HINT = 'SHOWN_NAVBAR_HINT';
+const shownNavbarHint = () => {
+  return {
+    type: SHOWN_NAVBAR_HINT
+  };
+}
+
 // TODO: Implement stubbed
 const facebookLoginAsync = () => {
   return dispatch => {
@@ -16,4 +23,4 @@ const facebookLoginAsync = () => {
   };
 }
 
-export default { facebookLoginAsync };
+export default { facebookLoginAsync, shownNavbarHint };

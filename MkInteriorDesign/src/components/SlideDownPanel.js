@@ -69,7 +69,6 @@ export default class SlideDownPanel extends Component {
       handler: {
         height : this.state.handlerHeight,
         width : width,
-        justifyContent : 'center',
         opacity : this.state.handlerOpacity,
         backgroundColor : this.state.handlerBackgroundColor
       }

@@ -49,12 +49,14 @@ class SwipeCards extends Component {
       onMoveShouldSetPanResponderCapture: () => true,
 
       onPanResponderGrant: (e, gestureState) => {
+        console.log(gestureState);
         this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
         this.state.pan.setValue({x: 0, y: 0});
       },
 
       onPanResponderMove: Animated.event([
-        null, {dx: this.state.pan.x, dy: this.state.pan.y},
+        // null, {dx: this.state.pan.x, dy: this.state.pan.y},
+        null, {dx: this.state.pan.x},
       ]),
 
       onPanResponderRelease: (e, {vx, vy}) => {

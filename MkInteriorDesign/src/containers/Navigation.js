@@ -1,4 +1,4 @@
-import React, { Component, Platform, Navigator} from 'react-native';
+import React, { Component, Platform, Navigator, View, Text } from 'react-native';
 import { Router, initialRoute } from '../config/router';
 import DrawerLayout from 'react-native-drawer-layout';
 import DrawerList from '../components/DrawerList';
@@ -53,7 +53,7 @@ export default class Navigation extends Component {
     // It can be retrieve later at runtime.
     return (
       <DrawerLayout
-        drawerWidth={300}
+        drawerWidth={100}
         ref={(drawer) => this.drawer = drawer }
         keyboardDismissMode="on-drag"
         renderNavigationView={
@@ -65,9 +65,9 @@ export default class Navigation extends Component {
         }
       >
         <Navigator
-          initialRoute={initialRoute}
-          configureScene={this.configureScene.bind(this)}
-          renderScene={this.renderScene.bind(this)}
+         initialRoute={initialRoute}
+         configureScene={this.configureScene.bind(this)}
+         renderScene={this.renderScene.bind(this)}
         />
       </DrawerLayout>
     )

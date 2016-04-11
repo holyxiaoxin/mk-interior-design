@@ -18,6 +18,8 @@ import BaseComponent from '../components/BaseComponent';
 import browseCardPlaceHolder from '../assets/images/browse-card-placeholder-image.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import Orientation from 'react-native-orientation';
+
 const { width, height } = Dimensions.get('window');
 
 class Card extends Component {
@@ -33,6 +35,15 @@ class Card extends Component {
     });
     numeral.language('sg');
   }
+
+  componentDidMount() {
+    Orientation.lockToPortrait(); //this will lock the view to Portrait
+    // Orientation.lockToLandscape(); //this will lock the view to Landscape
+    // Orientation.unlockAllOrientations(); //this will unlock the view to all Orientations
+
+    // Orientation.addOrientationListener(this._orientationDidChange);
+  }
+
 
   render() {
     const { location, name, houseType, style, size, price } = this.props;
@@ -60,6 +71,7 @@ class Card extends Component {
           <TextInput
             style={styles.cardTextInput}
             placeholder="Add quick note"
+            placeholderTextColor={THEME_COLOR.DARK_WHITE}
             underlineColorAndroid={THEME_COLOR.LIGHT_WHITE} />
           <View style={styles.cardSubmitWrapper}>
             <Text style={styles.cardSubmitText}>OK</Text>
@@ -106,7 +118,7 @@ export default class BrowsePage extends BaseComponent {
     )
 
     return(
-      <Layout drawer={this.props.drawer} title='Discover Styles'>
+      <Layout backgroundColor={THEME_COLOR.MIDDLE_WHITE} drawer={this.props.drawer} title='Discover Styles'>
         <FilterDrawer
           state={state.get('filter')}
           onChangeFilterInput={onChangeFilterInput}
@@ -158,45 +170,54 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   cardTitleText: {
+    fontFamily: FONT,
+    color: THEME_COLOR.DARK_GREY,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontFamily: FONT
   },
   cardSubtitleText: {
+    fontFamily: FONT,
+    color: THEME_COLOR.DARK_GREY,
     fontSize: 14,
     fontWeight: 'bold',
     fontStyle: 'italic',
     textAlign: 'center',
-    fontFamily: FONT
   },
   cardTopLeftInfoText: {
+    fontFamily: FONT,
+    color: THEME_COLOR.LIGHT_GREY,
     fontSize: 14,
     flex: 1,
     textAlign: 'right',
-    fontFamily: FONT
   },
   cardTopRightInfoText: {
+    fontFamily: FONT,
+    color: THEME_COLOR.LIGHT_GREY,
     fontSize: 14,
     flex: 1,
     textAlign: 'left',
-    fontFamily: FONT
   },
   cardInfoSeperator: {
+    color: THEME_COLOR.LIGHT_GREY,
+    fontSize: 14,
+    lineHeight: 18,
     marginLeft: 12,
     marginRight: 12
   },
   cardBottomLeftInfoText: {
+    fontFamily: FONT,
+    color: THEME_COLOR.LIGHT_GREY,
     fontSize: 14,
     flex: 1,
     textAlign: 'right',
-    fontFamily: FONT
   },
   cardBottomRightInfoText: {
+    fontFamily: FONT,
+    color: THEME_COLOR.LIGHT_GREY,
     fontSize: 14,
     flex: 1,
     textAlign: 'left',
-    fontFamily: FONT
   },
   cardImage: {
     height: 220,
@@ -208,11 +229,11 @@ const styles = StyleSheet.create({
     height: 40
   },
   cardTextInput: {
+    fontFamily: FONT,
     flex: 1,
     padding: 0,
     paddingLeft: 10,
     fontSize: 16,
-    fontFamily: FONT
   },
   cardSubmitWrapper: {
     backgroundColor: THEME_COLOR.DARK_WHITE,
@@ -223,8 +244,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   cardSubmitText: {
+    fontFamily: FONT,
     color: THEME_COLOR.LIGHT_WHITE,
-    fontFamily: FONT
   },
   SwipeButton: {
     justifyContent: 'center',

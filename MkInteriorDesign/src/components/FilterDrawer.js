@@ -35,12 +35,13 @@ export default class FilterDrawer extends Component {
           {this.props.children}
         </View>
         <SlideDownPanel
-          ref="panel"
           offsetTop={OFFSET_TOP}
-          initialHeight={MAXIMUM_HEIGHT}
+          initialHeight={HANDLER_HEIGHT}
           containerMaximumHeight={MAXIMUM_HEIGHT}
           handlerHeight={HANDLER_HEIGHT}
           handlerDefaultView={<Handler/>}
+          containerBackgroundColor="transparent"
+          handlerBackgroundColor="transparent"
         >
           <FrontContainer
             filterInput={state.get('filterInput')}
@@ -131,7 +132,8 @@ const styles = StyleSheet.create({
   frontContainer: {
     flex : 1,
     width: width,
-    backgroundColor: THEME_COLOR.DARK_WHITE
+    backgroundColor: THEME_COLOR.DARK_WHITE,
+    overflow: 'hidden'
   },
   filterBox: {
     flexDirection: 'row',
@@ -180,7 +182,6 @@ const styles = StyleSheet.create({
   image: {
     height : HANDLER_HEIGHT,
     width: width,
-    alignItems: 'center',
-    backgroundColor : 'gray'
+    backgroundColor : 'transparent'
   },
 });

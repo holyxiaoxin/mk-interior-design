@@ -7,21 +7,56 @@ import React, { Component,
   TouchableWithoutFeedback,
   Platform
 } from 'react-native';
-import hamburgerIcon from '../assets/images/hamburger-nav.png';
+import { mapDispatchToProps, connect } from '../util/connector';
 import { THEME_COLOR, FONT, NAVBAR_HEIGHT , NAVBAR_TOPBAR_HEIGHT } from '../config/constants'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window');
 
-export default class NavBar extends Component {
+class NavBar extends Component {
+  constructor() {
+    super();
+    this.state= {};
+  }
+
+  translateDown() {
+    this.setState({translateY: (this.state.translateY || 0) + 15});
+  }
+
+  translateUp() {
+    this.setState({translateY: (this.state.translateY || 0) - 15});
+  }
+
+  componentDidMount() {
+    if (this.props.state.get('showNavbarHint')) {
+      const intervals = [];
+      const multiplier = 1200;
+      const count = 4;
+      for (var i=0; i< count; i++) {
+        intervals.push(i*multiplier);
+      }
+      intervals.forEach((duration, index) => {
+        setTimeout(() => {
+          index % 2 === 0 ? this.translateUp() : this.translateDown();
+        }, duration);
+      });
+      this.props.actions.shownNavbarHint();
+    }
+  }
+
   render() {
     const { title, drawer: { openDrawer, closeDrawer } } = this.props;
 
     const leftButtonConfig = (
       <View style={styles.sharedMargin}>
         <TouchableWithoutFeedback onPress={openDrawer}>
-          <Image
-            style={styles.hamburgerIcon}
-            source={hamburgerIcon}
-          />
+          <Animatable.View
+            transition="translateY"
+            easing="ease-in-out"
+            style={{transform: [{translateY: this.state.translateY || 0}]}}
+            >
+            <Icon name="bars" size={24} style={{marginLeft: 5}} color={THEME_COLOR.LIGHT_GREY} />
+          </Animatable.View>
         </TouchableWithoutFeedback>
       </View>
 
@@ -52,6 +87,12 @@ export default class NavBar extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return { state: state.user };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 
 const styles = StyleSheet.create({
   container: {

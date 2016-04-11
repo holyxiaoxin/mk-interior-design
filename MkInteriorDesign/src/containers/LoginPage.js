@@ -61,7 +61,7 @@ class LoginPage extends Component {
 
           {/* Margin top and bottom 50 */}
           <View style={{marginBottom: 50, marginTop: 50, alignItems: 'center'}}>
-            <TouchableOpacity onPress={() => this.props.router.toInstructionsPage()}>
+            <TouchableOpacity onPress={() => this.props.router.toOnboardingPage()}>
               <Text style={styles.laterText}>Maybe later</Text>
             </TouchableOpacity>
           </View>

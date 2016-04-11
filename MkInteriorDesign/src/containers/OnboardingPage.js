@@ -5,16 +5,15 @@ import { THEME_COLOR, FONT, TOPBAR_OFFSET_HEIGHT } from '../config/constants';
 import BaseComponent from '../components/BaseComponent'
 import Layout from '../containers/Layout';
 import SwipeableViews from 'react-swipeable-views/lib/index.native.animated';
-import instructionPlaceholder1 from '../assets/images/instructions-placeholder-1.png'
-import instructionPlaceholder2 from '../assets/images/instructions-placeholder-2.png'
-import instructionPlaceholder3 from '../assets/images/instructions-placeholder-3.png'
+import tutorial1 from '../assets/images/tutorial-1.png'
+import tutorial2 from '../assets/images/tutorial-2.png'
 
 const { width, height } = Dimensions.get('window');
 
 const UPPER_CONTAINER_HEIGHT = (height - TOPBAR_OFFSET_HEIGHT) * (3/4);
 const LOWER_CONTAINER_HEIGHT = (height - TOPBAR_OFFSET_HEIGHT) * (1/4);
 
-export default class InstructionsPage extends BaseComponent {
+export default class OnboardingPage extends BaseComponent {
   constructor() {
     super();
     this.state = { index: 0 };
@@ -33,13 +32,13 @@ export default class InstructionsPage extends BaseComponent {
         <View style={{backgroundColor: THEME_COLOR.DARK_GREEN}}>
           <SwipeableViews style={styles.slideContainer} index={0} onChangeIndex={(index) => this.setState({index})}>
             <View style={styles.slide}>
-              <Image style={{width, height: UPPER_CONTAINER_HEIGHT}} source={instructionPlaceholder1} resizeMode={Image.resizeMode.contain}/>
+              <Image style={{width, height: UPPER_CONTAINER_HEIGHT}} source={tutorial1} resizeMode={Image.resizeMode.contain}/>
             </View>
             <View style={styles.slide}>
-              <Image style={{width, height: UPPER_CONTAINER_HEIGHT}} source={instructionPlaceholder2} resizeMode={Image.resizeMode.contain}/>
+              <Image style={{width, height: UPPER_CONTAINER_HEIGHT}} source={tutorial2} resizeMode={Image.resizeMode.contain}/>
             </View>
             <View style={styles.slide}>
-              <Image style={{width, height: UPPER_CONTAINER_HEIGHT}} source={instructionPlaceholder3} resizeMode={Image.resizeMode.contain}/>
+              <Image style={{width, height: UPPER_CONTAINER_HEIGHT}} source={tutorial1} resizeMode={Image.resizeMode.contain}/>
             </View>
           </SwipeableViews>
 
@@ -85,10 +84,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   dot: {
-    height: 12,
-    width: 12,
-    borderWidth: 2,
-    borderRadius: 12,
+    height: 10,
+    width: 10,
+    borderWidth: 1.5,
+    borderRadius: 10,
     margin: 2,
     borderColor: THEME_COLOR.LIGHT_WHITE
   },
@@ -102,8 +101,8 @@ const styles = StyleSheet.create({
   startWrapper: {
     flexDirection: 'row',
     width: 120,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 6,
+    paddingBottom: 6,
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
@@ -112,6 +111,8 @@ const styles = StyleSheet.create({
   },
   startText: {
     fontFamily: FONT,
+    fontWeight: 'bold',
+    fontSize: 16,
     color: THEME_COLOR.DARK_GREEN,
   }
 });

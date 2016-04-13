@@ -38,15 +38,12 @@ export default class PickRenovatorsPage extends BaseComponent {
   }
 
   decideForMe() {
-    alert("OK");
   }
 
   onCheckCallback() {
-    alert("checked");
   }
 
   onUncheckCallback() {
-    alert("unchecked");
   }
 
   renderAchievement() {
@@ -170,7 +167,7 @@ const styles = StyleSheet.create({
       fontStyle: 'italic',
       fontWeight: '600',
       fontSize: 16,
-      color: THEME_COLOR.LIGHT_GREY,
+      color: THEME_COLOR.MIDDLE_GREY,
       textAlign: 'center'
     },
     rightContainer: {

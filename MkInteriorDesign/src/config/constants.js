@@ -4,6 +4,7 @@ export const IS_ANDROID = (Platform.OS === 'android');
 
 export const THEME_COLOR = {
   DARK_GREY: '#414143',
+  MIDDLE_GREY: '#6D6E71',
   DARKER_GREY: '#2D2A2C',
   LIGHT_GREY: '#939598',
   LIGHT_WHITE: '#ffffff',

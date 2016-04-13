@@ -8,7 +8,7 @@ export default class Layout extends Component {
             title,
             drawer,
             renderNavBar = true,
-            backgroundColor = THEME_COLOR.DARK_WHITE
+            backgroundColor = this.props.backgroundColor || THEME_COLOR.DARK_WHITE
             } = this.props;
 
         if (renderNavBar && typeof drawer === 'undefined') {

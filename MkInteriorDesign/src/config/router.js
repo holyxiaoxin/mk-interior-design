@@ -1,74 +1,74 @@
-import React, { Navigator, Platform, BackAndroid } from 'react-native';
-import LoginPage from '../containers/LoginPage';
-import OnboardingPage from '../containers/OnboardingPage';
-import ProfilePage from '../containers/ProfilePage';
-import BrowsePage from '../containers/BrowsePage';
-import CounterPage from '../containers/CounterPage';
-import ListingPage from '../containers/ListingPage';
-import PickRenovatorsPage from '../containers/PickRenovatorsPage';
-import FavoritesPage from '../containers/FavoritesPage';
+import React, { Navigator, Platform, BackAndroid } from 'react-native'
+import LoginPage from '../containers/LoginPage'
+import OnboardingPage from '../containers/OnboardingPage'
+import ProfilePage from '../containers/ProfilePage'
+import BrowsePage from '../containers/BrowsePage'
+import CounterPage from '../containers/CounterPage'
+import ListingPage from '../containers/ListingPage'
+import PickRenovatorsPage from '../containers/PickRenovatorsPage'
+import FavoritesPage from '../containers/FavoritesPage'
 
 class Router {
   constructor(navigator) {
-    this.navigator = navigator;
+    this.navigator = navigator
     if (Platform.OS === 'android') {
       BackAndroid.addEventListener('hardwareBackPress', () => {
         if (this.navigator.getCurrentRoutes().length > 1) {
-          this.pop();
-          return true;
+          this.pop()
+          return true
         }
-        return false;
-      });
+        return false
+      })
     }
   }
 
   push(props, route) {
-    const routesList = this.navigator.getCurrentRoutes();
-    const currentRoute = routesList[routesList.length - 1];
-    const nextIndex = currentRoute.index + 1;
+    const routesList = this.navigator.getCurrentRoutes()
+    const currentRoute = routesList[routesList.length - 1]
+    const nextIndex = currentRoute.index + 1
     const currentComponent = currentRoute.component
 
     // Do not push when current component is the same
-    if(currentComponent == route.component) return;
+    if(currentComponent == route.component) return
 
-    route.props = props;
-    route.index = nextIndex;
-    this.navigator.push(route);
+    route.props = props
+    route.index = nextIndex
+    this.navigator.push(route)
   }
 
   pop() {
-    this.navigator.pop();
+    this.navigator.pop()
   }
 
   toLoginPage(props) {
-    this.push(props, { component: LoginPage });
+    this.push(props, { component: LoginPage })
   }
 
   toOnboardingPage(props) {
-    this.push(props, { component: OnboardingPage });
+    this.push(props, { component: OnboardingPage })
   }
 
   toProfilePage(props) {
-    this.push(props, { component: ProfilePage });
+    this.push(props, { component: ProfilePage })
   }
 
   // To use this in Component:
   // onPress={() => this.props.router.toBrowsePage()}
   // do not bind `this` in component to this function
   toBrowsePage(props) {
-    this.push(props, { component: BrowsePage });
+    this.push(props, { component: BrowsePage })
   }
 
   toCounterPage(props) {
-    this.push(props, { component: CounterPage });
+    this.push(props, { component: CounterPage })
   }
 
   toListingPage(props) {
-    this.push(props, { component: ListingPage });
+    this.push(props, { component: ListingPage })
   }
 
   toFavoritesPage(props) {
-    this.push(props, { component: FavoritesPage });
+    this.push(props, { component: FavoritesPage })
   }
 
   // replaceWithHome(props) {
@@ -81,7 +81,7 @@ class Router {
   // }
 
   // replaceWithLandingPage() {
-  //   this.navigator.popToTop();
+  //   this.navigator.popToTop()
   // }
 
 }
@@ -89,10 +89,12 @@ class Router {
 // Change this for easier debugging
 const initialRoute = {
   index: 0,
-  component: LoginPage
+  // component: LoginPage
   // component: BrowsePage
   // component: PickRenovatorsPage
+  component: ListingPage
+
   // component: OnboardingPage
 }
 
-module.exports = { Router, initialRoute };
+module.exports = { Router, initialRoute }

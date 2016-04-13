@@ -15,9 +15,11 @@ export default class ImageList extends Component {
     const images = this.props.images;
 
     const renderImages = images.map(function(row, i) {
+      let imageUrl = 'http://www.mynest.co/app/img/' + row.picImgURL + '.jpg';
+
       return (
         <Image key={`image-${i}`}
-          source={{uri: 'http://netdna.webdesignerdepot.com/uploads/circular_logos/NASA.jpg'}}
+          source={{uri: imageUrl}}
           style={styles.thumbnail}/>
       );
     })
